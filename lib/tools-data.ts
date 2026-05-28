@@ -39,13 +39,13 @@ export const pdfTools = [
     href: '/tools/remove-pages',
   },
   {
-    id: 'reorder-pages',
-    name: 'Reorder Pages',
-    description: 'Rearrange PDF pages in any order',
+    id: 'organize-pdf',
+    name: 'Organize PDF',
+    description: 'Rearrange, delete and rotate PDF pages with ease',
     icon: 'reorder',
     category: 'organize',
     color: 'bg-rose-500',
-    href: '/tools/reorder-pages',
+    href: '/tools/organize-pdf',
   },
 
   // Optimize
@@ -148,15 +148,6 @@ export const pdfTools = [
     href: '/tools/pdf-to-jpg',
     popular: true,
   },
-  {
-    id: 'pdf-to-png',
-    name: 'PDF to PNG',
-    description: 'Convert PDF pages to PNG images',
-    icon: 'image',
-    category: 'convert-from-pdf',
-    color: 'bg-teal-500',
-    href: '/tools/pdf-to-png',
-  },
 
   // Edit PDF
   {
@@ -170,7 +161,7 @@ export const pdfTools = [
   },
   {
     id: 'add-watermark',
-    name: 'Add Watermark',
+    name: 'Watermark PDF',
     description: 'Stamp an image or text on your PDF',
     icon: 'watermark',
     category: 'edit',
@@ -215,6 +206,35 @@ export const pdfTools = [
     color: 'bg-slate-800',
     href: '/tools/sign-pdf',
   },
+
+  // AI Tools
+  {
+    id: 'ocr-pdf',
+    name: 'OCR PDF',
+    description: 'Extract text from scanned PDFs using OCR',
+    icon: 'scan',
+    category: 'ai',
+    color: 'bg-blue-500',
+    href: '/tools/ocr-pdf',
+  },
+  {
+    id: 'ai-summarizer',
+    name: 'AI Summarizer',
+    description: 'Get AI-powered summary of your PDF content',
+    icon: 'sparkles',
+    category: 'ai',
+    color: 'bg-gradient-to-r from-blue-500 to-purple-500',
+    href: '/tools/ai-summarizer',
+  },
+  {
+    id: 'translate-pdf',
+    name: 'Translate PDF',
+    description: 'Translate your PDF to different languages',
+    icon: 'languages',
+    category: 'ai',
+    color: 'bg-teal-500',
+    href: '/tools/translate-pdf',
+  },
 ]
 
 export const categories = [
@@ -224,4 +244,5 @@ export const categories = [
   { id: 'convert-from-pdf', name: 'Convert from PDF', icon: 'file-output' },
   { id: 'edit', name: 'Edit PDF', icon: 'edit' },
   { id: 'security', name: 'PDF Security', icon: 'shield' },
+  { id: 'ai', name: 'AI Tools', icon: 'sparkles' },
 ]

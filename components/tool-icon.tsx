@@ -22,6 +22,9 @@ import {
   FileInput,
   FileOutput,
   Shield,
+  ScanText,
+  Sparkles,
+  Languages,
 } from 'lucide-react'
 
 export const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -47,6 +50,9 @@ export const iconMap: Record<string, React.ComponentType<{ className?: string }>
   'file-input': FileInput,
   'file-output': FileOutput,
   shield: Shield,
+  scan: ScanText,
+  sparkles: Sparkles,
+  languages: Languages,
 }
 
 export function ToolIcon({ icon, className }: { icon: string; className?: string }) {

@@ -1,16 +1,19 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import { saveAs } from 'file-saver'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { FileUploader } from '@/components/file-uploader'
 import { AdBanner, AdSidebar } from '@/components/ad-units'
 import { Button } from '@/components/ui/button'
 import { FileText, Download, Loader2 } from 'lucide-react'
+import { Document, Packer, Paragraph, TextRun } from 'docx'
 
 export default function PdfToWordPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   const handleFilesSelected = useCallback(async (newFiles: File[]) => {
     if (newFiles.length > 0) {
@@ -25,14 +28,90 @@ export default function PdfToWordPage() {
   const handleConvert = async () => {
     if (files.length === 0) return
     setIsProcessing(true)
+    setProgress(10)
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      alert('PDF to Word conversion requires server-side processing. This demo shows the tool workflow.')
+      // Load PDF.js
+      const pdfjsLib = await import('pdfjs-dist')
+      pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+      
+      const arrayBuffer = await files[0].arrayBuffer()
+      setProgress(20)
+      
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
+      setProgress(30)
+      
+      // Extract text from all pages
+      const paragraphs: Paragraph[] = []
+      const totalPages = pdf.numPages
+      
+      for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+        const page = await pdf.getPage(pageNum)
+        const textContent = await page.getTextContent()
+        
+        // Group text items by Y position to form lines
+        const lines: Map<number, string[]> = new Map()
+        
+        textContent.items.forEach((item: any) => {
+          const y = Math.round(item.transform[5])
+          if (!lines.has(y)) {
+            lines.set(y, [])
+          }
+          lines.get(y)!.push(item.str)
+        })
+        
+        // Sort lines by Y position (descending - top to bottom)
+        const sortedYPositions = Array.from(lines.keys()).sort((a, b) => b - a)
+        
+        // Add page header
+        if (pageNum > 1) {
+          paragraphs.push(new Paragraph({ children: [] }))
+        }
+        
+        // Convert lines to paragraphs
+        for (const y of sortedYPositions) {
+          const lineText = lines.get(y)!.join(' ').trim()
+          if (lineText) {
+            paragraphs.push(
+              new Paragraph({
+                children: [
+                  new TextRun({
+                    text: lineText,
+                    size: 24, // 12pt
+                  }),
+                ],
+              })
+            )
+          }
+        }
+        
+        setProgress(30 + Math.round((pageNum / totalPages) * 50))
+      }
+      
+      // Create Word document
+      const doc = new Document({
+        sections: [
+          {
+            properties: {},
+            children: paragraphs,
+          },
+        ],
+      })
+      
+      setProgress(90)
+      
+      // Generate and download
+      const blob = await Packer.toBlob(doc)
+      const originalName = files[0].name.replace(/\.pdf$/i, '')
+      saveAs(blob, `${originalName}.docx`)
+      
+      setProgress(100)
     } catch (error) {
-      console.error('Error:', error)
+      console.error('Error converting:', error)
+      alert('Error converting PDF. Please make sure it is a valid PDF file.')
     } finally {
       setIsProcessing(false)
+      setProgress(0)
     }
   }
 
@@ -52,7 +131,7 @@ export default function PdfToWordPage() {
                   PDF to Word
                 </h1>
                 <p className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">
-                  Convert PDF files to editable Word documents.
+                  Convert PDF files to editable Word documents (.docx) instantly.
                 </p>
               </div>
 
@@ -80,7 +159,7 @@ export default function PdfToWordPage() {
                       {isProcessing ? (
                         <>
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Converting...
+                          Converting... {progress}%
                         </>
                       ) : (
                         <>
@@ -93,14 +172,46 @@ export default function PdfToWordPage() {
                 )}
               </div>
 
+              <div className="mt-12 grid gap-6 md:grid-cols-3">
+                {[
+                  {
+                    title: 'Upload PDF',
+                    description: 'Select your PDF document',
+                  },
+                  {
+                    title: 'Convert',
+                    description: 'We extract text and convert to Word',
+                  },
+                  {
+                    title: 'Download',
+                    description: 'Get your editable .docx file',
+                  },
+                ].map((step, index) => (
+                  <div key={index} className="text-center p-4">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold mb-3">
+                      {index + 1}
+                    </div>
+                    <h3 className="font-semibold text-foreground mb-1">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                  </div>
+                ))}
+              </div>
+
               <AdBanner slot="pdf-word-bottom" className="mt-12" />
 
               <div className="mt-12 prose prose-neutral dark:prose-invert max-w-none">
-                <h2>Convert PDF to Word</h2>
+                <h2>Convert PDF to Word Online</h2>
                 <p>
                   Transform your PDF documents into editable Microsoft Word files.
                   Perfect for editing text, changing formatting, or repurposing content.
                 </p>
+                <h3>Why Convert PDF to Word?</h3>
+                <ul>
+                  <li><strong>Edit Content:</strong> Make changes to text and formatting</li>
+                  <li><strong>Copy Text:</strong> Easily copy and paste content</li>
+                  <li><strong>Reuse Content:</strong> Repurpose document content</li>
+                  <li><strong>No Software Needed:</strong> Works in your browser</li>
+                </ul>
               </div>
             </div>
 
