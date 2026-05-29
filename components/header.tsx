@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
-import { FileText, Menu, X, ChevronDown } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { FileText, Menu, ChevronDown, User, LogOut } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import {
@@ -10,12 +10,44 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 import { categories, pdfTools } from '@/lib/tools-data'
 import { ToolIcon } from './tool-icon'
+import { authClient } from '@/lib/auth-client'
+import { useRouter } from 'next/navigation'
+
+interface UserSession {
+  user: {
+    id: string
+    name: string
+    email: string
+  }
+}
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [session, setSession] = useState<UserSession | null>(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    async function checkSession() {
+      try {
+        const { data } = await authClient.getSession()
+        setSession(data as UserSession | null)
+      } catch {
+        setSession(null)
+      }
+    }
+    checkSession()
+  }, [])
+
+  const handleSignOut = async () => {
+    await authClient.signOut()
+    setSession(null)
+    router.push('/')
+    router.refresh()
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -64,15 +96,55 @@ export function Header() {
           <Link href="/pricing">
             <Button variant="ghost">Pricing</Button>
           </Link>
-          <Link href="/about">
-            <Button variant="ghost">About</Button>
+          <Link href="/faq">
+            <Button variant="ghost">FAQ</Button>
           </Link>
-          <Link href="/sign-in">
-            <Button variant="ghost" size="sm">Sign In</Button>
-          </Link>
-          <Link href="/pricing">
-            <Button size="sm" className="ml-2">Get Premium</Button>
-          </Link>
+          
+          {session?.user ? (
+            <>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="gap-2">
+                    <div className="bg-primary text-primary-foreground rounded-full h-7 w-7 flex items-center justify-center text-sm font-bold">
+                      {session.user.name?.charAt(0) || 'U'}
+                    </div>
+                    <span className="hidden lg:inline">{session.user.name?.split(' ')[0]}</span>
+                    <ChevronDown className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <div className="px-2 py-1.5">
+                    <p className="text-sm font-medium">{session.user.name}</p>
+                    <p className="text-xs text-muted-foreground">{session.user.email}</p>
+                  </div>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/dashboard" className="cursor-pointer">
+                      <User className="mr-2 h-4 w-4" />
+                      Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <Link href="/pricing">
+                <Button size="sm" className="ml-2">Get Premium</Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/sign-in">
+                <Button variant="ghost" size="sm">Sign In</Button>
+              </Link>
+              <Link href="/pricing">
+                <Button size="sm" className="ml-2">Get Premium</Button>
+              </Link>
+            </>
+          )}
         </nav>
 
         {/* Mobile Navigation */}
@@ -83,7 +155,7 @@ export function Header() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-80">
+          <SheetContent side="right" className="w-80 overflow-y-auto">
             <div className="flex flex-col gap-4 mt-6">
               <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2 mb-4">
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
@@ -93,6 +165,57 @@ export function Header() {
                   PDF<span className="text-primary">Master</span>
                 </span>
               </Link>
+
+              {/* User Section for Mobile */}
+              {session?.user ? (
+                <div className="pb-4 border-b">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="bg-primary text-primary-foreground rounded-full h-10 w-10 flex items-center justify-center font-bold">
+                      {session.user.name?.charAt(0) || 'U'}
+                    </div>
+                    <div>
+                      <p className="font-medium">{session.user.name}</p>
+                      <p className="text-sm text-muted-foreground">{session.user.email}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Link href="/dashboard" onClick={() => setIsOpen(false)} className="flex-1">
+                      <Button variant="outline" className="w-full">Dashboard</Button>
+                    </Link>
+                    <Button variant="outline" onClick={handleSignOut}>
+                      <LogOut className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="pb-4 border-b flex gap-2">
+                  <Link href="/sign-in" onClick={() => setIsOpen(false)} className="flex-1">
+                    <Button variant="outline" className="w-full">Sign In</Button>
+                  </Link>
+                  <Link href="/sign-up" onClick={() => setIsOpen(false)} className="flex-1">
+                    <Button className="w-full">Sign Up</Button>
+                  </Link>
+                </div>
+              )}
+
+              {/* Quick Links */}
+              <div className="space-y-1 pb-4 border-b">
+                <Link href="/tools" onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">All Tools</Button>
+                </Link>
+                <Link href="/pricing" onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">Pricing</Button>
+                </Link>
+                <Link href="/faq" onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">FAQ</Button>
+                </Link>
+                <Link href="/about" onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">About</Button>
+                </Link>
+                <Link href="/contact" onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">Contact</Button>
+                </Link>
+              </div>
               
               {categories.map((category) => (
                 <div key={category.id} className="space-y-2">
