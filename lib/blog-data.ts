@@ -485,6 +485,7 @@ Extract your PDF data to Excel efficiently with PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-02-08',
     readTime: '3 min read',
+    image: '/blog/rotate-pdf.png',
     content: `
 ## How to Rotate PDF Pages
 
@@ -531,6 +532,7 @@ PDFMaster makes page rotation simple and fast.
     author: 'PDFMaster Team',
     publishedAt: '2024-02-12',
     readTime: '6 min read',
+    image: '/blog/sign-pdf.png',
     content: `
 ## How to Sign PDF Electronically
 
