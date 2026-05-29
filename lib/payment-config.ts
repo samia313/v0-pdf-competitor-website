@@ -15,26 +15,26 @@ export const PAYMENT_METHODS = {
     name: 'JazzCash',
     description: 'Pay via JazzCash Mobile Wallet',
     icon: 'smartphone',
-    accountNumber: '03XXXXXXXXX', // Add your JazzCash number
-    accountTitle: 'Your Name',
+    accountNumber: '0303-9109260',
+    accountTitle: 'Naveed Ahmad Sharif',
   },
   easypaisa: {
     enabled: true,
     name: 'Easypaisa',
     description: 'Pay via Easypaisa Mobile Wallet',
     icon: 'smartphone',
-    accountNumber: '03XXXXXXXXX', // Add your Easypaisa number
-    accountTitle: 'Your Name',
+    accountNumber: '0345-0100172',
+    accountTitle: 'Naveed Ahmad Sharif',
   },
   bankTransfer: {
     enabled: true,
     name: 'Bank Transfer',
     description: 'Direct bank transfer (Pakistan banks)',
     icon: 'building',
-    bankName: 'Your Bank Name',
-    accountNumber: 'XXXX-XXXXXXXX',
-    accountTitle: 'Your Name',
-    iban: 'PK00XXXX0000000000000000',
+    bankName: 'Faysal Bank',
+    accountNumber: '3667786000002590',
+    accountTitle: 'Naveed Ahmad Sharif',
+    iban: 'PK83FAYS3667786000002590',
   },
 }
 

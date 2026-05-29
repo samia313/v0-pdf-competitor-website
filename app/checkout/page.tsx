@@ -403,12 +403,12 @@ function CheckoutContent() {
                         <p className="text-sm text-center">
                           <span className="font-medium">Need help?</span> Send payment screenshot on WhatsApp:{' '}
                           <a 
-                            href="https://wa.me/923XXXXXXXXX" 
+                            href="https://wa.me/923039109260" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-green-600 font-bold hover:underline"
                           >
-                            +92 3XX XXXXXXX
+                            +92 303 9109260
                           </a>
                         </p>
                       </div>

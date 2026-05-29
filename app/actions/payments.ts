@@ -69,26 +69,26 @@ function getPaymentInstructions(method: string, amount: number, orderId: string)
       steps: [
         'Open JazzCash App on your phone',
         'Go to "Send Money" or "Mobile Account"',
-        `Send PKR ${amount.toLocaleString()} to: 03XXXXXXXXX`,
+        `Send PKR ${amount.toLocaleString()} to: 0303-9109260`,
         `In reference/message, write: ${orderId}`,
         'Take screenshot of payment confirmation',
         'Upload screenshot below or send to our WhatsApp',
       ],
-      accountNumber: '03XXXXXXXXX',
-      accountTitle: 'PDFMaster',
+      accountNumber: '0303-9109260',
+      accountTitle: 'Naveed Ahmad Sharif',
     },
     easypaisa: {
       title: 'Easypaisa Payment Instructions',
       steps: [
         'Open Easypaisa App on your phone',
         'Go to "Send Money"',
-        `Send PKR ${amount.toLocaleString()} to: 03XXXXXXXXX`,
+        `Send PKR ${amount.toLocaleString()} to: 0345-0100172`,
         `In reference/message, write: ${orderId}`,
         'Take screenshot of payment confirmation',
         'Upload screenshot below or send to our WhatsApp',
       ],
-      accountNumber: '03XXXXXXXXX',
-      accountTitle: 'PDFMaster',
+      accountNumber: '0345-0100172',
+      accountTitle: 'Naveed Ahmad Sharif',
     },
     bank: {
       title: 'Bank Transfer Instructions',
@@ -99,10 +99,10 @@ function getPaymentInstructions(method: string, amount: number, orderId: string)
         'Take screenshot of payment confirmation',
         'Upload screenshot below or email to support@pdfmaster.com',
       ],
-      bankName: 'Meezan Bank', // Change to your bank
-      accountNumber: '0000-0000000000',
-      accountTitle: 'PDFMaster',
-      iban: 'PK00MEZN0000000000000000',
+      bankName: 'Faysal Bank',
+      accountNumber: '3667786000002590',
+      accountTitle: 'Naveed Ahmad Sharif',
+      iban: 'PK83FAYS3667786000002590',
     },
   }
   
