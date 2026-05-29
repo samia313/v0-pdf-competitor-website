@@ -37,7 +37,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-background">
       <head>
+        {/* Google AdSense - Replace ca-pub-XXXXXXXXXXXXXXXX with your actual AdSense Publisher ID after approval */}
         <meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX" />
+        {/* Google Analytics - Add your GA4 ID here */}
+        {/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> */}
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         {children}
