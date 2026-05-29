@@ -596,7 +596,6 @@ Sign documents professionally with PDFMaster's e-signature tool.
     author: 'PDFMaster Team',
     publishedAt: '2024-02-15',
     readTime: '4 min read',
-    image: '/blog/jpg-to-pdf.png',
     content: `
 ## Convert JPG to PDF
 
@@ -656,7 +655,6 @@ Create professional PDFs from your images with PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-02-18',
     readTime: '4 min read',
-    image: '/blog/pdf-to-jpg.png',
     content: `
 ## PDF to JPG Conversion
 
@@ -710,7 +708,6 @@ Get high-quality images from your PDFs with PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-02-22',
     readTime: '6 min read',
-    image: '/blog/edit-pdf.png',
     content: `
 ## How to Edit PDF Online
 
@@ -769,7 +766,6 @@ PDFMaster provides essential editing tools for quick PDF modifications.
     author: 'PDFMaster Team',
     publishedAt: '2024-02-25',
     readTime: '3 min read',
-    image: '/blog/remove-pages.png',
     content: `
 ## Remove Pages from PDF
 
@@ -827,7 +823,6 @@ Clean up your PDFs by removing unnecessary pages with PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-02-28',
     readTime: '4 min read',
-    image: '/blog/page-numbers.png',
     content: `
 ## Add Page Numbers to PDF
 
@@ -883,7 +878,6 @@ Professional page numbering made easy with PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-03-02',
     readTime: '5 min read',
-    image: '/blog/word-to-pdf.png',
     content: `
 ## Word to PDF Converter
 
@@ -945,7 +939,6 @@ Create perfect PDFs from Word documents with PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-03-05',
     readTime: '5 min read',
-    image: '/blog/excel-to-pdf.png',
     content: `
 ## Excel to PDF Conversion
 
@@ -1002,7 +995,6 @@ Share your spreadsheets as PDFs with PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-03-08',
     readTime: '4 min read',
-    image: '/blog/ppt-to-pdf.png',
     content: `
 ## PowerPoint to PDF Conversion
 
@@ -1056,7 +1048,6 @@ Share presentations universally with PDFMaster's converter.
     author: 'PDFMaster Team',
     publishedAt: '2024-03-12',
     readTime: '4 min read',
-    image: '/blog/unlock-pdf.png',
     content: `
 ## How to Unlock PDF
 
@@ -1110,7 +1101,6 @@ Safely unlock your PDFs with PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-03-15',
     readTime: '5 min read',
-    image: '/blog/html-to-pdf.png',
     content: `
 ## HTML to PDF Conversion
 
@@ -1169,7 +1159,6 @@ Capture web content as PDFs with PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-03-18',
     readTime: '4 min read',
-    image: '/blog/organize-pdf.png',
     content: `
 ## Organize PDF Pages
 
@@ -1226,7 +1215,6 @@ Create perfectly organized PDFs with PDFMaster.
     publishedAt: '2024-03-22',
     readTime: '5 min read',
     featured: true,
-    image: '/blog/ai-summarizer.png',
     content: `
 ## AI PDF Summarizer
 
@@ -1292,7 +1280,6 @@ Save time with AI-powered summaries from PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-03-25',
     readTime: '5 min read',
-    image: '/blog/translate-pdf.png',
     content: `
 ## Translate PDF Documents
 
@@ -1352,7 +1339,6 @@ Break language barriers with PDFMaster translation.
     author: 'PDFMaster Team',
     publishedAt: '2024-03-28',
     readTime: '4 min read',
-    image: '/blog/reduce-size-email.png',
     content: `
 ## Reduce PDF Size for Email
 
@@ -1411,7 +1397,6 @@ Send PDFs via email without size issues with PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-04-01',
     readTime: '7 min read',
-    image: '/blog/free-vs-paid.png',
     content: `
 ## Free vs Paid PDF Tools
 
@@ -1484,7 +1469,6 @@ PDFMaster offers both options to suit your needs.
     author: 'PDFMaster Team',
     publishedAt: '2024-04-05',
     readTime: '6 min read',
-    image: '/blog/accessibility.png',
     content: `
 ## PDF Accessibility Guide
 
@@ -1546,7 +1530,6 @@ Create inclusive documents with PDFMaster's accessibility tools.
     author: 'PDFMaster Team',
     publishedAt: '2024-04-08',
     readTime: '5 min read',
-    image: '/blog/batch-processing.png',
     content: `
 ## Batch PDF Processing
 
@@ -1607,7 +1590,6 @@ Boost productivity with batch processing in PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-04-12',
     readTime: '7 min read',
-    image: '/blog/fillable-forms.png',
     content: `
 ## Creating Fillable PDF Forms
 
@@ -1675,7 +1657,6 @@ Create professional forms with PDFMaster.
     author: 'PDFMaster Team',
     publishedAt: '2024-04-15',
     readTime: '8 min read',
-    image: '/blog/security-best-practices.png',
     content: `
 ## PDF Security Best Practices
 
@@ -1742,7 +1723,6 @@ Secure your documents professionally with PDFMaster.
     publishedAt: '2024-04-18',
     readTime: '5 min read',
     featured: true,
-    image: '/blog/mobile-pdf-tools.png',
     content: `
 ## PDF Tools on Mobile
 
