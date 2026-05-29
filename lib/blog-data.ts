@@ -10,6 +10,7 @@ export interface BlogPost {
   publishedAt: string
   readTime: string
   featured?: boolean
+  image: string
 }
 
 export const blogCategories = [
@@ -33,6 +34,7 @@ export const blogPosts: BlogPost[] = [
     publishedAt: '2024-01-15',
     readTime: '5 min read',
     featured: true,
+    image: '/blog/merge-pdf.png',
     content: `
 ## How to Merge PDF Files Online Free
 
@@ -93,6 +95,7 @@ Merging PDF files online is quick, easy, and free with PDFMaster. Try our tool t
     publishedAt: '2024-01-18',
     readTime: '6 min read',
     featured: true,
+    image: '/blog/compress-pdf.png',
     content: `
 ## How to Compress PDF Without Losing Quality
 
@@ -154,8 +157,8 @@ With PDFMaster's compression tool, you can easily reduce file sizes while mainta
     author: 'PDFMaster Team',
     publishedAt: '2024-01-20',
     readTime: '5 min read',
+    image: '/blog/convert-pdf.png',
     content: `
-## Convert PDF to Word (Editable)
 
 Converting PDF to Word allows you to edit documents that were previously locked in PDF format. Our converter maintains formatting and makes editing easy.
 
@@ -204,8 +207,8 @@ PDFMaster's PDF to Word converter makes document editing simple and efficient.
     author: 'PDFMaster Team',
     publishedAt: '2024-01-22',
     readTime: '4 min read',
+    image: '/blog/split-pdf.png',
     content: `
-## How to Split PDF Into Multiple Files
 
 Splitting PDFs is useful when you need to share specific pages or break down large documents into manageable sections.
 
@@ -253,6 +256,7 @@ Splitting PDFs has never been easier with PDFMaster's intuitive interface.
     author: 'PDFMaster Team',
     publishedAt: '2024-01-25',
     readTime: '5 min read',
+    image: '/blog/watermark-pdf.png',
     content: `
 ## How to Add Watermark to PDF
 
@@ -309,8 +313,8 @@ Protect your documents professionally with PDFMaster's watermarking tool.
     publishedAt: '2024-01-28',
     readTime: '6 min read',
     featured: true,
+    image: '/blog/protect-pdf.png',
     content: `
-## How to Password Protect PDF
 
 Protecting sensitive documents with passwords is essential for security. Learn how to secure your PDFs effectively.
 
@@ -371,8 +375,8 @@ PDFMaster makes PDF security simple while providing enterprise-grade protection.
     author: 'PDFMaster Team',
     publishedAt: '2024-02-01',
     readTime: '7 min read',
-    content: `
-## OCR PDF - Convert Scanned Documents to Searchable Text
+    image: '/blog/ocr-pdf.png',
+    content: ` - Convert Scanned Documents to Searchable Text
 
 OCR technology recognizes text in scanned images and converts it to searchable, editable text.
 
@@ -428,8 +432,8 @@ Make your scanned documents searchable and editable with PDFMaster's powerful OC
     author: 'PDFMaster Team',
     publishedAt: '2024-02-05',
     readTime: '5 min read',
-    content: `
-## PDF to Excel - Extract Tables and Data
+    image: '/blog/pdf-excel.png',
+    content: ` - Extract Tables and Data
 
 Converting PDF tables to Excel makes data analysis and editing much easier.
 
