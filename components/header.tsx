@@ -61,6 +61,12 @@ export function Header() {
           <Link href="/tools">
             <Button variant="ghost">All Tools</Button>
           </Link>
+          <Link href="/about">
+            <Button variant="ghost">About</Button>
+          </Link>
+          <Link href="/contact">
+            <Button variant="ghost">Contact</Button>
+          </Link>
         </nav>
 
         {/* Mobile Navigation */}

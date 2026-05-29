@@ -50,7 +50,10 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} PDFMaster. All rights reserved.
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-4 md:gap-6">
+            <Link href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              About Us
+            </Link>
             <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Privacy Policy
             </Link>
@@ -58,7 +61,7 @@ export function Footer() {
               Terms of Service
             </Link>
             <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Contact
+              Contact Us
             </Link>
           </div>
         </div>
