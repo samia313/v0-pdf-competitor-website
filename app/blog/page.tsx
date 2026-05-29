@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Calendar, Clock, User, ArrowRight, Search, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'PDF Blog - Tips, Tutorials & Guides | PDFMaster',
@@ -81,7 +82,17 @@ export default function BlogPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredPosts.slice(0, 3).map((post) => (
                 <Link key={post.id} href={`/blog/${post.slug}`}>
-                  <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+                  <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent overflow-hidden">
+                    {post.image && (
+                      <div className="relative h-48 overflow-hidden">
+                        <Image
+                          src={post.image}
+                          alt={post.title}
+                          fill
+                          className="object-cover transition-transform duration-300 hover:scale-105"
+                        />
+                      </div>
+                    )}
                     <CardHeader>
                       <div className="flex items-center gap-2 mb-2">
                         <Badge variant="secondary" className="text-xs">
@@ -129,7 +140,17 @@ export default function BlogPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {blogPosts.map((post) => (
                 <Link key={post.id} href={`/blog/${post.slug}`}>
-                  <Card className="h-full hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                  <Card className="h-full hover:shadow-md transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                    {post.image && (
+                      <div className="relative h-40 overflow-hidden">
+                        <Image
+                          src={post.image}
+                          alt={post.title}
+                          fill
+                          className="object-cover transition-transform duration-300 hover:scale-105"
+                        />
+                      </div>
+                    )}
                     <CardHeader>
                       <div className="flex items-center gap-2 mb-2">
                         <Badge variant="outline" className="text-xs">

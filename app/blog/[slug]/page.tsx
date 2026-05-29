@@ -8,6 +8,7 @@ import { Calendar, Clock, User, ArrowLeft, ArrowRight, Share2, BookOpen, Tag } f
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import Image from 'next/image'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -160,6 +161,20 @@ export default async function BlogPostPage({ params }: Props) {
                   </span>
                 </div>
               </div>
+
+              {/* Featured Image */}
+              {post.image && (
+                <div className="mb-10 rounded-xl overflow-hidden shadow-lg">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    width={1200}
+                    height={630}
+                    className="w-full h-auto object-cover"
+                    priority
+                  />
+                </div>
+              )}
 
               {/* Article Content */}
               <div 
