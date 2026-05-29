@@ -93,6 +93,9 @@ export function Header() {
           <Link href="/tools">
             <Button variant="ghost">All Tools</Button>
           </Link>
+          <Link href="/blog">
+            <Button variant="ghost">Blog</Button>
+          </Link>
           <Link href="/pricing">
             <Button variant="ghost">Pricing</Button>
           </Link>
@@ -202,6 +205,9 @@ export function Header() {
               <div className="space-y-1 pb-4 border-b">
                 <Link href="/tools" onClick={() => setIsOpen(false)}>
                   <Button variant="ghost" className="w-full justify-start">All Tools</Button>
+                </Link>
+                <Link href="/blog" onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">Blog</Button>
                 </Link>
                 <Link href="/pricing" onClick={() => setIsOpen(false)}>
                   <Button variant="ghost" className="w-full justify-start">Pricing</Button>

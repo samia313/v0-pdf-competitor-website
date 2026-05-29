@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { blogPosts, blogCategories } from '@/lib/blog-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://pdfmaster.com'
@@ -13,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/faq',
     '/privacy',
     '/terms',
+    '/blog',
     '/sign-in',
     '/sign-up',
   ]
@@ -46,12 +48,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/translate-pdf',
   ]
 
-  const allPages = [...staticPages, ...toolPages]
+  // Blog category pages
+  const blogCategoryPages = blogCategories.map(cat => `/blog/category/${cat.id}`)
+
+  // Blog post pages
+  const blogPostPages = blogPosts.map(post => `/blog/${post.slug}`)
+
+  const allPages = [...staticPages, ...toolPages, ...blogCategoryPages, ...blogPostPages]
 
   return allPages.map((page) => ({
     url: `${baseUrl}${page}`,
     lastModified: new Date(),
-    changeFrequency: page === '' ? 'daily' : 'weekly',
-    priority: page === '' ? 1 : page.startsWith('/tools/') ? 0.9 : 0.8,
+    changeFrequency: page === '' ? 'daily' : page.startsWith('/blog/') ? 'weekly' : 'weekly',
+    priority: page === '' ? 1 : page.startsWith('/tools/') ? 0.9 : page.startsWith('/blog/') ? 0.8 : 0.7,
   }))
 }
