@@ -80,10 +80,10 @@ export async function GET() {
       )
     `)
 
-    // Insert default admin user (your email - update this to your email)
+    // Insert default admin user
     await pool.query(`
       INSERT INTO admin_users (email, role)
-      VALUES ('naveed@pdfmaster.com', 'superadmin')
+      VALUES ('samiaahmadnaveed@gmail.com', 'superadmin')
       ON CONFLICT (email) DO NOTHING
     `)
 
