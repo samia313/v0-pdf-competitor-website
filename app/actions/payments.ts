@@ -1,25 +1,10 @@
 'use server'
 
 import { PKR_PRICES } from '@/lib/payment-config'
-
-// LemonSqueezy Checkout URL Generator
-export async function createLemonSqueezyCheckout(planId: string, email?: string) {
-  const storeId = process.env.LEMONSQUEEZY_STORE_ID
-  const variantId = process.env[`LEMONSQUEEZY_${planId.toUpperCase().replace('-', '_')}_VARIANT_ID`]
-  
-  if (!storeId || !variantId) {
-    throw new Error('LemonSqueezy configuration missing')
-  }
-  
-  // Build checkout URL
-  let checkoutUrl = `https://${storeId}.lemonsqueezy.com/checkout/buy/${variantId}`
-  
-  if (email) {
-    checkoutUrl += `?checkout[email]=${encodeURIComponent(email)}`
-  }
-  
-  return { url: checkoutUrl }
-}
+import { db } from '@/lib/db'
+import { orders } from '@/lib/db/schema'
+import { PRODUCTS } from '@/lib/products'
+import { sendOrderConfirmationEmail } from '@/lib/email'
 
 // Manual Payment Order Creation
 export async function createManualPaymentOrder(
@@ -32,26 +17,38 @@ export async function createManualPaymentOrder(
   }
 ) {
   // Generate unique order ID
-  const orderId = `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+  const orderId = `PDF-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`
   
   const price = PKR_PRICES[planId as keyof typeof PKR_PRICES]
+  const product = PRODUCTS.find(p => p.id === planId)
   
-  // In production, save this to database
-  const order = {
-    orderId,
-    planId,
-    paymentMethod,
-    amount: price,
-    currency: 'PKR',
-    status: 'pending',
-    customerInfo,
-    createdAt: new Date().toISOString(),
+  if (!price || !product) {
+    throw new Error('Invalid plan selected')
   }
   
-  // Here you would save to database
-  // await db.orders.create(order)
+  // Save to database
+  await db.insert(orders).values({
+    orderId,
+    customerName: customerInfo.name,
+    customerEmail: customerInfo.email,
+    customerPhone: customerInfo.phone,
+    planId,
+    planName: product.name,
+    amount: price,
+    currency: 'PKR',
+    paymentMethod,
+    paymentStatus: 'pending',
+  })
   
-  console.log('Manual payment order created:', order)
+  // Send confirmation email (non-blocking)
+  sendOrderConfirmationEmail({
+    to: customerInfo.email,
+    customerName: customerInfo.name,
+    orderId,
+    planName: product.name,
+    amount: price,
+    paymentMethod,
+  }).catch(console.error)
   
   return {
     success: true,
@@ -107,12 +104,4 @@ function getPaymentInstructions(method: string, amount: number, orderId: string)
   }
   
   return instructions[method as keyof typeof instructions]
-}
-
-// Verify payment (admin use)
-export async function verifyManualPayment(orderId: string) {
-  // In production, update database
-  // await db.orders.update({ orderId }, { status: 'completed' })
-  
-  return { success: true, message: 'Payment verified successfully' }
 }

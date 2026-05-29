@@ -67,6 +67,9 @@ export function Header() {
           <Link href="/about">
             <Button variant="ghost">About</Button>
           </Link>
+          <Link href="/sign-in">
+            <Button variant="ghost" size="sm">Sign In</Button>
+          </Link>
           <Link href="/pricing">
             <Button size="sm" className="ml-2">Get Premium</Button>
           </Link>
