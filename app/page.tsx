@@ -2,6 +2,7 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { ToolCard } from '@/components/tool-card'
 import { AdBanner } from '@/components/ad-units'
+import { HeroSlider } from '@/components/hero-slider'
 import { pdfTools, categories } from '@/lib/tools-data'
 import { ToolIcon } from '@/components/tool-icon'
 import { Check, Zap, Shield, Globe } from 'lucide-react'
@@ -16,33 +17,8 @@ export default function HomePage() {
       <Header />
 
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 via-background to-background py-20 lg:py-28">
-          <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
-          <div className="container mx-auto px-4 relative">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground text-balance">
-                Every tool you need to work with{' '}
-                <span className="text-primary">PDFs</span>
-              </h1>
-              <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed text-pretty">
-                Free online PDF tools to merge, split, compress, convert PDF files. Fast, secure, and easy to use. No registration required.
-              </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-4">
-                <Link href="/tools">
-                  <Button size="lg" className="text-base px-8">
-                    Explore All Tools
-                  </Button>
-                </Link>
-                <Link href="/tools/merge-pdf">
-                  <Button size="lg" variant="outline" className="text-base px-8">
-                    Merge PDF
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Hero Slider */}
+        <HeroSlider />
 
         {/* Ad Banner */}
         <div className="container mx-auto px-4 -mt-4">
