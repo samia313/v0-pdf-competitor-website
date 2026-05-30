@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Calendar, Clock, User, ArrowRight, Search, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 
 export const metadata = {
   title: 'PDF Blog - Tips, Tutorials & Guides | PDFMaster',

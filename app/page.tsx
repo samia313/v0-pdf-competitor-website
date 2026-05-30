@@ -8,6 +8,13 @@ import { ToolIcon } from '@/components/tool-icon'
 import { Check, Zap, Shield, Globe } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { Suspense } from 'react'
+
+export const metadata = {
+  title: 'PDFMaster - Free Online PDF Tools | Merge, Split, Compress',
+  description: 'Free online PDF tools to merge, split, compress, convert PDF files. Fast, secure, and easy to use. No registration required.',
+  keywords: 'PDF tools, merge PDF, split PDF, compress PDF, convert PDF, PDF editor, free PDF tools online',
+}
 
 export default function HomePage() {
   const popularTools = pdfTools.filter((tool) => tool.popular)

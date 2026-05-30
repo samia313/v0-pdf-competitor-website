@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, memo } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight, FileText, Merge, Split, FileDown, Image, Shield } from 'lucide-react'
@@ -75,7 +75,7 @@ const slides = [
   },
 ]
 
-export function HeroSlider() {
+export const HeroSlider = memo(function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
@@ -205,4 +205,4 @@ export function HeroSlider() {
       </div>
     </section>
   )
-}
+})
