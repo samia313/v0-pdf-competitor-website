@@ -11,8 +11,8 @@ import Link from 'next/link'
 import { MessageCircle } from 'lucide-react'
 
 export const metadata = {
-  title: 'FAQ - Frequently Asked Questions | PDFMaster',
-  description: 'Find answers to commonly asked questions about PDFMaster PDF tools, pricing, and features.',
+  title: 'FAQ - Frequently Asked Questions | OrbixDocs',
+  description: 'Find answers to commonly asked questions about OrbixDocs PDF tools, pricing, and features.',
 }
 
 const faqs = [
@@ -20,19 +20,19 @@ const faqs = [
     category: 'General',
     questions: [
       {
-        q: 'What is PDFMaster?',
-        a: 'PDFMaster is a free online platform that provides powerful PDF tools to merge, split, compress, convert, and edit PDF files. Our tools are easy to use and work directly in your browser without any software installation.'
+        q: 'What is OrbixDocs?',
+        a: 'OrbixDocs is a free online platform that provides powerful PDF tools to merge, split, compress, convert, and edit PDF files. Our tools are easy to use and work directly in your browser without any software installation.'
       },
       {
-        q: 'Is PDFMaster free to use?',
-        a: 'Yes! PDFMaster offers a free plan with access to all basic PDF tools. Free users can process up to 5 files per day with a maximum file size of 25MB. For unlimited access and advanced features, you can upgrade to our Premium or Business plans.'
+        q: 'Is OrbixDocs free to use?',
+        a: 'Yes! OrbixDocs offers a free plan with access to all basic PDF tools. Free users can process up to 5 files per day with a maximum file size of 25MB. For unlimited access and advanced features, you can upgrade to our Premium or Business plans.'
       },
       {
         q: 'Do I need to create an account?',
         a: 'No account is required to use our basic PDF tools. However, creating a free account gives you benefits like file history, higher daily limits, and the ability to save your preferences.'
       },
       {
-        q: 'Is my data safe with PDFMaster?',
+        q: 'Is my data safe with OrbixDocs?',
         a: 'Absolutely! We take your privacy seriously. All files are processed securely and automatically deleted from our servers within 1 hour. We use encryption for all file transfers and never share your files with third parties.'
       },
     ]
@@ -105,11 +105,11 @@ const faqs = [
     questions: [
       {
         q: 'Which browsers are supported?',
-        a: 'PDFMaster works on all modern browsers including Chrome, Firefox, Safari, and Edge. For the best experience, we recommend using the latest version of your browser.'
+        a: 'OrbixDocs works on all modern browsers including Chrome, Firefox, Safari, and Edge. For the best experience, we recommend using the latest version of your browser.'
       },
       {
-        q: 'Can I use PDFMaster on mobile devices?',
-        a: 'Yes! PDFMaster is fully responsive and works on smartphones and tablets. You can access all our tools from any device with a web browser.'
+        q: 'Can I use OrbixDocs on mobile devices?',
+        a: 'Yes! OrbixDocs is fully responsive and works on smartphones and tablets. You can access all our tools from any device with a web browser.'
       },
       {
         q: 'Why is my PDF taking long to process?',
@@ -136,7 +136,7 @@ export default function FAQPage() {
               Frequently Asked Questions
             </h1>
             <p className="text-xl text-muted-foreground">
-              Find answers to common questions about PDFMaster
+              Find answers to common questions about OrbixDocs
             </p>
           </div>
 

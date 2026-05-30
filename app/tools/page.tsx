@@ -6,7 +6,7 @@ import { pdfTools, categories } from '@/lib/tools-data'
 import { ToolIcon } from '@/components/tool-icon'
 
 export const metadata = {
-  title: 'All PDF Tools - PDFMaster',
+  title: 'All PDF Tools - OrbixDocs',
   description: 'Browse all our free PDF tools. Merge, split, compress, convert and edit PDF files online.',
 }
 

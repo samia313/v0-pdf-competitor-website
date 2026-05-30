@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   
   return {
-    title: `${categoryData.name} - PDF Blog | PDFMaster`,
+    title: `${categoryData.name} - PDF Blog | OrbixDocs`,
     description: `${categoryData.description}. Browse all ${categoryData.name.toLowerCase()} articles about PDF tools and document management.`,
   }
 }

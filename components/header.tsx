@@ -57,7 +57,7 @@ export function Header() {
             <FileText className="h-5 w-5 text-primary-foreground" />
           </div>
           <span className="text-xl font-bold text-foreground">
-            PDF<span className="text-primary">Master</span>
+            Orbix<span className="text-primary">Docs</span>
           </span>
         </Link>
 
@@ -164,9 +164,9 @@ export function Header() {
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
                   <FileText className="h-5 w-5 text-primary-foreground" />
                 </div>
-                <span className="text-xl font-bold">
-                  PDF<span className="text-primary">Master</span>
-                </span>
+              <span className="text-xl font-bold">
+                Orbix<span className="text-primary">Docs</span>
+              </span>
               </Link>
 
               {/* User Section for Mobile */}

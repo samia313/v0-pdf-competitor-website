@@ -4,8 +4,8 @@ import { redirect } from 'next/navigation'
 import { AuthForm } from '@/components/auth-form'
 
 export const metadata = {
-  title: 'Sign In - PDFMaster',
-  description: 'Sign in to your PDFMaster account',
+  title: 'Sign In - OrbixDocs',
+  description: 'Sign in to your OrbixDocs account',
 }
 
 export default async function SignInPage() {

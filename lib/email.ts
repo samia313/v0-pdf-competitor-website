@@ -12,7 +12,7 @@ export async function sendOrderConfirmationEmail(data: {
 }) {
   try {
     await resend.emails.send({
-      from: 'PDFMaster <noreply@pdfmaster.com>',
+      from: 'OrbixDocs <noreply@orbixdocs.com>',
       to: data.to,
       subject: `Order Confirmation - ${data.orderId}`,
       html: `
@@ -31,7 +31,7 @@ export async function sendOrderConfirmationEmail(data: {
         <body>
           <div class="container">
             <div class="header">
-              <h1>PDFMaster</h1>
+              <h1>OrbixDocs</h1>
             </div>
             <div class="content">
               <h2>Order Confirmation</h2>
@@ -50,7 +50,7 @@ export async function sendOrderConfirmationEmail(data: {
               <p>If you have any questions, please contact us on WhatsApp: +92 345 0100172</p>
             </div>
             <div class="footer">
-              <p>&copy; 2024 PDFMaster. All rights reserved.</p>
+              <p>&copy; 2024 OrbixDocs. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -73,9 +73,9 @@ export async function sendPaymentVerifiedEmail(data: {
 }) {
   try {
     await resend.emails.send({
-      from: 'PDFMaster <noreply@pdfmaster.com>',
+      from: 'OrbixDocs <noreply@orbixdocs.com>',
       to: data.to,
-      subject: `Payment Verified - Welcome to PDFMaster Premium!`,
+      subject: `Payment Verified - Welcome to OrbixDocs Premium!`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -96,7 +96,7 @@ export async function sendPaymentVerifiedEmail(data: {
               <h1>Payment Verified!</h1>
             </div>
             <div class="content">
-              <h2>Welcome to PDFMaster Premium!</h2>
+              <h2>Welcome to OrbixDocs Premium!</h2>
               <p>Dear ${data.customerName},</p>
               
               <div class="success-box">
@@ -115,10 +115,10 @@ export async function sendPaymentVerifiedEmail(data: {
                 <li>Priority support</li>
               </ul>
               
-              <a href="https://pdfmaster.com" class="cta-button">Start Using Premium</a>
+              <a href="https://orbixdocs.com" class="cta-button">Start Using Premium</a>
             </div>
             <div class="footer">
-              <p>&copy; 2024 PDFMaster. All rights reserved.</p>
+              <p>&copy; 2024 OrbixDocs. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -140,7 +140,7 @@ export async function sendPaymentRejectedEmail(data: {
 }) {
   try {
     await resend.emails.send({
-      from: 'PDFMaster <noreply@pdfmaster.com>',
+      from: 'OrbixDocs <noreply@orbixdocs.com>',
       to: data.to,
       subject: `Payment Issue - Order ${data.orderId}`,
       html: `
@@ -159,7 +159,7 @@ export async function sendPaymentRejectedEmail(data: {
         <body>
           <div class="container">
             <div class="header">
-              <h1>PDFMaster</h1>
+              <h1>OrbixDocs</h1>
             </div>
             <div class="content">
               <h2>Payment Issue</h2>
@@ -174,7 +174,7 @@ export async function sendPaymentRejectedEmail(data: {
               <p>If this was a mistake, please send us your payment screenshot again.</p>
             </div>
             <div class="footer">
-              <p>&copy; 2024 PDFMaster. All rights reserved.</p>
+              <p>&copy; 2024 OrbixDocs. All rights reserved.</p>
             </div>
           </div>
         </body>

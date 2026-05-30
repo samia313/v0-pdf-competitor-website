@@ -17,8 +17,8 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
 export const metadata = {
-  title: 'Admin Dashboard - PDFMaster',
-  description: 'Manage your PDFMaster orders and subscriptions',
+  title: 'Admin Dashboard - OrbixDocs',
+  description: 'Manage your OrbixDocs orders and subscriptions',
 }
 
 export default async function AdminDashboard() {
@@ -34,7 +34,7 @@ export default async function AdminDashboard() {
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
             <FileText className="w-5 h-5 text-primary-foreground" />
           </div>
-          <span className="text-xl font-bold">PDFMaster</span>
+          <span className="text-xl font-bold">OrbixDocs</span>
         </div>
         
         <nav className="space-y-2">
@@ -88,7 +88,7 @@ export default async function AdminDashboard() {
       <main className="ml-64 p-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">Welcome to PDFMaster Admin Panel</p>
+          <p className="text-muted-foreground">Welcome to OrbixDocs Admin Panel</p>
         </div>
         
         {/* Stats Grid */}

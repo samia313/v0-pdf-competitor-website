@@ -41,7 +41,7 @@ export default function SubscriptionsPage() {
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
             <FileText className="w-5 h-5 text-primary-foreground" />
           </div>
-          <span className="text-xl font-bold">PDFMaster</span>
+          <span className="text-xl font-bold">OrbixDocs</span>
         </div>
         
         <nav className="space-y-2">
