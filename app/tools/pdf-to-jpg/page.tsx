@@ -19,10 +19,12 @@ export default function PdfToJpgPage() {
   const [quality, setQuality] = useState<'low' | 'medium' | 'high'>('high')
   const [totalPages, setTotalPages] = useState(0)
   const [progress, setProgress] = useState(0)
+  const [convertedFile, setConvertedFile] = useState<{ blob: Blob; name: string } | null>(null)
 
   const handleFilesSelected = useCallback(async (newFiles: File[]) => {
     if (newFiles.length > 0) {
       setFiles([newFiles[0]])
+      setConvertedFile(null)
       try {
         const buffer = await newFiles[0].arrayBuffer()
         const pdf = await PDFDocument.load(buffer)
@@ -37,7 +39,17 @@ export default function PdfToJpgPage() {
     setFiles([])
     setTotalPages(0)
     setProgress(0)
+    setConvertedFile(null)
   }, [])
+
+  const handleDownload = useCallback(() => {
+    if (convertedFile) {
+      saveAs(convertedFile.blob, convertedFile.name)
+      setConvertedFile(null)
+      setFiles([])
+      setTotalPages(0)
+    }
+  }, [convertedFile])
 
   const handleConvert = async () => {
     if (files.length === 0) return
@@ -78,7 +90,8 @@ This demo shows the tool interface and workflow.`
       
       // Generate the zip with the info
       const zipBlob = await zip.generateAsync({ type: 'blob' })
-      saveAs(zipBlob, `${files[0].name.replace('.pdf', '')}_images.zip`)
+      const zipName = `${files[0].name.replace('.pdf', '')}_images.zip`
+      setConvertedFile({ blob: zipBlob, name: zipName })
       
       setProgress(100)
     } catch (error) {
@@ -148,24 +161,41 @@ This demo shows the tool interface and workflow.`
                       </Select>
                     </div>
 
-                    <Button
-                      size="lg"
-                      className="w-full text-base"
-                      onClick={handleConvert}
-                      disabled={isProcessing}
-                    >
-                      {isProcessing ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Converting... {progress > 0 && `${progress}%`}
-                        </>
-                      ) : (
-                        <>
+                    {convertedFile ? (
+                      <div className="space-y-3">
+                        <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                          <p className="text-green-800 font-semibold mb-2">Conversion Complete!</p>
+                          <p className="text-sm text-green-700">{convertedFile.name}</p>
+                        </div>
+                        <Button
+                          size="lg"
+                          className="w-full text-base bg-green-600 hover:bg-green-700"
+                          onClick={handleDownload}
+                        >
                           <Download className="mr-2 h-5 w-5" />
-                          Convert to JPG
-                        </>
-                      )}
-                    </Button>
+                          Download ZIP
+                        </Button>
+                      </div>
+                    ) : (
+                      <Button
+                        size="lg"
+                        className="w-full text-base"
+                        onClick={handleConvert}
+                        disabled={isProcessing}
+                      >
+                        {isProcessing ? (
+                          <>
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            Converting... {progress > 0 && `${progress}%`}
+                          </>
+                        ) : (
+                          <>
+                            <Download className="mr-2 h-5 w-5" />
+                            Convert to JPG
+                          </>
+                        )}
+                      </Button>
+                    )}
                   </div>
                 )}
               </div>

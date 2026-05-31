@@ -17,14 +17,25 @@ export default function JpgToPdfPage() {
   const [isProcessing, setIsProcessing] = useState(false)
   const [pageSize, setPageSize] = useState<'fit' | 'a4' | 'letter'>('a4')
   const [orientation, setOrientation] = useState<'portrait' | 'landscape'>('portrait')
+  const [convertedFile, setConvertedFile] = useState<{ blob: Blob; name: string } | null>(null)
 
   const handleFilesSelected = useCallback((newFiles: File[]) => {
     setFiles((prev) => [...prev, ...newFiles])
+    setConvertedFile(null)
   }, [])
 
   const handleRemoveFile = useCallback((index: number) => {
     setFiles((prev) => prev.filter((_, i) => i !== index))
+    setConvertedFile(null)
   }, [])
+
+  const handleDownload = useCallback(() => {
+    if (convertedFile) {
+      saveAs(convertedFile.blob, convertedFile.name)
+      setConvertedFile(null)
+      setFiles([])
+    }
+  }, [convertedFile])
 
   const handleConvert = async () => {
     if (files.length === 0) return
@@ -102,7 +113,7 @@ export default function JpgToPdfPage() {
 
       const pdfBytes = await pdf.save()
       const blob = new Blob([pdfBytes], { type: 'application/pdf' })
-      saveAs(blob, 'images.pdf')
+      setConvertedFile({ blob, name: 'images.pdf' })
     } catch (error) {
       console.error('Error converting images to PDF:', error)
       alert('Error converting images. Please make sure all files are valid JPG or PNG images.')
@@ -152,54 +163,73 @@ export default function JpgToPdfPage() {
                 />
 
                 {files.length > 0 && (
-                  <div className="mt-6 space-y-6">
-                    {/* Options */}
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label>Page Size</Label>
-                        <Select value={pageSize} onValueChange={(v) => setPageSize(v as any)}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="a4">A4</SelectItem>
-                            <SelectItem value="letter">Letter</SelectItem>
-                            <SelectItem value="fit">Fit to Image</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Orientation</Label>
-                        <Select value={orientation} onValueChange={(v) => setOrientation(v as any)}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="portrait">Portrait</SelectItem>
-                            <SelectItem value="landscape">Landscape</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
-                    <Button
-                      size="lg"
-                      className="w-full text-base"
-                      onClick={handleConvert}
-                      disabled={isProcessing}
-                    >
-                      {isProcessing ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Converting...
-                        </>
-                      ) : (
-                        <>
+                  <div className="mt-6">
+                    {convertedFile ? (
+                      <div className="space-y-3">
+                        <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                          <p className="text-green-800 font-semibold mb-2">Conversion Complete!</p>
+                          <p className="text-sm text-green-700">{convertedFile.name}</p>
+                        </div>
+                        <Button
+                          size="lg"
+                          className="w-full text-base bg-green-600 hover:bg-green-700"
+                          onClick={handleDownload}
+                        >
                           <Download className="mr-2 h-5 w-5" />
-                          Convert to PDF
-                        </>
-                      )}
-                    </Button>
+                          Download PDF
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        {/* Options */}
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label>Page Size</Label>
+                            <Select value={pageSize} onValueChange={(v) => setPageSize(v as any)}>
+                              <SelectTrigger>
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="a4">A4</SelectItem>
+                                <SelectItem value="letter">Letter</SelectItem>
+                                <SelectItem value="fit">Fit to Image</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="space-y-2">
+                            <Label>Orientation</Label>
+                            <Select value={orientation} onValueChange={(v) => setOrientation(v as any)}>
+                              <SelectTrigger>
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="portrait">Portrait</SelectItem>
+                                <SelectItem value="landscape">Landscape</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+
+                        <Button
+                          size="lg"
+                          className="w-full text-base"
+                          onClick={handleConvert}
+                          disabled={isProcessing}
+                        >
+                          {isProcessing ? (
+                            <>
+                              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                              Converting...
+                            </>
+                          ) : (
+                            <>
+                              <Download className="mr-2 h-5 w-5" />
+                              Convert to PDF
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
