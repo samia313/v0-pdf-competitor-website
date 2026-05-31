@@ -2,7 +2,6 @@
 
 import { useState, useCallback } from 'react'
 import { saveAs } from 'file-saver'
-import * as pdfjsLib from 'pdfjs-dist'
 import { Document, Paragraph, TextRun, Packer } from 'docx'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
@@ -43,6 +42,7 @@ export default function PdfToWordPage() {
     setProgress(10)
 
     try {
+      const pdfjsLib = await import('pdfjs-dist')
       pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
       
       const arrayBuffer = await files[0].arrayBuffer()
