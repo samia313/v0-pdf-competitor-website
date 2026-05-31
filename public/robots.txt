@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# Allow Googlebot and other search engines
+User-agent: Googlebot
+Allow: /
+
+# Disallow admin panel
+Disallow: /admin/
+Disallow: /admin-panel/
+Disallow: /dashboard/
+Disallow: /api/
+
+# Disallow sensitive pages
+Disallow: /checkout/
+Disallow: /sign-in/
+Disallow: /sign-up/
+
+# Allow crawling of important pages
+Allow: /tools/
+Allow: /blog/
+Allow: /pricing/
+Allow: /about/
+Allow: /contact/
+Allow: /faq/
+
+# Sitemap
+Sitemap: https://orbixdocs.com/sitemap.xml
+Sitemap: https://orbixdocs.com/sitemap-tools.xml
+Sitemap: https://orbixdocs.com/sitemap-blog.xml
