@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import { saveAs } from 'file-saver'
-import { Document, Paragraph, TextRun, Packer } from 'docx'
+import * as docxLib from 'docx'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { FileUploader } from '@/components/file-uploader'
@@ -83,9 +83,9 @@ export default function PdfToWordPage() {
           const lineText = lines.get(y)!.join(' ').trim()
           if (lineText) {
             paragraphs.push(
-              new Paragraph({
+              new docxLib.Paragraph({
                 children: [
-                  new TextRun({
+                  new docxLib.TextRun({
                     text: lineText,
                     size: 24, // 12pt
                   }),
@@ -99,7 +99,7 @@ export default function PdfToWordPage() {
       }
       
       // Create Word document
-      const doc = new Document({
+      const doc = new docxLib.Document({
         sections: [
           {
             properties: {},
@@ -111,7 +111,7 @@ export default function PdfToWordPage() {
       setProgress(90)
       
       // Generate filename but don't auto download
-      const blob = await Packer.toBlob(doc)
+      const blob = await docxLib.Packer.toBlob(doc)
       const originalName = files[0].name.replace(/\.pdf$/i, '')
       const fileName = `${originalName}.docx`
       

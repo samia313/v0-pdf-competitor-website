@@ -53,41 +53,78 @@ export default function PdfToPptPage() {
       
       // Create PowerPoint presentation
       const pptx = new pptxgen()
+      pptx.defineLayout({ name: 'LAYOUT_16x9', width: 10, height: 5.625 })
       pptx.layout = 'LAYOUT_16x9'
       
       const totalPages = pdf.numPages
       
       for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
-        const page = await pdf.getPage(pageNum)
-        
-        // Get page dimensions
-        const viewport = page.getViewport({ scale: 2 })
-        
-        // Create canvas for rendering
-        const canvas = document.createElement('canvas')
-        canvas.width = viewport.width
-        canvas.height = viewport.height
-        
-        const context = canvas.getContext('2d')
-        if (!context) throw new Error('Could not get canvas context')
-        
-        // Render page to canvas
-        await page.render({ canvasContext: context, viewport }).promise
-        
-        // Convert canvas to image
-        const imageData = canvas.toDataURL('image/jpeg', 0.9)
-        
-        // Add slide with image
-        const slide = pptx.addSlide()
-        slide.addImage({
-          data: imageData,
-          x: 0,
-          y: 0,
-          w: 10,
-          h: 7.5,
-        })
-        
-        setProgress(30 + Math.round((pageNum / totalPages) * 60))
+        try {
+          const page = await pdf.getPage(pageNum)
+          const textContent = await page.getTextContent()
+          
+          // Create slide
+          const slide = pptx.addSlide()
+          
+          // Add background color
+          slide.background = { color: 'FFFFFF' }
+          
+          // Group text items and add to slide
+          if (textContent.items && textContent.items.length > 0) {
+            let yPos = 0.3
+            let currentText = ''
+            let lastY = 0
+            
+            textContent.items.forEach((item: any, index: number) => {
+              const currentY = Math.round(item.transform[5])
+              
+              // If Y position changed significantly, add text as new element
+              if (Math.abs(currentY - lastY) > 10 && currentText.trim()) {
+                slide.addText(currentText.trim(), {
+                  x: 0.3,
+                  y: yPos,
+                  w: 9.4,
+                  h: 0.4,
+                  fontSize: currentText.length > 100 ? 10 : 12,
+                  color: '333333',
+                })
+                yPos += 0.5
+                currentText = ''
+              }
+              
+              currentText += item.str + ' '
+              lastY = currentY
+            })
+            
+            // Add remaining text
+            if (currentText.trim()) {
+              slide.addText(currentText.trim(), {
+                x: 0.3,
+                y: yPos,
+                w: 9.4,
+                h: 0.4,
+                fontSize: 11,
+                color: '333333',
+              })
+            }
+          }
+          
+          // Add page number
+          slide.addText(`Page ${pageNum}`, {
+            x: 9,
+            y: 5.1,
+            w: 1,
+            h: 0.3,
+            fontSize: 8,
+            color: '999999',
+            align: 'right',
+          })
+          
+          setProgress(30 + Math.round((pageNum / totalPages) * 60))
+        } catch (pageError) {
+          console.error(`[v0] Error processing page ${pageNum}:`, pageError)
+          // Continue with next page
+        }
       }
       
       setProgress(95)
@@ -100,7 +137,7 @@ export default function PdfToPptPage() {
       
       setProgress(100)
     } catch (error) {
-      console.error('Error converting:', error)
+      console.error('[v0] Error converting PDF:', error)
       alert('Error converting PDF. Please make sure it is a valid PDF file.')
     } finally {
       setIsProcessing(false)
