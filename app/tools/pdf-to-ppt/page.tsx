@@ -59,70 +59,33 @@ export default function PdfToPptPage() {
       
       for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
         const page = await pdf.getPage(pageNum)
-        const textContent = await page.getTextContent()
         
-        // Group text by approximate Y position to form content blocks
-        const textBlocks: Map<number, string[]> = new Map()
+        // Get page dimensions
+        const viewport = page.getViewport({ scale: 2 })
         
-        textContent.items.forEach((item: any) => {
-          const y = Math.round(item.transform[5] / 50) * 50
-          if (!textBlocks.has(y)) {
-            textBlocks.set(y, [])
-          }
-          textBlocks.get(y)!.push(item.str)
-        })
+        // Create canvas for rendering
+        const canvas = document.createElement('canvas')
+        canvas.width = viewport.width
+        canvas.height = viewport.height
         
-        // Sort blocks by Y (top to bottom)
-        const sortedYs = Array.from(textBlocks.keys()).sort((a, b) => b - a)
+        const context = canvas.getContext('2d')
+        if (!context) throw new Error('Could not get canvas context')
         
-        // Create slide
+        // Render page to canvas
+        await page.render({ canvasContext: context, viewport }).promise
+        
+        // Convert canvas to image
+        const imageData = canvas.toDataURL('image/jpeg', 0.9)
+        
+        // Add slide with image
         const slide = pptx.addSlide()
-        
-        // Add slide number
-        slide.addText(`Slide ${pageNum}`, {
-          x: 9,
-          y: 5,
-          w: 1,
-          h: 0.3,
-          fontSize: 10,
-          color: '666666',
+        slide.addImage({
+          data: imageData,
+          x: 0,
+          y: 0,
+          w: 10,
+          h: 7.5,
         })
-        
-        let yPos = 0.5
-        let isFirst = true
-        
-        for (const y of sortedYs) {
-          const blockText = textBlocks.get(y)!.join(' ').trim()
-          if (!blockText) continue
-          
-          if (isFirst) {
-            // Title
-            slide.addText(blockText, {
-              x: 0.5,
-              y: yPos,
-              w: 9,
-              h: 0.8,
-              fontSize: 24,
-              bold: true,
-              color: '333333',
-            })
-            yPos += 1
-            isFirst = false
-          } else {
-            // Content
-            slide.addText(blockText, {
-              x: 0.5,
-              y: yPos,
-              w: 9,
-              h: 0.5,
-              fontSize: 14,
-              color: '444444',
-            })
-            yPos += 0.6
-          }
-          
-          if (yPos > 4.5) break
-        }
         
         setProgress(30 + Math.round((pageNum / totalPages) * 60))
       }
