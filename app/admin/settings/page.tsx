@@ -1,183 +1,207 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
-import { getAdminUsers, addAdminUser, removeAdminUser } from '@/app/actions/admin'
-import { 
-  FileText, 
-  Settings,
-  MessageSquare,
-  Home,
-  ShoppingCart,
-  Users,
-  Plus,
-  Trash2,
-  Shield
-} from 'lucide-react'
-import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import useSWR from 'swr'
+import { ArrowLeft, LogOut } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
-export default function SettingsPage() {
-  const [newAdminEmail, setNewAdminEmail] = useState('')
-  const { data: admins, mutate } = useSWR('admins', getAdminUsers)
+export default function AdminSettings() {
+  const router = useRouter()
+  const [showPasswordChange, setShowPasswordChange] = useState(false)
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
+  const [loading, setLoading] = useState(false)
 
-  const handleAddAdmin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (newAdminEmail) {
-      try {
-        await addAdminUser(newAdminEmail)
-        setNewAdminEmail('')
-        mutate()
-      } catch (error) {
-        alert('Failed to add admin. Make sure you are a superadmin.')
-      }
-    }
+  const handleLogout = () => {
+    document.cookie = 'admin-session=; path=/admin; max-age=0;'
+    router.push('/admin/login')
   }
 
-  const handleRemoveAdmin = async (email: string) => {
-    if (confirm(`Are you sure you want to remove ${email} as admin?`)) {
-      try {
-        await removeAdminUser(email)
-        mutate()
-      } catch (error) {
-        alert('Failed to remove admin. Make sure you are a superadmin.')
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setMessage(null)
+    setLoading(true)
+
+    if (newPassword !== confirmPassword) {
+      setMessage({ type: 'error', text: 'New passwords do not match' })
+      setLoading(false)
+      return
+    }
+
+    if (newPassword.length < 8) {
+      setMessage({ type: 'error', text: 'Password must be at least 8 characters' })
+      setLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch('/api/admin/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setMessage({ type: 'error', text: data.message || 'Failed to change password' })
+        return
       }
+
+      setMessage({ type: 'success', text: 'Password changed successfully' })
+      setCurrentPassword('')
+      setNewPassword('')
+      setConfirmPassword('')
+      setShowPasswordChange(false)
+    } catch (error) {
+      setMessage({ type: 'error', text: 'Failed to change password' })
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen bg-muted/30">
-      {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-64 bg-background border-r p-4">
-        <div className="flex items-center gap-2 mb-8 px-2">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <FileText className="w-5 h-5 text-primary-foreground" />
-          </div>
-          <span className="text-xl font-bold">OrbixDocs</span>
-        </div>
-        
-        <nav className="space-y-2">
-          <Link href="/admin">
-            <Button variant="ghost" className="w-full justify-start">
-              <Home className="w-4 h-4 mr-2" />
-              Dashboard
-            </Button>
-          </Link>
-          <Link href="/admin/orders">
-            <Button variant="ghost" className="w-full justify-start">
-              <ShoppingCart className="w-4 h-4 mr-2" />
-              Orders
-            </Button>
-          </Link>
-          <Link href="/admin/subscriptions">
-            <Button variant="ghost" className="w-full justify-start">
-              <Users className="w-4 h-4 mr-2" />
-              Subscriptions
-            </Button>
-          </Link>
-          <Link href="/admin/contacts">
-            <Button variant="ghost" className="w-full justify-start">
-              <MessageSquare className="w-4 h-4 mr-2" />
-              Messages
-            </Button>
-          </Link>
-          <Link href="/admin/settings">
-            <Button variant="secondary" className="w-full justify-start">
-              <Settings className="w-4 h-4 mr-2" />
-              Settings
-            </Button>
-          </Link>
-        </nav>
-        
-        <div className="absolute bottom-4 left-4 right-4">
-          <Link href="/">
-            <Button variant="outline" className="w-full">
-              Back to Site
-            </Button>
-          </Link>
-        </div>
-      </aside>
-      
-      {/* Main Content */}
-      <main className="ml-64 p-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold">Settings</h1>
-          <p className="text-muted-foreground">Manage admin users and settings</p>
-        </div>
-        
-        <div className="grid gap-6">
-          {/* Admin Users */}
-          <Card className="p-6">
-            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <Shield className="w-5 h-5" />
-              Admin Users
-            </h2>
-            
-            <form onSubmit={handleAddAdmin} className="flex gap-2 mb-6">
-              <Input
-                type="email"
-                placeholder="Enter email address"
-                value={newAdminEmail}
-                onChange={(e) => setNewAdminEmail(e.target.value)}
-                className="max-w-md"
-              />
-              <Button type="submit">
-                <Plus className="w-4 h-4 mr-2" />
-                Add Admin
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="sticky top-0 z-50 border-b bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center gap-4">
+            <Link href="/admin">
+              <Button variant="outline" size="icon">
+                <ArrowLeft className="w-4 h-4" />
               </Button>
-            </form>
-            
-            <div className="space-y-2">
-              {admins?.map((admin) => (
-                <div key={admin.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Users className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-medium">{admin.email}</p>
-                      <p className="text-sm text-muted-foreground capitalize">{admin.role}</p>
-                    </div>
-                  </div>
-                  {admin.role !== 'superadmin' && (
-                    <Button 
-                      variant="ghost" 
-                      size="sm"
-                      onClick={() => handleRemoveAdmin(admin.email)}
-                    >
-                      <Trash2 className="w-4 h-4 text-destructive" />
-                    </Button>
-                  )}
-                </div>
-              ))}
+            </Link>
+            <div>
+              <h1 className="text-3xl font-bold">Settings</h1>
+              <p className="text-sm text-muted-foreground mt-1">
+                Manage admin account settings
+              </p>
             </div>
-          </Card>
-          
-          {/* Payment Settings Info */}
-          <Card className="p-6">
-            <h2 className="text-xl font-semibold mb-4">Payment Settings</h2>
-            <div className="space-y-4 text-sm">
-              <div className="p-4 bg-muted/50 rounded-lg">
-                <p className="font-medium mb-2">JazzCash</p>
-                <p className="text-muted-foreground">0303-9109260 (Naveed Ahmad Sharif)</p>
-              </div>
-              <div className="p-4 bg-muted/50 rounded-lg">
-                <p className="font-medium mb-2">Easypaisa</p>
-                <p className="text-muted-foreground">0345-0100172 (Naveed Ahmad Sharif)</p>
-              </div>
-              <div className="p-4 bg-muted/50 rounded-lg">
-                <p className="font-medium mb-2">Bank Transfer</p>
-                <p className="text-muted-foreground">Faysal Bank - 3667786000002590</p>
-                <p className="text-muted-foreground">IBAN: PK83FAYS3667786000002590</p>
-              </div>
-            </div>
-            <p className="text-xs text-muted-foreground mt-4">
-              To change payment details, edit lib/payment-config.ts file
-            </p>
-          </Card>
+          </div>
         </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Security Section */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Security</CardTitle>
+            <CardDescription>Manage your admin account security</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Change Password */}
+            <div>
+              <h3 className="font-semibold mb-4">Change Admin Password</h3>
+              {!showPasswordChange ? (
+                <Button onClick={() => setShowPasswordChange(true)}>
+                  Change Password
+                </Button>
+              ) : (
+                <form onSubmit={handleChangePassword} className="space-y-4">
+                  {message && (
+                    <div
+                      className={`p-3 rounded-md ${
+                        message.type === 'success'
+                          ? 'bg-green-50 border border-green-200 text-green-700'
+                          : 'bg-red-50 border border-red-200 text-red-700'
+                      }`}
+                    >
+                      {message.text}
+                    </div>
+                  )}
+
+                  <div>
+                    <label className="text-sm font-medium">Current Password</label>
+                    <Input
+                      type="password"
+                      placeholder="Enter current password"
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                      required
+                      disabled={loading}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium">New Password</label>
+                    <Input
+                      type="password"
+                      placeholder="Enter new password (min 8 chars)"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      required
+                      disabled={loading}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium">Confirm Password</label>
+                    <Input
+                      type="password"
+                      placeholder="Confirm new password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                      disabled={loading}
+                    />
+                  </div>
+
+                  <div className="flex gap-2">
+                    <Button type="submit" disabled={loading}>
+                      {loading ? 'Updating...' : 'Update Password'}
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setShowPasswordChange(false)}
+                      disabled={loading}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </form>
+              )}
+            </div>
+
+            <div className="border-t pt-6">
+              <h3 className="font-semibold mb-4">Logout</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Sign out from this admin account
+              </p>
+              <Button variant="outline" onClick={handleLogout}>
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Admin Info */}
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle>Admin Panel Information</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Panel Version</span>
+              <span className="font-medium">1.0.0</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Last Updated</span>
+              <span className="font-medium">May 31, 2026</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Status</span>
+              <span className="font-medium text-green-600">Active</span>
+            </div>
+          </CardContent>
+        </Card>
       </main>
     </div>
   )

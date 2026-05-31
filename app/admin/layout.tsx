@@ -1,27 +1,42 @@
-import { auth } from '@/lib/auth'
-import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
-import { db } from '@/lib/db'
-import { adminUsers } from '@/lib/db/schema'
-import { eq } from 'drizzle-orm'
+'use client'
 
-export default async function AdminLayout({
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const session = await auth.api.getSession({ headers: await headers() })
-  
-  if (!session?.user?.email) {
-    redirect('/sign-in')
+  const router = useRouter()
+  const [authenticated, setAuthenticated] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Check if admin session cookie exists
+    const adminSession = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('admin-session='))
+
+    if (!adminSession) {
+      // Redirect to login if not authenticated
+      if (typeof window !== 'undefined') {
+        router.push('/admin/login')
+      }
+    } else {
+      setAuthenticated(true)
+    }
+
+    setLoading(false)
+  }, [router])
+
+  if (loading) {
+    return null
   }
-  
-  // Check if user is admin
-  const admins = await db.select().from(adminUsers).where(eq(adminUsers.email, session.user.email))
-  
-  if (admins.length === 0) {
-    redirect('/')
+
+  if (!authenticated) {
+    return null
   }
-  
+
   return <>{children}</>
 }

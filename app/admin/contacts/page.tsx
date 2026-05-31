@@ -1,156 +1,134 @@
 'use client'
 
-import Link from 'next/link'
-import { getContactSubmissions, updateContactStatus } from '@/app/actions/admin'
-import { 
-  FileText, 
-  Settings,
-  MessageSquare,
-  Home,
-  ShoppingCart,
-  Users,
-  Mail,
-  Clock,
-  CheckCircle
-} from 'lucide-react'
-import { Card } from '@/components/ui/card'
+import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import useSWR from 'swr'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { ArrowLeft, Trash2 } from 'lucide-react'
+import Link from 'next/link'
 
-export default function ContactsPage() {
-  const { data: contacts, mutate } = useSWR('contacts', getContactSubmissions)
+interface Contact {
+  id: number
+  name: string
+  email: string
+  subject: string
+  message: string
+  createdAt: string
+  status: string
+}
 
-  const handleUpdateStatus = async (id: number, status: string) => {
-    await updateContactStatus(id, status)
-    mutate()
-  }
+export default function AdminContacts() {
+  const [contacts, setContacts] = useState<Contact[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case 'new':
-        return <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">New</span>
-      case 'read':
-        return <span className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">Read</span>
-      case 'responded':
-        return <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Responded</span>
-      default:
-        return <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-medium">{status}</span>
+  useEffect(() => {
+    fetchContacts()
+  }, [])
+
+  const fetchContacts = async () => {
+    try {
+      const response = await fetch('/api/admin/contacts')
+      const data = await response.json()
+      setContacts(data)
+    } catch (error) {
+      console.error('Failed to fetch contacts:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
+  const handleDelete = async (id: number) => {
+    if (!confirm('Are you sure you want to delete this contact?')) return
+
+    try {
+      await fetch(`/api/admin/contacts/${id}`, {
+        method: 'DELETE',
+      })
+      setContacts(contacts.filter(c => c.id !== id))
+    } catch (error) {
+      console.error('Failed to delete contact:', error)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    )
+  }
+
   return (
-    <div className="min-h-screen bg-muted/30">
-      {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-64 bg-background border-r p-4">
-        <div className="flex items-center gap-2 mb-8 px-2">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <FileText className="w-5 h-5 text-primary-foreground" />
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="sticky top-0 z-50 border-b bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center gap-4">
+            <Link href="/admin">
+              <Button variant="outline" size="icon">
+                <ArrowLeft className="w-4 h-4" />
+              </Button>
+            </Link>
+            <div>
+              <h1 className="text-3xl font-bold">Contact Submissions</h1>
+              <p className="text-sm text-muted-foreground mt-1">
+                Manage contact form messages
+              </p>
+            </div>
           </div>
-          <span className="text-xl font-bold">OrbixDocs</span>
         </div>
-        
-        <nav className="space-y-2">
-          <Link href="/admin">
-            <Button variant="ghost" className="w-full justify-start">
-              <Home className="w-4 h-4 mr-2" />
-              Dashboard
-            </Button>
-          </Link>
-          <Link href="/admin/orders">
-            <Button variant="ghost" className="w-full justify-start">
-              <ShoppingCart className="w-4 h-4 mr-2" />
-              Orders
-            </Button>
-          </Link>
-          <Link href="/admin/subscriptions">
-            <Button variant="ghost" className="w-full justify-start">
-              <Users className="w-4 h-4 mr-2" />
-              Subscriptions
-            </Button>
-          </Link>
-          <Link href="/admin/contacts">
-            <Button variant="secondary" className="w-full justify-start">
-              <MessageSquare className="w-4 h-4 mr-2" />
-              Messages
-            </Button>
-          </Link>
-          <Link href="/admin/settings">
-            <Button variant="ghost" className="w-full justify-start">
-              <Settings className="w-4 h-4 mr-2" />
-              Settings
-            </Button>
-          </Link>
-        </nav>
-        
-        <div className="absolute bottom-4 left-4 right-4">
-          <Link href="/">
-            <Button variant="outline" className="w-full">
-              Back to Site
-            </Button>
-          </Link>
-        </div>
-      </aside>
-      
+      </header>
+
       {/* Main Content */}
-      <main className="ml-64 p-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold">Contact Messages</h1>
-          <p className="text-muted-foreground">Manage customer inquiries</p>
-        </div>
-        
-        <Card className="p-6">
-          {!contacts || contacts.length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground">
-              <MessageSquare className="w-12 h-12 mx-auto mb-4 opacity-50" />
-              <p>No messages yet</p>
-            </div>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="space-y-4">
+          {contacts.length === 0 ? (
+            <Card>
+              <CardContent className="py-12 text-center">
+                <p className="text-muted-foreground">No contact submissions yet</p>
+              </CardContent>
+            </Card>
           ) : (
-            <div className="space-y-4">
-              {contacts.map((contact) => (
-                <div key={contact.id} className="border rounded-lg p-4 hover:bg-muted/50">
-                  <div className="flex items-start justify-between mb-3">
+            contacts.map((contact) => (
+              <Card key={contact.id}>
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between">
                     <div>
-                      <h3 className="font-semibold">{contact.subject}</h3>
-                      <p className="text-sm text-muted-foreground flex items-center gap-2">
-                        <Mail className="w-4 h-4" />
-                        {contact.name} ({contact.email})
-                      </p>
+                      <CardTitle className="text-lg">{contact.subject}</CardTitle>
+                      <CardDescription className="mt-2">
+                        From: <span className="font-medium">{contact.name}</span> ({contact.email})
+                      </CardDescription>
                     </div>
-                    <div className="flex items-center gap-2">
-                      {getStatusBadge(contact.status)}
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        {new Date(contact.createdAt).toLocaleDateString()}
-                      </span>
-                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleDelete(contact.id)}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
                   </div>
-                  
-                  <p className="text-sm mb-4 bg-muted/50 p-3 rounded-md">{contact.message}</p>
-                  
-                  <div className="flex gap-2">
-                    {contact.status === 'new' && (
-                      <Button size="sm" variant="outline" onClick={() => handleUpdateStatus(contact.id, 'read')}>
-                        Mark as Read
-                      </Button>
-                    )}
-                    {contact.status !== 'responded' && (
-                      <Button size="sm" onClick={() => handleUpdateStatus(contact.id, 'responded')}>
-                        <CheckCircle className="w-4 h-4 mr-2" />
-                        Mark as Responded
-                      </Button>
-                    )}
-                    <a href={`mailto:${contact.email}?subject=Re: ${contact.subject}`}>
-                      <Button size="sm" variant="outline">
-                        <Mail className="w-4 h-4 mr-2" />
-                        Reply via Email
-                      </Button>
-                    </a>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-foreground whitespace-pre-wrap mb-3">
+                    {contact.message}
+                  </p>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span>
+                      {new Date(contact.createdAt).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })}
+                    </span>
+                    <Badge variant="outline">{contact.status}</Badge>
                   </div>
-                </div>
-              ))}
-            </div>
+                </CardContent>
+              </Card>
+            ))
           )}
-        </Card>
+        </div>
       </main>
     </div>
   )
