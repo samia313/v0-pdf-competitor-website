@@ -52,7 +52,7 @@ export default function PdfToWordPage() {
       setProgress(30)
       
       // Extract text from all pages
-      const paragraphs: Paragraph[] = []
+      const paragraphs: any[] = []
       const totalPages = pdf.numPages
       
       for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
@@ -73,9 +73,9 @@ export default function PdfToWordPage() {
         // Sort lines by Y position (descending - top to bottom)
         const sortedYPositions = Array.from(lines.keys()).sort((a, b) => b - a)
         
-        // Add page header
+        // Add page separator
         if (pageNum > 1) {
-          paragraphs.push(new Paragraph({ children: [] }))
+          paragraphs.push(new docxLib.Paragraph({ children: [] }))
         }
         
         // Convert lines to paragraphs
