@@ -21,14 +21,33 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      alert('Please fill in all fields')
+      return
+    }
+
     setIsSubmitting(true)
     
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    setFormData({ name: '', email: '', subject: '', message: '' })
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form')
+      }
+
+      setIsSubmitted(true)
+      setFormData({ name: '', email: '', subject: '', message: '' })
+    } catch (error) {
+      alert('Error sending message. Please try again.')
+      console.error('Form submission error:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (

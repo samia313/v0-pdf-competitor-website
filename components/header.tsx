@@ -96,6 +96,12 @@ export function Header() {
           <Link href="/blog">
             <Button variant="ghost">Blog</Button>
           </Link>
+          <Link href="/about">
+            <Button variant="ghost">About</Button>
+          </Link>
+          <Link href="/contact">
+            <Button variant="ghost">Contact</Button>
+          </Link>
           <Link href="/pricing">
             <Button variant="ghost">Pricing</Button>
           </Link>
@@ -208,6 +214,12 @@ export function Header() {
                 </Link>
                 <Link href="/blog" onClick={() => setIsOpen(false)}>
                   <Button variant="ghost" className="w-full justify-start">Blog</Button>
+                </Link>
+                <Link href="/about" onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">About Us</Button>
+                </Link>
+                <Link href="/contact" onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">Contact Us</Button>
                 </Link>
                 <Link href="/pricing" onClick={() => setIsOpen(false)}>
                   <Button variant="ghost" className="w-full justify-start">Pricing</Button>
