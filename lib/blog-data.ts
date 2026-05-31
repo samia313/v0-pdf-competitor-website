@@ -596,6 +596,7 @@ Sign documents professionally with OrbixDocs's e-signature tool.
     author: 'OrbixDocs Team',
     publishedAt: '2024-02-15',
     readTime: '4 min read',
+    image: '/blog/jpg-to-pdf.png',
     content: `
 ## Convert JPG to PDF
 
@@ -655,6 +656,7 @@ Create professional PDFs from your images with OrbixDocs.
     author: 'OrbixDocs Team',
     publishedAt: '2024-02-18',
     readTime: '4 min read',
+    image: '/blog/pdf-to-jpg.png',
     content: `
 ## PDF to JPG Conversion
 
@@ -708,6 +710,7 @@ Get high-quality images from your PDFs with OrbixDocs.
     author: 'OrbixDocs Team',
     publishedAt: '2024-02-22',
     readTime: '6 min read',
+    image: '/blog/edit-pdf.png',
     content: `
 ## How to Edit PDF Online
 
