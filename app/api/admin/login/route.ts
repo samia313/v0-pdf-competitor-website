@@ -1,30 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'crypto'
 
-const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || 
-  crypto.createHash('sha256').update(process.env.ADMIN_PASSWORD || 'admin123').digest('hex')
-
 export async function POST(request: NextRequest) {
   try {
-    const { password } = await request.json()
+    const body = await request.json()
+    const { password } = body
 
-    if (!password) {
-      return NextResponse.json(
-        { message: 'Password is required' },
-        { status: 400 }
-      )
-    }
+    // Default admin password - change this or use environment variable
+    const ADMIN_PASSWORD = 'admin123'
 
-    const passwordHash = crypto.createHash('sha256').update(password).digest('hex')
-
-    if (passwordHash !== ADMIN_PASSWORD_HASH) {
+    // Check password
+    if (password !== ADMIN_PASSWORD) {
       return NextResponse.json(
         { message: 'Invalid password' },
         { status: 401 }
       )
     }
 
-    const response = NextResponse.json({ success: true })
+    const response = NextResponse.json({ success: true, message: 'Login successful' })
     
     // Set admin session cookie
     response.cookies.set('admin-session', crypto.randomBytes(32).toString('hex'), {
