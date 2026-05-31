@@ -53,78 +53,93 @@ export default function PdfToPptPage() {
       
       // Create PowerPoint presentation
       const pptx = new pptxgen()
-      pptx.defineLayout({ name: 'LAYOUT_16x9', width: 10, height: 5.625 })
       pptx.layout = 'LAYOUT_16x9'
       
       const totalPages = pdf.numPages
       
+      // Process each page
       for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
         try {
           const page = await pdf.getPage(pageNum)
           const textContent = await page.getTextContent()
           
-          // Create slide
+          // Create slide with white background
           const slide = pptx.addSlide()
-          slide.background = { color: 'FFFFFF' }
           
-          // Add content
+          // Add content from text
           if (textContent.items && textContent.items.length > 0) {
-            const allText = textContent.items.map((item: any) => item.str).join(' ')
+            const texts: string[] = []
+            textContent.items.forEach((item: any) => {
+              texts.push(item.str)
+            })
             
-            // Add text in sections
-            const words = allText.split(' ').filter((w: string) => w.trim())
-            let currentY = 0.5
-            let currentLineText = ''
+            const fullText = texts.join(' ')
+            const words = fullText.split(' ').filter(w => w.trim().length > 0)
             
-            for (const word of words) {
-              currentLineText += word + ' '
+            if (words.length > 0) {
+              let currentY = 0.5
+              let currentText = ''
+              let wordCount = 0
               
-              // Add text every ~15 words or at end
-              if (currentLineText.split(' ').length >= 15 || word === words[words.length - 1]) {
-                if (currentLineText.trim()) {
-                  slide.addText(currentLineText.trim(), {
-                    x: 0.3,
-                    y: currentY,
-                    w: 9.4,
-                    h: 0.6,
-                    fontSize: 11,
-                    color: '333333',
-                    wrap: true,
-                  })
-                  currentY += 0.8
-                  currentLineText = ''
+              for (let i = 0; i < words.length; i++) {
+                currentText += words[i] + ' '
+                wordCount++
+                
+                // Add text box every 10-15 words or at the end
+                if (wordCount >= 12 || i === words.length - 1) {
+                  const textToAdd = currentText.trim()
+                  if (textToAdd.length > 0) {
+                    slide.addText(textToAdd, {
+                      x: 0.5,
+                      y: currentY,
+                      w: 9,
+                      h: 0.8,
+                      fontSize: 11,
+                      color: '333333',
+                      wrap: true,
+                      breakOnSpace: true,
+                    })
+                    currentY += 1
+                    currentText = ''
+                    wordCount = 0
+                  }
+                  if (currentY >= 5) break
                 }
               }
             }
           }
           
           // Add page number
-          slide.addText(`Page ${pageNum}`, {
-            x: 0.3,
+          slide.addText(`Slide ${pageNum} / ${totalPages}`, {
+            x: 0.5,
             y: 5.2,
-            w: 1,
+            w: 9,
             h: 0.3,
             fontSize: 8,
             color: '999999',
+            align: 'right',
           })
           
           setProgress(30 + Math.round((pageNum / totalPages) * 60))
         } catch (pageError) {
-          // Continue with next page
+          console.error(`Page ${pageNum} error:`, pageError)
+          // Continue with next page even if one fails
         }
       }
       
-      setProgress(90)
+      setProgress(95)
       
-      // Generate file
-      const pptxBlob = await pptx.write({ outputType: 'blob' }) as Blob
+      // Write the PowerPoint file
+      const pptxBytes = await pptx.write({ outputType: 'arraybuffer' }) as ArrayBuffer
+      const blob = new Blob([pptxBytes], { type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' })
       
       const originalName = files[0].name.replace(/\.pdf$/i, '')
       const fileName = `${originalName}.pptx`
-      setConvertedFile({ blob: pptxBlob, name: fileName })
       
+      setConvertedFile({ blob, name: fileName })
       setProgress(100)
     } catch (error) {
+      console.error('Conversion error:', error)
       alert('Error converting PDF. Please make sure it is a valid PDF file.')
     } finally {
       setIsProcessing(false)
