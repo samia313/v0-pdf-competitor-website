@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 export default function AdminLayout({
@@ -9,10 +9,19 @@ export default function AdminLayout({
   children: React.ReactNode
 }) {
   const router = useRouter()
+  const pathname = usePathname()
   const [authenticated, setAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
 
+  // Don't require auth for login page
+  const isLoginPage = pathname === '/admin/login'
+
   useEffect(() => {
+    if (isLoginPage) {
+      setLoading(false)
+      return
+    }
+
     // Check if admin session cookie exists
     const adminSession = document.cookie
       .split('; ')
@@ -28,13 +37,13 @@ export default function AdminLayout({
     }
 
     setLoading(false)
-  }, [router])
+  }, [router, isLoginPage])
 
   if (loading) {
     return null
   }
 
-  if (!authenticated) {
+  if (!isLoginPage && !authenticated) {
     return null
   }
 
