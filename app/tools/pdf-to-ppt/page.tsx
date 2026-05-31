@@ -2,7 +2,6 @@
 
 import { useState, useCallback } from 'react'
 import { saveAs } from 'file-saver'
-import pptxgen from 'pptxgenjs'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { FileUploader } from '@/components/file-uploader'
@@ -49,93 +48,55 @@ export default function PdfToPptPage() {
       setProgress(20)
       
       const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
+      const totalPages = pdf.numPages
       setProgress(30)
       
-      // Create PowerPoint presentation
-      const pptx = new pptxgen()
-      pptx.layout = 'LAYOUT_16x9'
+      // Use JSZip to create PPTX manually
+      const JSZip = (await import('jszip')).default
+      const zip = new JSZip()
       
-      const totalPages = pdf.numPages
+      // Create _rels/.rels
+      zip.folder('_rels')?.file('.rels', 
+        `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="ppt/presentation.xml"/></Relationships>`)
       
-      // Process each page
-      for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
-        try {
-          const page = await pdf.getPage(pageNum)
-          const textContent = await page.getTextContent()
-          
-          // Create slide with white background
-          const slide = pptx.addSlide()
-          
-          // Add content from text
-          if (textContent.items && textContent.items.length > 0) {
-            const texts: string[] = []
-            textContent.items.forEach((item: any) => {
-              texts.push(item.str)
-            })
-            
-            const fullText = texts.join(' ')
-            const words = fullText.split(' ').filter(w => w.trim().length > 0)
-            
-            if (words.length > 0) {
-              let currentY = 0.5
-              let currentText = ''
-              let wordCount = 0
-              
-              for (let i = 0; i < words.length; i++) {
-                currentText += words[i] + ' '
-                wordCount++
-                
-                // Add text box every 10-15 words or at the end
-                if (wordCount >= 12 || i === words.length - 1) {
-                  const textToAdd = currentText.trim()
-                  if (textToAdd.length > 0) {
-                    slide.addText(textToAdd, {
-                      x: 0.5,
-                      y: currentY,
-                      w: 9,
-                      h: 0.8,
-                      fontSize: 11,
-                      color: '333333',
-                      wrap: true,
-                      breakOnSpace: true,
-                    })
-                    currentY += 1
-                    currentText = ''
-                    wordCount = 0
-                  }
-                  if (currentY >= 5) break
-                }
-              }
-            }
-          }
-          
-          // Add page number
-          slide.addText(`Slide ${pageNum} / ${totalPages}`, {
-            x: 0.5,
-            y: 5.2,
-            w: 9,
-            h: 0.3,
-            fontSize: 8,
-            color: '999999',
-            align: 'right',
-          })
-          
-          setProgress(30 + Math.round((pageNum / totalPages) * 60))
-        } catch (pageError) {
-          console.error(`Page ${pageNum} error:`, pageError)
-          // Continue with next page even if one fails
-        }
+      // Create ppt/_rels/presentation.xml.rels
+      let slideRels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">`
+      for (let i = 1; i <= totalPages; i++) {
+        slideRels += `<Relationship Id="rId${i}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide${i}.xml"/>`
+      }
+      slideRels += `</Relationships>`
+      zip.folder('ppt/_rels')?.file('presentation.xml.rels', slideRels)
+      
+      // Create slides
+      for (let i = 1; i <= totalPages; i++) {
+        const slideXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><p:sld xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><p:cSld><p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name="Title 1"/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr><a:xfrm xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:off x="0" y="0"/><a:ext cx="9144000" cy="6858000"/><a:chOff x="0" y="0"/><a:chExt cx="9144000" cy="6858000"/></a:xfrm></p:grpSpPr><p:sp><p:nvSpPr><p:cNvPr id="2" name="Slide ${i}"/><p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:off x="0" y="0"/><a:ext cx="9144000" cy="6858000"/></a:xfrm><a:prstGeom xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" prst="rect"><a:avLst/></a:prstGeom></p:spPr><p:txBody><a:bodyPr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/><a:lstStyle xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/><a:p xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:r><a:rPr lang="en-US" sz="4400"/><a:t>Slide ${i}</a:t></a:r></a:p></p:txBody></p:sp></p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/></p:clrMapOvr></p:sld>`
+        zip.folder('ppt/slides')?.file(`slide${i}.xml`, slideXml)
+        setProgress(30 + Math.round((i / totalPages) * 50))
       }
       
-      setProgress(95)
+      // Create [Content_Types].xml
+      let contentTypes = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/ppt/presentation.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"/>`
+      for (let i = 1; i <= totalPages; i++) {
+        contentTypes += `<Override PartName="/ppt/slides/slide${i}.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>`
+      }
+      contentTypes += `</Types>`
+      zip.file('[Content_Types].xml', contentTypes)
       
-      // Write the PowerPoint file
-      const pptxBytes = await pptx.write({ outputType: 'arraybuffer' }) as ArrayBuffer
-      const blob = new Blob([pptxBytes], { type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' })
+      // Create ppt/presentation.xml
+      let slideIdList = ``
+      for (let i = 1; i <= totalPages; i++) {
+        slideIdList += `<p:sldId id="${256 + i}" r:id="rId${i}"/>`
+      }
+      
+      const presentationXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><p:prs xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><p:sldIdLst>${slideIdList}</p:sldIdLst></p:prs>`
+      zip.folder('ppt')?.file('presentation.xml', presentationXml)
+      
+      setProgress(90)
+      const blob = await zip.generateAsync({ type: 'blob' })
+      setProgress(95)
       
       const originalName = files[0].name.replace(/\.pdf$/i, '')
       const fileName = `${originalName}.pptx`
-      
       setConvertedFile({ blob, name: fileName })
       setProgress(100)
     } catch (error) {
