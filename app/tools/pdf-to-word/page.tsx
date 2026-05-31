@@ -2,13 +2,14 @@
 
 import { useState, useCallback } from 'react'
 import { saveAs } from 'file-saver'
+import * as pdfjsLib from 'pdfjs-dist'
+import { Document, Paragraph, TextRun, Packer } from 'docx'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { FileUploader } from '@/components/file-uploader'
 import { AdBanner, AdSidebar } from '@/components/ad-units'
 import { Button } from '@/components/ui/button'
 import { FileText, Download, Loader2 } from 'lucide-react'
-import { Document, Packer, Paragraph, TextRun } from 'docx'
 
 export default function PdfToWordPage() {
   const [files, setFiles] = useState<File[]>([])
@@ -42,8 +43,6 @@ export default function PdfToWordPage() {
     setProgress(10)
 
     try {
-      // Load PDF.js
-      const pdfjsLib = await import('pdfjs-dist')
       pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
       
       const arrayBuffer = await files[0].arrayBuffer()
