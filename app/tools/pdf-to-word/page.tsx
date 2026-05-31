@@ -14,16 +14,27 @@ export default function PdfToWordPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [convertedFile, setConvertedFile] = useState<{ blob: Blob; name: string } | null>(null)
 
   const handleFilesSelected = useCallback(async (newFiles: File[]) => {
     if (newFiles.length > 0) {
       setFiles([newFiles[0]])
+      setConvertedFile(null)
     }
   }, [])
 
   const handleRemoveFile = useCallback(() => {
     setFiles([])
+    setConvertedFile(null)
   }, [])
+
+  const handleDownload = useCallback(() => {
+    if (convertedFile) {
+      saveAs(convertedFile.blob, convertedFile.name)
+      setConvertedFile(null)
+      setFiles([])
+    }
+  }, [convertedFile])
 
   const handleConvert = async () => {
     if (files.length === 0) return
@@ -100,11 +111,13 @@ export default function PdfToWordPage() {
       
       setProgress(90)
       
-      // Generate and download
+      // Generate filename but don't auto download
       const blob = await Packer.toBlob(doc)
       const originalName = files[0].name.replace(/\.pdf$/i, '')
-      saveAs(blob, `${originalName}.docx`)
+      const fileName = `${originalName}.docx`
       
+      // Store for manual download
+      setConvertedFile({ blob, name: fileName })
       setProgress(100)
     } catch (error) {
       console.error('Error converting:', error)
@@ -150,24 +163,41 @@ export default function PdfToWordPage() {
 
                 {files.length > 0 && (
                   <div className="mt-6">
-                    <Button
-                      size="lg"
-                      className="w-full text-base"
-                      onClick={handleConvert}
-                      disabled={isProcessing}
-                    >
-                      {isProcessing ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Converting... {progress}%
-                        </>
-                      ) : (
-                        <>
+                    {convertedFile ? (
+                      <div className="space-y-3">
+                        <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                          <p className="text-green-800 font-semibold mb-2">Conversion Complete!</p>
+                          <p className="text-sm text-green-700">{convertedFile.name}</p>
+                        </div>
+                        <Button
+                          size="lg"
+                          className="w-full text-base bg-green-600 hover:bg-green-700"
+                          onClick={handleDownload}
+                        >
                           <Download className="mr-2 h-5 w-5" />
-                          Convert to Word
-                        </>
-                      )}
-                    </Button>
+                          Download Word Document
+                        </Button>
+                      </div>
+                    ) : (
+                      <Button
+                        size="lg"
+                        className="w-full text-base"
+                        onClick={handleConvert}
+                        disabled={isProcessing}
+                      >
+                        {isProcessing ? (
+                          <>
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            Converting... {progress}%
+                          </>
+                        ) : (
+                          <>
+                            <Download className="mr-2 h-5 w-5" />
+                            Convert to Word
+                          </>
+                        )}
+                      </Button>
+                    )}
                   </div>
                 )}
               </div>
