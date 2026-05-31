@@ -65,79 +65,66 @@ export default function PdfToPptPage() {
           
           // Create slide
           const slide = pptx.addSlide()
-          
-          // Add background color
           slide.background = { color: 'FFFFFF' }
           
-          // Group text items and add to slide
+          // Add content
           if (textContent.items && textContent.items.length > 0) {
-            let yPos = 0.3
-            let currentText = ''
-            let lastY = 0
+            const allText = textContent.items.map((item: any) => item.str).join(' ')
             
-            textContent.items.forEach((item: any, index: number) => {
-              const currentY = Math.round(item.transform[5])
+            // Add text in sections
+            const words = allText.split(' ').filter((w: string) => w.trim())
+            let currentY = 0.5
+            let currentLineText = ''
+            
+            for (const word of words) {
+              currentLineText += word + ' '
               
-              // If Y position changed significantly, add text as new element
-              if (Math.abs(currentY - lastY) > 10 && currentText.trim()) {
-                slide.addText(currentText.trim(), {
-                  x: 0.3,
-                  y: yPos,
-                  w: 9.4,
-                  h: 0.4,
-                  fontSize: currentText.length > 100 ? 10 : 12,
-                  color: '333333',
-                })
-                yPos += 0.5
-                currentText = ''
+              // Add text every ~15 words or at end
+              if (currentLineText.split(' ').length >= 15 || word === words[words.length - 1]) {
+                if (currentLineText.trim()) {
+                  slide.addText(currentLineText.trim(), {
+                    x: 0.3,
+                    y: currentY,
+                    w: 9.4,
+                    h: 0.6,
+                    fontSize: 11,
+                    color: '333333',
+                    wrap: true,
+                  })
+                  currentY += 0.8
+                  currentLineText = ''
+                }
               }
-              
-              currentText += item.str + ' '
-              lastY = currentY
-            })
-            
-            // Add remaining text
-            if (currentText.trim()) {
-              slide.addText(currentText.trim(), {
-                x: 0.3,
-                y: yPos,
-                w: 9.4,
-                h: 0.4,
-                fontSize: 11,
-                color: '333333',
-              })
             }
           }
           
           // Add page number
           slide.addText(`Page ${pageNum}`, {
-            x: 9,
-            y: 5.1,
+            x: 0.3,
+            y: 5.2,
             w: 1,
             h: 0.3,
             fontSize: 8,
             color: '999999',
-            align: 'right',
           })
           
           setProgress(30 + Math.round((pageNum / totalPages) * 60))
         } catch (pageError) {
-          console.error(`[v0] Error processing page ${pageNum}:`, pageError)
           // Continue with next page
         }
       }
       
-      setProgress(95)
+      setProgress(90)
       
       // Generate file
       const pptxBlob = await pptx.write({ outputType: 'blob' }) as Blob
+      
       const originalName = files[0].name.replace(/\.pdf$/i, '')
       const fileName = `${originalName}.pptx`
       setConvertedFile({ blob: pptxBlob, name: fileName })
       
       setProgress(100)
     } catch (error) {
-      console.error('[v0] Error converting PDF:', error)
       alert('Error converting PDF. Please make sure it is a valid PDF file.')
     } finally {
       setIsProcessing(false)
