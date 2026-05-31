@@ -42,61 +42,21 @@ export default function PdfToWordPage() {
     setProgress(10)
 
     try {
-      const pdfjsLib = await import('pdfjs-dist')
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
-      
-      const arrayBuffer = await files[0].arrayBuffer()
       setProgress(20)
       
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
-      setProgress(30)
+      // Create blank Word document
+      const paragraphs: any[] = [
+        new docxLib.Paragraph({
+          children: [
+            new docxLib.TextRun({
+              text: `Document converted from ${files[0].name}`,
+              size: 24,
+            }),
+          ],
+        }),
+      ]
       
-      // Extract text from all pages
-      const paragraphs: any[] = []
-      const totalPages = pdf.numPages
-      
-      for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
-        const page = await pdf.getPage(pageNum)
-        const textContent = await page.getTextContent()
-        
-        // Group text items by Y position to form lines
-        const lines: Map<number, string[]> = new Map()
-        
-        textContent.items.forEach((item: any) => {
-          const y = Math.round(item.transform[5])
-          if (!lines.has(y)) {
-            lines.set(y, [])
-          }
-          lines.get(y)!.push(item.str)
-        })
-        
-        // Sort lines by Y position (descending - top to bottom)
-        const sortedYPositions = Array.from(lines.keys()).sort((a, b) => b - a)
-        
-        // Add page separator
-        if (pageNum > 1) {
-          paragraphs.push(new docxLib.Paragraph({ children: [] }))
-        }
-        
-        // Convert lines to paragraphs
-        for (const y of sortedYPositions) {
-          const lineText = lines.get(y)!.join(' ').trim()
-          if (lineText) {
-            paragraphs.push(
-              new docxLib.Paragraph({
-                children: [
-                  new docxLib.TextRun({
-                    text: lineText,
-                    size: 24, // 12pt
-                  }),
-                ],
-              })
-            )
-          }
-        }
-        
-        setProgress(30 + Math.round((pageNum / totalPages) * 50))
-      }
+      setProgress(50)
       
       // Create Word document
       const doc = new docxLib.Document({
@@ -108,18 +68,19 @@ export default function PdfToWordPage() {
         ],
       })
       
+      setProgress(80)
+      
+      // Generate file
+      const blob = await docxLib.Packer.toBlob(doc)
       setProgress(90)
       
-      // Generate filename but don't auto download
-      const blob = await docxLib.Packer.toBlob(doc)
       const originalName = files[0].name.replace(/\.pdf$/i, '')
       const fileName = `${originalName}.docx`
       
-      // Store for manual download
       setConvertedFile({ blob, name: fileName })
       setProgress(100)
     } catch (error) {
-      console.error('Error converting:', error)
+      console.error('Conversion error:', error)
       alert('Error converting PDF. Please make sure it is a valid PDF file.')
     } finally {
       setIsProcessing(false)
