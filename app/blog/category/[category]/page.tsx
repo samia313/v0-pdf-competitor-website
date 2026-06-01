@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   
   return {
-    title: `${categoryData.name} - PDF Blog | OrbixDocs`,
+    title: `${categoryData.name} - PDF Blog | ClixPDF`,
     description: `${categoryData.description}. Browse all ${categoryData.name.toLowerCase()} articles about PDF tools and document management.`,
   }
 }

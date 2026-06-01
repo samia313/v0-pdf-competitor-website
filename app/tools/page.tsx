@@ -6,7 +6,7 @@ import { pdfTools, categories } from '@/lib/tools-data'
 import { ToolIcon } from '@/components/tool-icon'
 
 export const metadata = {
-  title: 'All PDF Tools - OrbixDocs',
+  title: 'All PDF Tools - ClixPDF',
   description: 'Browse all our free PDF tools. Merge, split, compress, convert and edit PDF files online.',
 }
 

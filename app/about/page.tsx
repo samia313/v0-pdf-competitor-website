@@ -100,7 +100,7 @@ export default function AboutPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                About OrbixDocs
+                About ClixPDF
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
                 We are on a mission to make PDF tools accessible, secure, and free for everyone. 
@@ -135,7 +135,7 @@ export default function AboutPage() {
               </h2>
               <div className="prose prose-neutral dark:prose-invert max-w-none text-muted-foreground">
                 <p className="text-lg leading-relaxed mb-4">
-                  OrbixDocs was born from a simple frustration: why should basic PDF operations 
+                  ClixPDF was born from a simple frustration: why should basic PDF operations 
                   require expensive software or complex installations? We believed there had to 
                   be a better way.
                 </p>
@@ -145,7 +145,7 @@ export default function AboutPage() {
                   as a simple PDF merger has grown into a comprehensive suite of 22+ tools.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  Today, OrbixDocs serves over a million users monthly from 190+ countries. 
+                  Today, ClixPDF serves over a million users monthly from 190+ countries. 
                   We continue to innovate, adding AI-powered features like document summarization 
                   and translation, while staying true to our core promise: powerful PDF tools 
                   that are free, secure, and easy to use.
@@ -211,7 +211,7 @@ export default function AboutPage() {
         <section className="py-16 md:py-20 bg-secondary/30">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-foreground mb-4 text-center">
-              Why Choose OrbixDocs?
+              Why Choose ClixPDF?
             </h2>
             <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
               We combine cutting-edge technology with user-friendly design to deliver 
@@ -248,7 +248,7 @@ export default function AboutPage() {
                 Ready to Transform Your PDF Workflow?
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Join millions of users who trust OrbixDocs for their document needs. 
+                Join millions of users who trust ClixPDF for their document needs. 
                 No registration required - start using our tools right away.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

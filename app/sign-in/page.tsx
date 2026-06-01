@@ -4,8 +4,8 @@ import { redirect } from 'next/navigation'
 import { AuthForm } from '@/components/auth-form'
 
 export const metadata = {
-  title: 'Sign In - OrbixDocs',
-  description: 'Sign in to your OrbixDocs account',
+  title: 'Sign In - ClixPDF',
+  description: 'Sign in to your ClixPDF account',
 }
 
 export default async function SignInPage() {

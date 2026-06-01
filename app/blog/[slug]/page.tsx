@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   
   return {
-    title: `${post.title} | OrbixDocs Blog`,
+    title: `${post.title} | ClixPDF Blog`,
     description: post.description,
     keywords: post.tags.join(', '),
     openGraph: {

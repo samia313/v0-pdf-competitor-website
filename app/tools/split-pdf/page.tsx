@@ -225,7 +225,7 @@ export default function SplitPdfPage() {
               <div className="mt-12 prose prose-neutral dark:prose-invert max-w-none">
                 <h2>How to Split PDF Files Online</h2>
                 <p>
-                  Use OrbixDocs to split your PDF documents into separate pages or extract specific pages.
+                  Use ClixPDF to split your PDF documents into separate pages or extract specific pages.
                   Our tool works directly in your browser for maximum privacy and speed.
                 </p>
                 <h3>Split Options</h3>
