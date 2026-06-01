@@ -14,8 +14,8 @@ import {
 } from 'lucide-react'
 
 export const metadata = {
-  title: 'About Us - OrbixDocs | Free Online PDF Tools',
-  description: 'Learn about OrbixDocs - your trusted destination for free, secure, and easy-to-use PDF tools. Our mission is to make PDF editing accessible to everyone.',
+  title: 'About Us - ClixPDF | Free Online PDF Tools',
+  description: 'Learn about ClixPDF - your trusted destination for free, secure, and easy-to-use PDF tools. Our mission is to make PDF editing accessible to everyone.',
 }
 
 const stats = [

@@ -2,8 +2,8 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 
 export const metadata = {
-  title: 'Privacy Policy - OrbixDocs',
-  description: 'Learn how OrbixDocs protects your privacy and handles your data.',
+  title: 'Privacy Policy - ClixPDF',
+  description: 'Learn how ClixPDF protects your privacy and handles your data.',
 }
 
 export default function PrivacyPage() {
@@ -24,7 +24,7 @@ export default function PrivacyPage() {
 
             <h2>Your Privacy is Our Priority</h2>
             <p>
-              At OrbixDocs, we are committed to protecting your privacy. This Privacy Policy explains
+              At ClixPDF, we are committed to protecting your privacy. This Privacy Policy explains
               how we collect, use, and safeguard your information when you use our website and services.
             </p>
 

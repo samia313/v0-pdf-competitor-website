@@ -11,8 +11,8 @@ import Link from 'next/link'
 import { MessageCircle } from 'lucide-react'
 
 export const metadata = {
-  title: 'FAQ - Frequently Asked Questions | OrbixDocs',
-  description: 'Find answers to commonly asked questions about OrbixDocs PDF tools, pricing, and features.',
+  title: 'FAQ - Frequently Asked Questions | ClixPDF',
+  description: 'Find answers to commonly asked questions about ClixPDF PDF tools, pricing, and features.',
 }
 
 const faqs = [

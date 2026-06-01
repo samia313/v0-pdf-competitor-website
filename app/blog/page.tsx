@@ -11,7 +11,7 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 
 export const metadata = {
-  title: 'PDF Blog - Tips, Tutorials & Guides | OrbixDocs',
+  title: 'PDF Blog - Tips, Tutorials & Guides | ClixPDF',
   description: 'Learn everything about PDF tools, document management, and productivity tips. Free tutorials, guides, and expert advice.',
   keywords: 'pdf blog, pdf tutorials, pdf tips, document management, pdf guides',
 }
