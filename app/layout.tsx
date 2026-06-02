@@ -64,6 +64,7 @@ export default function RootLayout({
             />
           </>
         )}
+        <meta name="google-site-verification" content="4_9TKP6mvNOMnOt2h4jl6iI1IfEycFDTQfIifkLUz5o" />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         {children}
