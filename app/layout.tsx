@@ -66,8 +66,8 @@ export default function RootLayout({
         )}
         
       </head>
-     
-      <body<meta name="google-site-verification" content="amo41A_OPlpxZ8xPL8rUJl9lI72Zmi69k_ZlUNRdATQ" />
+     <meta name="google-site-verification" content="amo41A_OPlpxZ8xPL8rUJl9lI72Zmi69k_ZlUNRdATQ" />
+      <body
        className={`${inter.variable} font-sans antialiased`}>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
