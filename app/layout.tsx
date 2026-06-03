@@ -66,7 +66,11 @@ export default function RootLayout({
         )}
         
       </head>
-     <meta name="google-site-verification" content="amo41A_OPlpxZ8xPL8rUJl9lI72Zmi69k_ZlUNRdATQ" />
+     export const metadata = {
+  verification: {
+    google: "abc123xyz789..." // Google se jo code diya hai
+  }
+}
       <body
        className={`${inter.variable} font-sans antialiased`}>
         {children}
