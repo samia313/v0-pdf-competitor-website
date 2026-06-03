@@ -66,11 +66,6 @@ export default function RootLayout({
         )}
         
       </head>
-     export const metadata = {
-  verification: {
-    google-site-verification: google749f1aad6357fd45.html
-  }
-}
       <body
        className={`${inter.variable} font-sans antialiased`}>
         {children}
