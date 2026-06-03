@@ -68,7 +68,7 @@ export default function RootLayout({
       </head>
      export const metadata = {
   verification: {
-    google: "abc123xyz789..." // Google se jo code diya hai
+    google-site-verification: google749f1aad6357fd45.html
   }
 }
       <body
