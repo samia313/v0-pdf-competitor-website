@@ -14,7 +14,7 @@ export function Footer() {
                 <FileText className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold">
-                Clix<span className="text-primary">PDF</span>
+                PDF<span className="text-primary">ilio</span>
               </span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -48,7 +48,7 @@ export function Footer() {
         {/* Bottom section */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} ClixPDF. All rights reserved.
+            © {new Date().getFullYear()} PDFilio. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-4 md:gap-6">
             <Link href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">

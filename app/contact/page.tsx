@@ -167,7 +167,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-medium text-foreground">Email</h3>
-                    <p className="text-muted-foreground">support@clixpdf.com</p>
+                    <p className="text-muted-foreground">support@pdfilio.com</p>
                   </div>
                 </div>
 

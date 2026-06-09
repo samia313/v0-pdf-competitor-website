@@ -17,7 +17,7 @@ export async function createManualPaymentOrder(
   }
 ) {
   // Generate unique order ID
-  const orderId = `CLIXPDF-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`
+  const orderId = `PDFILIO-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`
   
   const price = PKR_PRICES[planId as keyof typeof PKR_PRICES]
   const product = PRODUCTS.find(p => p.id === planId)
@@ -94,7 +94,7 @@ function getPaymentInstructions(method: string, amount: number, orderId: string)
         `Transfer PKR ${amount.toLocaleString()} to the account below`,
         `In reference/narration, write: ${orderId}`,
         'Take screenshot of payment confirmation',
-        'Upload screenshot below or email to support@clixpdf.com',
+        'Upload screenshot below or email to support@pdfilio.com',
       ],
       bankName: 'Faysal Bank',
       accountNumber: '3667786000002590',
