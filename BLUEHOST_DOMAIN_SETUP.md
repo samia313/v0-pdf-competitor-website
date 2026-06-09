@@ -1,4 +1,4 @@
-# BLUEHOST PE CLIXPDF.COM SETUP KAISE KAREN
+# BLUEHOST PE PDFILIO.COM SETUP KAISE KAREN
 
 ## STEP 1: BLUEHOST MEIN LOGIN KARO
 
@@ -13,14 +13,14 @@
 
 ### Method A: Bluehost Dashboard Se
 1. Dashboard mein **"Domains"** section dhundo
-2. **"clixpdf.com"** select karo
+2. **"pdfilio.com"** select karo
 3. **"Manage DNS"** ya **"DNS Settings"** click karo
 4. Ya **"Advanced DNS"** dhundo
 
 ### Method B: Direct Access
 1. **https://my.bluehost.com/hosting/dashboard** par jaao
 2. Left sidebar mein **"Domains"** dhundo
-3. **"clixpdf.com"** ke aage **"Manage"** click karo
+3. **"pdfilio.com"** ke aage **"Manage"** click karo
 4. **"Zone File"** ya **"DNS"** tab mein jaao
 
 ---
