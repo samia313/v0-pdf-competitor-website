@@ -124,7 +124,7 @@ export function Header() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-64">
               {pdfTools
-                .filter((tool) => tool.category === 'convert-to')
+                .filter((tool) => tool.category === 'convert-to-pdf')
                 .map((tool) => (
                   <DropdownMenuItem key={tool.id} asChild>
                     <Link href={tool.href} className="flex items-center gap-3 cursor-pointer">
@@ -150,7 +150,7 @@ export function Header() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-64">
               {pdfTools
-                .filter((tool) => tool.category === 'convert-from')
+                .filter((tool) => tool.category === 'convert-from-pdf')
                 .map((tool) => (
                   <DropdownMenuItem key={tool.id} asChild>
                     <Link href={tool.href} className="flex items-center gap-3 cursor-pointer">
