@@ -203,7 +203,7 @@ export default function MergePdfPage() {
               <div className="mt-12 prose prose-neutral dark:prose-invert max-w-none">
                 <h2>How to Merge PDF Files Online</h2>
                 <p>
-                  ClixPDF makes it easy to combine multiple PDF files into a single document. 
+                  PDFilio makes it easy to combine multiple PDF files into a single document. 
                   Our free online PDF merger works directly in your browser - no software installation needed.
                 </p>
                 <h3>Why Use Our PDF Merger?</h3>

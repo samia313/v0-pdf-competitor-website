@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Suspense } from 'react'
 
 export const metadata = {
-  title: 'ClixPDF - Free Online PDF Tools | Merge, Split, Compress',
+  title: 'PDFilio - Free Online PDF Tools | Merge, Split, Compress',
   description: 'Free online PDF tools to merge, split, compress, convert PDF files. Fast, secure, and easy to use. No registration required.',
   keywords: 'PDF tools, merge PDF, split PDF, compress PDF, convert PDF, PDF editor, free PDF tools online',
 }
@@ -100,7 +100,7 @@ export default function HomePage() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                Why Choose OrbixDocs?
+                Why Choose PDFilio?
               </h2>
               <p className="mt-4 text-muted-foreground text-lg">
                 Trusted by millions of users worldwide

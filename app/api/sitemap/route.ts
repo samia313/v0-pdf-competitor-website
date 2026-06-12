@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://orbixdocs.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://pdfilio.com'
 
   const pages = [
     { url: '/', changefreq: 'daily', priority: '1.0' },

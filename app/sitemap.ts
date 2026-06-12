@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { blogPosts, blogCategories } from '@/lib/blog-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://orbixdocs.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://pdfilio.com'
   
   // Static pages
   const staticPages = [
