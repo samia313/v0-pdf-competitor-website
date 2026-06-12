@@ -282,7 +282,7 @@ export default function PricingPage() {
         <div className="mt-20 text-center bg-primary/5 rounded-2xl p-12">
           <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-            Join millions of users who trust ClixPDF for their PDF needs. Start with our free plan and upgrade when you need more.
+            Join millions of users who trust PDFilio for their PDF needs. Start with our free plan and upgrade when you need more.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/tools">

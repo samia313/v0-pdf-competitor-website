@@ -59,11 +59,11 @@ Bluehost se Vercel ke nameservers use karo:
 ### Vercel Dashboard Mein:
 
 1. **https://vercel.com/dashboard** par jaao
-2. Apna **"clixpdf"** project select karo
+2. Apna **"pdfilio"** project select karo
 3. **"Settings"** tab mein jaao
 4. Left sidebar mein **"Domains"** click karo
 5. **"Add Domain"** button click karo
-6. **"clixpdf.com"** type karo
+6. **"pdfilio.com"** type karo
 7. **"Add"** click karo
 
 Vercel automatically nameservers add kar dega!
@@ -109,11 +109,11 @@ Agar aap Bluehost ke nameservers change nahi karna chahte to A Record add karo:
 **Check Karne Ke Liye:**
 ```bash
 # Terminal mein:
-nslookup clixpdf.com
+nslookup pdfilio.com
 
 # Ya online tool:
 # https://www.whatsmydns.net/
-# clixpdf.com enter karo
+# pdfilio.com enter karo
 ```
 
 ---
@@ -133,8 +133,8 @@ Vercel automatically HTTPS enable karega:
 
 1. **"Redirect"** section mein jaao
 2. **"New Redirect"** click karo
-3. From: `www.clixpdf.com`
-4. To: `clixpdf.com`
+3. From: `www.pdfilio.com`
+4. To: `pdfilio.com`
 5. **"Save"** click karo
 
 Ya Vercel mein automatically handle hoga.
@@ -148,7 +148,7 @@ Ya Vercel mein automatically handle hoga.
 1. Bluehost dashboard mein **"Email"** section jaao
 2. **"Create Email Account"** click karo
 3. Details fill karo:
-   - Email: `info@clixpdf.com`
+   - Email: `info@pdfilio.com`
    - Password: strong password set karo
 4. **"Create"** click karo
 
@@ -158,11 +158,11 @@ Ya Vercel mein automatically handle hoga.
 2. **Settings** → **Accounts and Import**
 3. **"Send mail as"** section mein jaao
 4. **"Add another email"** click karo
-5. Email: `info@clixpdf.com`
+5. Email: `info@pdfilio.com`
 6. SMTP Settings add karo:
    - Server: `mail.bluehost.com`
    - Port: `587` (TLS) ya `465` (SSL)
-   - Username: `info@clixpdf.com`
+   - Username: `info@pdfilio.com`
    - Password: [jo tune banaya tha]
 
 ---
@@ -173,9 +173,9 @@ Ya Vercel mein automatically handle hoga.
 - [ ] Nameservers change kiye (ya A/CNAME Records add kiye)
 - [ ] Vercel mein domain add kiya
 - [ ] 24-48 hours wait kiya
-- [ ] Browser mein `clixpdf.com` check kiya
+- [ ] Browser mein `pdfilio.com` check kiya
 - [ ] Green lock icon (HTTPS) verify kiya
-- [ ] Admin panel `clixpdf.com/admin` check kiya
+- [ ] Admin panel `pdfilio.com/admin` check kiya
 - [ ] All tools working hain verify kiye
 - [ ] Email setup kiya (optional)
 
@@ -251,7 +251,7 @@ Ya Vercel mein automatically handle hoga.
 1. **GitHub par code push karo:**
    ```bash
    git add .
-   git commit -m "ClixPDF ready for production"
+   git commit -m "PDFilio ready for production"
    git push origin main
    ```
 
@@ -263,7 +263,7 @@ Ya Vercel mein automatically handle hoga.
 
 5. **24-48 hours wait karo**
 
-6. **clixpdf.com open karo browser mein** ✅
+6. **pdfilio.com open karo browser mein** ✅
 
 ---
 
@@ -278,7 +278,7 @@ Ya Vercel mein automatically handle hoga.
 
 ## SUCCESS INDICATORS
 
-✅ Browser mein `clixpdf.com` fully load ho raha hai
+✅ Browser mein `pdfilio.com` fully load ho raha hai
 ✅ Green lock icon (HTTPS) show ho raha hai
 ✅ `/admin` page accessible hai
 ✅ All tools working hain
