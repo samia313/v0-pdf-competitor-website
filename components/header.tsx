@@ -65,7 +65,7 @@ export function Header() {
         <nav className="hidden lg:flex items-center gap-0.5 flex-1 ml-8">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="gap-1 text-sm">
+              <Button variant="ghost" className="gap-1 text-sm outline-none focus:outline-none focus-visible:outline-none hover:bg-transparent">
                 Organize PDF
                 <ChevronDown className="h-4 w-4" />
               </Button>
@@ -91,7 +91,7 @@ export function Header() {
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="gap-1 text-sm">
+              <Button variant="ghost" className="gap-1 text-sm outline-none focus:outline-none focus-visible:outline-none hover:bg-transparent">
                 Optimize
                 <ChevronDown className="h-4 w-4" />
               </Button>
@@ -117,7 +117,7 @@ export function Header() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="gap-1 text-sm">
+              <Button variant="ghost" className="gap-1 text-sm outline-none focus:outline-none focus-visible:outline-none hover:bg-transparent">
                 Convert to PDF
                 <ChevronDown className="h-4 w-4" />
               </Button>
@@ -143,7 +143,7 @@ export function Header() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="gap-1 text-sm">
+              <Button variant="ghost" className="gap-1 text-sm outline-none focus:outline-none focus-visible:outline-none hover:bg-transparent">
                 Convert from PDF
                 <ChevronDown className="h-4 w-4" />
               </Button>
