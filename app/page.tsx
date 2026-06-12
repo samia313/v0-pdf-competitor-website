@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Suspense } from 'react'
 
 export const metadata = {
-  title: 'pdfilio - Free Online PDF Tools | Merge, Split, Compress',
+  title: 'PDFilio',
   description: 'Free online PDF tools to merge, split, compress, convert PDF files. Fast, secure, and easy to use. No registration required.',
   keywords: 'PDF tools, merge PDF, split PDF, compress PDF, convert PDF, PDF editor, free PDF tools online',
 }
