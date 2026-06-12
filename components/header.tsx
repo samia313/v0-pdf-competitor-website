@@ -57,7 +57,7 @@ export function Header() {
             <FileText className="h-5 w-5 text-primary-foreground" />
           </div>
           <span className="text-xl font-bold text-foreground">
-            Clix<span className="text-primary">PDF</span>
+            pdf<span className="text-primary">ilio</span>
           </span>
         </Link>
 
@@ -171,7 +171,7 @@ export function Header() {
                   <FileText className="h-5 w-5 text-primary-foreground" />
                 </div>
               <span className="text-xl font-bold">
-                Clix<span className="text-primary">PDF</span>
+                pdf<span className="text-primary">ilio</span>
               </span>
               </Link>
 

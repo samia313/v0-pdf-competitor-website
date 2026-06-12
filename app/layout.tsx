@@ -9,18 +9,18 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'ClixPDF - Free Online PDF Tools',
+  title: 'pdfilio - Free Online PDF Tools',
   description: 'Free online PDF tools to merge, split, compress, convert PDF files. Edit PDF documents easily with our powerful and secure PDF editor.',
   keywords: 'PDF tools, merge PDF, split PDF, compress PDF, convert PDF, PDF to Word, Word to PDF, PDF editor, free PDF tools',
-  authors: [{ name: 'ClixPDF' }],
+  authors: [{ name: 'pdfilio' }],
   openGraph: {
-    title: 'ClixPDF - Free Online PDF Tools',
+    title: 'pdfilio - Free Online PDF Tools',
     description: 'Free online PDF tools to merge, split, compress, convert PDF files.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ClixPDF - Free Online PDF Tools',
+    title: 'pdfilio - Free Online PDF Tools',
     description: 'Free online PDF tools to merge, split, compress, convert PDF files.',
   },
   robots: {

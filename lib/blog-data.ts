@@ -30,7 +30,7 @@ export const blogPosts: BlogPost[] = [
     description: 'Learn how to combine multiple PDF files into one document quickly and easily using our free online PDF merger tool. No software installation required.',
     category: 'tutorials',
     tags: ['merge pdf', 'combine pdf', 'pdf tools', 'free pdf merger'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-01-15',
     readTime: '5 min read',
     featured: true,
@@ -81,7 +81,7 @@ No, merging PDFs does not affect the quality of the original documents.
 
 ### Conclusion
 
-Merging PDF files online is quick, easy, and free with ClixPDF. Try our tool today and simplify your document management workflow.
+Merging PDF files online is quick, easy, and free with pdfilio. Try our tool today and simplify your document management workflow.
     `
   },
   {
@@ -91,7 +91,7 @@ Merging PDF files online is quick, easy, and free with ClixPDF. Try our tool tod
     description: 'Discover the best techniques to reduce PDF file size while maintaining document quality. Learn compression settings and optimization tips.',
     category: 'tutorials',
     tags: ['compress pdf', 'reduce pdf size', 'pdf optimization', 'file compression'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-01-18',
     readTime: '6 min read',
     featured: true,
@@ -144,7 +144,7 @@ PDF compression works by:
 
 ### Conclusion
 
-With ClixPDF's compression tool, you can easily reduce file sizes while maintaining the quality your documents deserve.
+With pdfilio's compression tool, you can easily reduce file sizes while maintaining the quality your documents deserve.
     `
   },
   {
@@ -154,7 +154,7 @@ With ClixPDF's compression tool, you can easily reduce file sizes while maintain
     description: 'Learn how to convert PDF documents to editable Word files. Preserve formatting, images, and text with our accurate PDF to Word converter.',
     category: 'tutorials',
     tags: ['pdf to word', 'convert pdf', 'editable document', 'word conversion'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-01-20',
     readTime: '5 min read',
     image: '/blog/convert-pdf.png',
@@ -194,7 +194,7 @@ Our converter preserves:
 
 ### Conclusion
 
-ClixPDF's PDF to Word converter makes document editing simple and efficient.
+pdfilio's PDF to Word converter makes document editing simple and efficient.
     `
   },
   {
@@ -204,7 +204,7 @@ ClixPDF's PDF to Word converter makes document editing simple and efficient.
     description: 'Learn how to split a large PDF into smaller files or extract specific pages. Complete guide with step-by-step instructions.',
     category: 'tutorials',
     tags: ['split pdf', 'extract pages', 'pdf separator', 'divide pdf'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-01-22',
     readTime: '4 min read',
     image: '/blog/split-pdf.png',
@@ -243,7 +243,7 @@ Choose exactly which pages go into each file
 
 ### Conclusion
 
-Splitting PDFs has never been easier with ClixPDF's intuitive interface.
+Splitting PDFs has never been easier with pdfilio's intuitive interface.
     `
   },
   {
@@ -253,7 +253,7 @@ Splitting PDFs has never been easier with ClixPDF's intuitive interface.
     description: 'Learn how to add text or image watermarks to PDF files for copyright protection and branding. Step-by-step watermarking guide.',
     category: 'security',
     tags: ['watermark pdf', 'protect pdf', 'copyright', 'branding'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-01-25',
     readTime: '5 min read',
     image: '/blog/watermark-pdf.png',
@@ -299,7 +299,7 @@ Watermarks help protect your documents from unauthorized use and establish owner
 
 ### Conclusion
 
-Protect your documents professionally with ClixPDF's watermarking tool.
+Protect your documents professionally with pdfilio's watermarking tool.
     `
   },
   {
@@ -309,7 +309,7 @@ Protect your documents professionally with ClixPDF's watermarking tool.
     description: 'Secure your PDF files with password protection and encryption. Learn about different security levels and best practices.',
     category: 'security',
     tags: ['password protect pdf', 'encrypt pdf', 'pdf security', 'secure documents'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-01-28',
     readTime: '6 min read',
     featured: true,
@@ -362,7 +362,7 @@ Control what users can do:
 
 ### Conclusion
 
-ClixPDF makes PDF security simple while providing enterprise-grade protection.
+pdfilio makes PDF security simple while providing enterprise-grade protection.
     `
   },
   {
@@ -372,7 +372,7 @@ ClixPDF makes PDF security simple while providing enterprise-grade protection.
     description: 'Learn how OCR (Optical Character Recognition) converts scanned PDFs into searchable, editable text. Complete OCR guide.',
     category: 'tutorials',
     tags: ['ocr pdf', 'scanned pdf', 'searchable pdf', 'text recognition'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-02-01',
     readTime: '7 min read',
     image: '/blog/ocr-pdf.png',
@@ -419,7 +419,7 @@ Our OCR supports 100+ languages including:
 
 ### Conclusion
 
-Make your scanned documents searchable and editable with ClixPDF's powerful OCR.
+Make your scanned documents searchable and editable with pdfilio's powerful OCR.
     `
   },
   {
@@ -429,7 +429,7 @@ Make your scanned documents searchable and editable with ClixPDF's powerful OCR.
     description: 'Convert PDF tables to Excel spreadsheets with accurate data extraction. Learn tips for perfect table conversion.',
     category: 'tutorials',
     tags: ['pdf to excel', 'extract tables', 'data extraction', 'spreadsheet conversion'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-02-05',
     readTime: '5 min read',
     image: '/blog/pdf-excel.png',
@@ -472,7 +472,7 @@ We preserve:
 
 ### Conclusion
 
-Extract your PDF data to Excel efficiently with ClixPDF.
+Extract your PDF data to Excel efficiently with pdfilio.
     `
   },
   {
@@ -482,7 +482,7 @@ Extract your PDF data to Excel efficiently with ClixPDF.
     description: 'Learn how to rotate PDF pages to correct orientation. Rotate single pages or entire documents easily.',
     category: 'tools',
     tags: ['rotate pdf', 'pdf orientation', 'flip pages', 'pdf editor'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-02-08',
     readTime: '3 min read',
     image: '/blog/rotate-pdf.png',
@@ -519,7 +519,7 @@ Phone camera orientation issues
 
 ### Conclusion
 
-ClixPDF makes page rotation simple and fast.
+pdfilio makes page rotation simple and fast.
     `
   },
   {
@@ -529,7 +529,7 @@ ClixPDF makes page rotation simple and fast.
     description: 'Learn how to add electronic signatures to PDF documents. Create, draw, or upload your signature for legal documents.',
     category: 'tutorials',
     tags: ['sign pdf', 'electronic signature', 'digital signature', 'e-signature'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-02-12',
     readTime: '6 min read',
     image: '/blog/sign-pdf.png',
@@ -583,7 +583,7 @@ Electronic signatures are legally valid in:
 
 ### Conclusion
 
-Sign documents professionally with ClixPDF's e-signature tool.
+Sign documents professionally with pdfilio's e-signature tool.
     `
   },
   {
@@ -593,7 +593,7 @@ Sign documents professionally with ClixPDF's e-signature tool.
     description: 'Convert JPG, PNG, and other images to PDF format. Create multi-page PDFs from multiple images easily.',
     category: 'tutorials',
     tags: ['jpg to pdf', 'image to pdf', 'convert images', 'photo to pdf'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-02-15',
     readTime: '4 min read',
     image: '/blog/jpg-to-pdf.png',
@@ -643,7 +643,7 @@ Create multi-page PDFs:
 
 ### Conclusion
 
-Create professional PDFs from your images with ClixPDF.
+Create professional PDFs from your images with pdfilio.
     `
   },
   {
@@ -653,7 +653,7 @@ Create professional PDFs from your images with ClixPDF.
     description: 'Convert PDF pages to high-quality JPG images. Extract all pages or select specific pages to convert.',
     category: 'tutorials',
     tags: ['pdf to jpg', 'pdf to image', 'extract images', 'convert pages'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-02-18',
     readTime: '4 min read',
     image: '/blog/pdf-to-jpg.png',
@@ -697,7 +697,7 @@ Convert multiple PDFs:
 
 ### Conclusion
 
-Get high-quality images from your PDFs with ClixPDF.
+Get high-quality images from your PDFs with pdfilio.
     `
   },
   {
@@ -707,7 +707,7 @@ Get high-quality images from your PDFs with ClixPDF.
     description: 'Learn how to edit PDF files directly in your browser. Add text, images, shapes, and annotations without software.',
     category: 'tools',
     tags: ['edit pdf', 'pdf editor', 'modify pdf', 'add text to pdf'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-02-22',
     readTime: '6 min read',
     image: '/blog/edit-pdf.png',
@@ -756,7 +756,7 @@ Edit your PDF documents directly in your browser without installing software.
 
 ### Conclusion
 
-ClixPDF provides essential editing tools for quick PDF modifications.
+pdfilio provides essential editing tools for quick PDF modifications.
     `
   },
   {
@@ -766,7 +766,7 @@ ClixPDF provides essential editing tools for quick PDF modifications.
     description: 'Learn how to delete specific pages from PDF documents. Remove single or multiple pages easily.',
     category: 'tools',
     tags: ['remove pdf pages', 'delete pages', 'pdf editor', 'page removal'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-02-25',
     readTime: '3 min read',
     content: `
@@ -813,7 +813,7 @@ Keep only selected pages
 
 ### Conclusion
 
-Clean up your PDFs by removing unnecessary pages with ClixPDF.
+Clean up your PDFs by removing unnecessary pages with pdfilio.
     `
   },
   {
@@ -823,7 +823,7 @@ Clean up your PDFs by removing unnecessary pages with ClixPDF.
     description: 'Learn how to insert page numbers into PDF files. Customize position, format, and style of page numbers.',
     category: 'tools',
     tags: ['page numbers', 'pdf numbering', 'add numbers', 'pdf footer'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-02-28',
     readTime: '4 min read',
     content: `
@@ -868,7 +868,7 @@ Add professional page numbering to your PDF documents.
 
 ### Conclusion
 
-Professional page numbering made easy with ClixPDF.
+Professional page numbering made easy with pdfilio.
     `
   },
   {
@@ -878,7 +878,7 @@ Professional page numbering made easy with ClixPDF.
     description: 'Convert Word documents to PDF while preserving all formatting. Learn tips for perfect Word to PDF conversion.',
     category: 'tutorials',
     tags: ['word to pdf', 'docx to pdf', 'convert word', 'document conversion'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-03-02',
     readTime: '5 min read',
     content: `
@@ -929,7 +929,7 @@ Simplify complex formatting
 
 ### Conclusion
 
-Create perfect PDFs from Word documents with ClixPDF.
+Create perfect PDFs from Word documents with pdfilio.
     `
   },
   {
@@ -939,7 +939,7 @@ Create perfect PDFs from Word documents with ClixPDF.
     description: 'Convert Excel spreadsheets to PDF while maintaining formatting, formulas display, and cell structure.',
     category: 'tutorials',
     tags: ['excel to pdf', 'spreadsheet to pdf', 'xlsx to pdf', 'convert excel'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-03-05',
     readTime: '5 min read',
     content: `
@@ -985,7 +985,7 @@ Convert your Excel spreadsheets to PDF for easy sharing and printing.
 
 ### Conclusion
 
-Share your spreadsheets as PDFs with ClixPDF.
+Share your spreadsheets as PDFs with pdfilio.
     `
   },
   {
@@ -995,7 +995,7 @@ Share your spreadsheets as PDFs with ClixPDF.
     description: 'Convert PowerPoint presentations to PDF format. Preserve animations as static slides for easy sharing.',
     category: 'tutorials',
     tags: ['powerpoint to pdf', 'ppt to pdf', 'presentation to pdf', 'convert slides'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-03-08',
     readTime: '4 min read',
     content: `
@@ -1038,7 +1038,7 @@ Convert your presentations to PDF for universal sharing.
 
 ### Conclusion
 
-Share presentations universally with ClixPDF's converter.
+Share presentations universally with pdfilio's converter.
     `
   },
   {
@@ -1048,7 +1048,7 @@ Share presentations universally with ClixPDF's converter.
     description: 'Learn how to remove password protection from PDF files. Unlock PDFs when you know the password.',
     category: 'security',
     tags: ['unlock pdf', 'remove password', 'pdf decryption', 'unprotect pdf'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-03-12',
     readTime: '4 min read',
     content: `
@@ -1091,7 +1091,7 @@ Restricts printing, copying, editing
 
 ### Conclusion
 
-Safely unlock your PDFs with ClixPDF.
+Safely unlock your PDFs with pdfilio.
     `
   },
   {
@@ -1101,7 +1101,7 @@ Safely unlock your PDFs with ClixPDF.
     description: 'Convert web pages and HTML files to PDF format. Capture entire web pages including images and formatting.',
     category: 'tutorials',
     tags: ['html to pdf', 'webpage to pdf', 'url to pdf', 'web page converter'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-03-15',
     readTime: '5 min read',
     content: `
@@ -1149,7 +1149,7 @@ Paste HTML code for conversion
 
 ### Conclusion
 
-Capture web content as PDFs with ClixPDF.
+Capture web content as PDFs with pdfilio.
     `
   },
   {
@@ -1159,7 +1159,7 @@ Capture web content as PDFs with ClixPDF.
     description: 'Learn how to organize PDF pages by reordering, moving, and arranging them. Create the perfect document structure.',
     category: 'tools',
     tags: ['organize pdf', 'reorder pages', 'arrange pdf', 'move pages'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-03-18',
     readTime: '4 min read',
     content: `
@@ -1204,7 +1204,7 @@ Alphabetically or by other criteria
 
 ### Conclusion
 
-Create perfectly organized PDFs with ClixPDF.
+Create perfectly organized PDFs with pdfilio.
     `
   },
   {
@@ -1214,7 +1214,7 @@ Create perfectly organized PDFs with ClixPDF.
     description: 'Use AI to summarize PDF documents automatically. Get key points, main ideas, and concise summaries.',
     category: 'tools',
     tags: ['ai summarizer', 'pdf summary', 'document summary', 'ai tools'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-03-22',
     readTime: '5 min read',
     featured: true,
@@ -1270,7 +1270,7 @@ Professional format
 
 ### Conclusion
 
-Save time with AI-powered summaries from ClixPDF.
+Save time with AI-powered summaries from pdfilio.
     `
   },
   {
@@ -1280,7 +1280,7 @@ Save time with AI-powered summaries from ClixPDF.
     description: 'Translate PDF documents to different languages while preserving formatting. Support for 100+ languages.',
     category: 'tools',
     tags: ['translate pdf', 'pdf translation', 'language conversion', 'multilingual'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-03-25',
     readTime: '5 min read',
     content: `
@@ -1329,7 +1329,7 @@ Translate your PDFs to any language while preserving formatting.
 
 ### Conclusion
 
-Break language barriers with ClixPDF translation.
+Break language barriers with pdfilio translation.
     `
   },
   {
@@ -1339,7 +1339,7 @@ Break language barriers with ClixPDF translation.
     description: 'Learn quick methods to reduce PDF file size for email attachments. Meet email size limits easily.',
     category: 'tips',
     tags: ['reduce pdf size', 'email attachment', 'compress for email', 'file size'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-03-28',
     readTime: '4 min read',
     content: `
@@ -1387,7 +1387,7 @@ Delete unnecessary pages/images
 
 ### Conclusion
 
-Send PDFs via email without size issues with ClixPDF.
+Send PDFs via email without size issues with pdfilio.
     `
   },
   {
@@ -1397,7 +1397,7 @@ Send PDFs via email without size issues with ClixPDF.
     description: 'Compare free and paid PDF tools to make the right choice. Understand features, limitations, and value.',
     category: 'comparison',
     tags: ['free pdf tools', 'paid pdf tools', 'comparison', 'pdf software'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-04-01',
     readTime: '7 min read',
     content: `
@@ -1459,7 +1459,7 @@ Understand the differences to make the right choice for your needs.
 
 ### Conclusion
 
-ClixPDF offers both options to suit your needs.
+pdfilio offers both options to suit your needs.
     `
   },
   {
@@ -1469,7 +1469,7 @@ ClixPDF offers both options to suit your needs.
     description: 'Learn how to make PDF documents accessible for screen readers and users with disabilities.',
     category: 'tips',
     tags: ['pdf accessibility', 'screen reader', 'accessible documents', 'ada compliance'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-04-05',
     readTime: '6 min read',
     content: `
@@ -1514,13 +1514,13 @@ Make your PDFs accessible to everyone, including users with disabilities.
 
 ### Tools
 
-- ClixPDF OCR
+- pdfilio OCR
 - Accessibility checkers
 - Screen reader testing
 
 ### Conclusion
 
-Create inclusive documents with ClixPDF's accessibility tools.
+Create inclusive documents with pdfilio's accessibility tools.
     `
   },
   {
@@ -1530,7 +1530,7 @@ Create inclusive documents with ClixPDF's accessibility tools.
     description: 'Learn how to process multiple PDF files simultaneously. Save time with batch operations.',
     category: 'tips',
     tags: ['batch processing', 'multiple pdfs', 'bulk operations', 'productivity'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-04-08',
     readTime: '5 min read',
     content: `
@@ -1580,7 +1580,7 @@ Batch processing is available for:
 
 ### Conclusion
 
-Boost productivity with batch processing in ClixPDF.
+Boost productivity with batch processing in pdfilio.
     `
   },
   {
@@ -1590,7 +1590,7 @@ Boost productivity with batch processing in ClixPDF.
     description: 'Learn how to create fillable PDF forms with text fields, checkboxes, dropdowns, and more.',
     category: 'tutorials',
     tags: ['pdf forms', 'fillable pdf', 'form creation', 'interactive pdf'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-04-12',
     readTime: '7 min read',
     content: `
@@ -1647,7 +1647,7 @@ Create interactive forms that users can fill out digitally.
 
 ### Conclusion
 
-Create professional forms with ClixPDF.
+Create professional forms with pdfilio.
     `
   },
   {
@@ -1657,7 +1657,7 @@ Create professional forms with ClixPDF.
     description: 'Learn essential PDF security practices to protect sensitive business documents from unauthorized access.',
     category: 'security',
     tags: ['pdf security', 'document protection', 'business security', 'data protection'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-04-15',
     readTime: '8 min read',
     content: `
@@ -1712,7 +1712,7 @@ Protect your business documents with these security measures.
 
 ### Conclusion
 
-Secure your documents professionally with ClixPDF.
+Secure your documents professionally with pdfilio.
     `
   },
   {
@@ -1722,7 +1722,7 @@ Secure your documents professionally with ClixPDF.
     description: 'Learn how to use PDF tools effectively on your smartphone. Edit, convert, and manage PDFs on the go.',
     category: 'tips',
     tags: ['mobile pdf', 'smartphone', 'pdf on phone', 'mobile productivity'],
-    author: 'ClixPDF Team',
+    author: 'pdfilio Team',
     publishedAt: '2024-04-18',
     readTime: '5 min read',
     featured: true,
@@ -1731,7 +1731,7 @@ Secure your documents professionally with ClixPDF.
 
 Manage your PDFs anywhere with your smartphone.
 
-### ClixPDF Mobile Features
+### pdfilio Mobile Features
 
 - All tools work on mobile
 - Touch-friendly interface
@@ -1776,7 +1776,7 @@ Manage your PDFs anywhere with your smartphone.
 
 ### Conclusion
 
-ClixPDF works seamlessly on your mobile device.
+pdfilio works seamlessly on your mobile device.
     `
   }
 ]

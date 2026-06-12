@@ -11,8 +11,8 @@ import Link from 'next/link'
 import { MessageCircle } from 'lucide-react'
 
 export const metadata = {
-  title: 'FAQ - Frequently Asked Questions | ClixPDF',
-  description: 'Find answers to commonly asked questions about ClixPDF PDF tools, pricing, and features.',
+  title: 'FAQ - Frequently Asked Questions | pdfilio',
+  description: 'Find answers to commonly asked questions about pdfilio PDF tools, pricing, and features.',
 }
 
 const faqs = [
@@ -20,19 +20,19 @@ const faqs = [
     category: 'General',
     questions: [
       {
-        q: 'What is ClixPDF?',
-        a: 'ClixPDF is a free online platform that provides powerful PDF tools to merge, split, compress, convert, and edit PDF files. Our tools are easy to use and work directly in your browser without any software installation.'
+        q: 'What is pdfilio?',
+        a: 'pdfilio is a free online platform that provides powerful PDF tools to merge, split, compress, convert, and edit PDF files. Our tools are easy to use and work directly in your browser without any software installation.'
       },
       {
-        q: 'Is ClixPDF free to use?',
-        a: 'Yes! ClixPDF offers a free plan with access to all basic PDF tools. Free users can process up to 5 files per day with a maximum file size of 25MB. For unlimited access and advanced features, you can upgrade to our Premium or Business plans.'
+        q: 'Is pdfilio free to use?',
+        a: 'Yes! pdfilio offers a free plan with access to all basic PDF tools. Free users can process up to 5 files per day with a maximum file size of 25MB. For unlimited access and advanced features, you can upgrade to our Premium or Business plans.'
       },
       {
         q: 'Do I need to create an account?',
         a: 'No account is required to use our basic PDF tools. However, creating a free account gives you benefits like file history, higher daily limits, and the ability to save your preferences.'
       },
       {
-        q: 'Is my data safe with ClixPDF?',
+        q: 'Is my data safe with pdfilio?',
         a: 'Absolutely! We take your privacy seriously. All files are processed securely and automatically deleted from our servers within 1 hour. We use encryption for all file transfers and never share your files with third parties.'
       },
     ]
@@ -105,11 +105,11 @@ const faqs = [
     questions: [
       {
         q: 'Which browsers are supported?',
-        a: 'ClixPDF works on all modern browsers including Chrome, Firefox, Safari, and Edge. For the best experience, we recommend using the latest version of your browser.'
+        a: 'pdfilio works on all modern browsers including Chrome, Firefox, Safari, and Edge. For the best experience, we recommend using the latest version of your browser.'
       },
       {
-        q: 'Can I use ClixPDF on mobile devices?',
-        a: 'Yes! ClixPDF is fully responsive and works on smartphones and tablets. You can access all our tools from any device with a web browser.'
+        q: 'Can I use pdfilio on mobile devices?',
+        a: 'Yes! pdfilio is fully responsive and works on smartphones and tablets. You can access all our tools from any device with a web browser.'
       },
       {
         q: 'Why is my PDF taking long to process?',
@@ -136,7 +136,7 @@ export default function FAQPage() {
               Frequently Asked Questions
             </h1>
             <p className="text-xl text-muted-foreground">
-              Find answers to common questions about ClixPDF
+              Find answers to common questions about pdfilio
             </p>
           </div>
 

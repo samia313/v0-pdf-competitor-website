@@ -2,8 +2,8 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 
 export const metadata = {
-  title: 'Terms of Service - ClixPDF',
-  description: 'Read the terms of service for using ClixPDF PDF tools.',
+  title: 'Terms of Service - pdfilio',
+  description: 'Read the terms of service for using pdfilio PDF tools.',
 }
 
 export default function TermsPage() {
@@ -24,13 +24,13 @@ export default function TermsPage() {
 
             <h2>Acceptance of Terms</h2>
             <p>
-              By accessing and using ClixPDF, you agree to be bound by these Terms of Service.
+              By accessing and using pdfilio, you agree to be bound by these Terms of Service.
               If you do not agree to these terms, please do not use our services.
             </p>
 
             <h2>Description of Service</h2>
             <p>
-              ClixPDF provides free online PDF tools including but not limited to:
+              pdfilio provides free online PDF tools including but not limited to:
             </p>
             <ul>
               <li>PDF merging and splitting</li>
@@ -53,13 +53,13 @@ export default function TermsPage() {
             <h2>Intellectual Property</h2>
             <p>
               You retain all rights to the files you upload and process. We do not claim any
-              ownership of your content. The ClixPDF website, logo, and tools are protected
+              ownership of your content. The pdfilio website, logo, and tools are protected
               by intellectual property laws.
             </p>
 
             <h2>Disclaimer of Warranties</h2>
             <p>
-              ClixPDF is provided &quot;as is&quot; without warranties of any kind. We do not guarantee:
+              pdfilio is provided &quot;as is&quot; without warranties of any kind. We do not guarantee:
             </p>
             <ul>
               <li>Uninterrupted or error-free service</li>
@@ -70,7 +70,7 @@ export default function TermsPage() {
 
             <h2>Limitation of Liability</h2>
             <p>
-              To the maximum extent permitted by law, ClixPDF shall not be liable for any
+              To the maximum extent permitted by law, pdfilio shall not be liable for any
               indirect, incidental, special, or consequential damages arising from your use
               of our services.
             </p>
@@ -84,7 +84,7 @@ export default function TermsPage() {
 
             <h2>Advertising</h2>
             <p>
-              Our free service is supported by advertising. By using ClixPDF, you consent
+              Our free service is supported by advertising. By using pdfilio, you consent
               to the display of advertisements. Ad blockers may interfere with service functionality.
             </p>
 

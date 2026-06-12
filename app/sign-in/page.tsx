@@ -4,8 +4,8 @@ import { redirect } from 'next/navigation'
 import { AuthForm } from '@/components/auth-form'
 
 export const metadata = {
-  title: 'Sign In - ClixPDF',
-  description: 'Sign in to your ClixPDF account',
+  title: 'Sign In - pdfilio',
+  description: 'Sign in to your pdfilio account',
 }
 
 export default async function SignInPage() {

@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   
   return {
-    title: `${post.title} | ClixPDF Blog`,
+    title: `${post.title} | pdfilio Blog`,
     description: post.description,
     keywords: post.tags.join(', '),
     openGraph: {
