@@ -17,6 +17,7 @@ import { categories, pdfTools } from '@/lib/tools-data'
 import { ToolIcon } from './tool-icon'
 import { authClient } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
+import { ThemeToggle } from './theme-toggle'
 
 interface UserSession {
   user: {
@@ -200,11 +201,10 @@ export function Header() {
             <>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="gap-2">
-                    <div className="bg-primary text-primary-foreground rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold">
-                      {session.user.name?.charAt(0) || 'U'}
+                  <Button variant="ghost" size="icon" className="rounded-full">
+                    <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center">
+                      <User className="h-4 w-4" />
                     </div>
-                    <ChevronDown className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
@@ -248,13 +248,12 @@ export function Header() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <Link href="/pricing">
-                <Button size="sm">Get Premium</Button>
-              </Link>
+              <ThemeToggle />
             </>
           ) : (
             <>
-              <Link href="/sign-in">
+              <ThemeToggle />
+              <Link href="/auth/sign-in">
                 <Button variant="ghost" size="sm">Sign In</Button>
               </Link>
               <Link href="/pricing">
