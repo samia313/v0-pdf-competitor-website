@@ -62,86 +62,153 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1">
-          {categories.slice(0, 4).map((category) => (
-            <DropdownMenu key={category.id}>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="gap-1">
-                  {category.name}
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-64">
-                {pdfTools
-                  .filter((tool) => tool.category === category.id)
-                  .map((tool) => (
-                    <DropdownMenuItem key={tool.id} asChild>
-                      <Link href={tool.href} className="flex items-center gap-3 cursor-pointer">
-                        <div className={`h-8 w-8 rounded-md ${tool.color} flex items-center justify-center`}>
-                          <ToolIcon icon={tool.icon} className="h-4 w-4 text-white" />
-                        </div>
-                        <div>
-                          <div className="font-medium">{tool.name}</div>
-                          <div className="text-xs text-muted-foreground">{tool.description}</div>
-                        </div>
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ))}
-          <Link href="/tools">
-            <Button variant="ghost">All Tools</Button>
-          </Link>
+        <nav className="hidden lg:flex items-center gap-0.5 flex-1 ml-8">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="gap-1 text-sm">
+                Organize PDF
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-64">
+              {pdfTools
+                .filter((tool) => tool.category === 'organize')
+                .map((tool) => (
+                  <DropdownMenuItem key={tool.id} asChild>
+                    <Link href={tool.href} className="flex items-center gap-3 cursor-pointer">
+                      <div className={`h-8 w-8 rounded-md ${tool.color} flex items-center justify-center`}>
+                        <ToolIcon icon={tool.icon} className="h-4 w-4 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-medium">{tool.name}</div>
+                        <div className="text-xs text-muted-foreground">{tool.description}</div>
+                      </div>
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="gap-1 text-sm">
+                Optimize
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-64">
+              {pdfTools
+                .filter((tool) => tool.category === 'optimize')
+                .map((tool) => (
+                  <DropdownMenuItem key={tool.id} asChild>
+                    <Link href={tool.href} className="flex items-center gap-3 cursor-pointer">
+                      <div className={`h-8 w-8 rounded-md ${tool.color} flex items-center justify-center`}>
+                        <ToolIcon icon={tool.icon} className="h-4 w-4 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-medium">{tool.name}</div>
+                        <div className="text-xs text-muted-foreground">{tool.description}</div>
+                      </div>
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="gap-1 text-sm">
+                Convert to PDF
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-64">
+              {pdfTools
+                .filter((tool) => tool.category === 'convert-to')
+                .map((tool) => (
+                  <DropdownMenuItem key={tool.id} asChild>
+                    <Link href={tool.href} className="flex items-center gap-3 cursor-pointer">
+                      <div className={`h-8 w-8 rounded-md ${tool.color} flex items-center justify-center`}>
+                        <ToolIcon icon={tool.icon} className="h-4 w-4 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-medium">{tool.name}</div>
+                        <div className="text-xs text-muted-foreground">{tool.description}</div>
+                      </div>
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="gap-1 text-sm">
+                Convert from PDF
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-64">
+              {pdfTools
+                .filter((tool) => tool.category === 'convert-from')
+                .map((tool) => (
+                  <DropdownMenuItem key={tool.id} asChild>
+                    <Link href={tool.href} className="flex items-center gap-3 cursor-pointer">
+                      <div className={`h-8 w-8 rounded-md ${tool.color} flex items-center justify-center`}>
+                        <ToolIcon icon={tool.icon} className="h-4 w-4 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-medium">{tool.name}</div>
+                        <div className="text-xs text-muted-foreground">{tool.description}</div>
+                      </div>
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <Link href="/blog">
-            <Button variant="ghost">Blog</Button>
-          </Link>
-          <Link href="/about">
-            <Button variant="ghost">About</Button>
-          </Link>
-          <Link href="/contact">
-            <Button variant="ghost">Contact</Button>
+            <Button variant="ghost" className="text-sm">Blog</Button>
           </Link>
           <Link href="/pricing">
-            <Button variant="ghost">Pricing</Button>
+            <Button variant="ghost" className="text-sm">Pricing</Button>
           </Link>
-          <Link href="/faq">
-            <Button variant="ghost">FAQ</Button>
-          </Link>
-          
+        </nav>
+
+        {/* Right side auth section */}
+        <div className="hidden lg:flex items-center gap-2 ml-auto">
           {session?.user ? (
             <>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="gap-2">
-                    <div className="bg-primary text-primary-foreground rounded-full h-7 w-7 flex items-center justify-center text-sm font-bold">
+                  <Button variant="ghost" size="sm" className="gap-2">
+                    <div className="bg-primary text-primary-foreground rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold">
                       {session.user.name?.charAt(0) || 'U'}
                     </div>
-                    <span className="hidden lg:inline">{session.user.name?.split(' ')[0]}</span>
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuContent align="end" className="w-48">
                   <div className="px-2 py-1.5">
                     <p className="text-sm font-medium">{session.user.name}</p>
-                    <p className="text-xs text-muted-foreground">{session.user.email}</p>
+                    <p className="text-xs text-muted-foreground truncate">{session.user.email}</p>
                   </div>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href="/dashboard" className="cursor-pointer">
+                    <Link href="/dashboard" className="cursor-pointer text-sm">
                       <User className="mr-2 h-4 w-4" />
                       Dashboard
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive text-sm">
                     <LogOut className="mr-2 h-4 w-4" />
                     Sign Out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               <Link href="/pricing">
-                <Button size="sm" className="ml-2">Get Premium</Button>
+                <Button size="sm">Get Premium</Button>
               </Link>
             </>
           ) : (
@@ -150,11 +217,11 @@ export function Header() {
                 <Button variant="ghost" size="sm">Sign In</Button>
               </Link>
               <Link href="/pricing">
-                <Button size="sm" className="ml-2">Get Premium</Button>
+                <Button size="sm">Get Premium</Button>
               </Link>
             </>
           )}
-        </nav>
+        </div>
 
         {/* Mobile Navigation */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
