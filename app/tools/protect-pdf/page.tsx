@@ -15,6 +15,7 @@ import { Lock, Download, Loader2, Eye, EyeOff } from 'lucide-react'
 export default function ProtectPdfPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
+  const [protectPdfBlob, setProtectPdfBlob] = useState<Blob | null>(null)
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -61,6 +62,11 @@ export default function ProtectPdfPage() {
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  const handleDownload = () => {
+    if (!protectPdfBlob) return
+    saveAs(protectPdfBlob, 'protect.pdf')
   }
 
   return (
@@ -140,7 +146,7 @@ export default function ProtectPdfPage() {
 
                     <Button
                       size="lg"
-                      className="w-full text-base"
+                      className="flex-1 text-base"
                       onClick={handleProtect}
                       disabled={isProcessing || !password || password !== confirmPassword || password.length < 4}
                     >
@@ -151,7 +157,7 @@ export default function ProtectPdfPage() {
                         </>
                       ) : (
                         <>
-                          <Download className="mr-2 h-5 w-5" />
+                          <Lock className="mr-2 h-5 w-5" />
                           Protect & Download
                         </>
                       )}

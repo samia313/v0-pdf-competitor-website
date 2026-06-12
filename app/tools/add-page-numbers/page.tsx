@@ -15,6 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 export default function AddPageNumbersPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
+  const [addpagenumbersPdfBlob, setAddPageNumbersPdfBlob] = useState<Blob | null>(null)
   const [position, setPosition] = useState<'bottom-center' | 'bottom-right' | 'bottom-left' | 'top-center' | 'top-right' | 'top-left'>('bottom-center')
   const [startNumber, setStartNumber] = useState(1)
 
@@ -99,6 +100,11 @@ export default function AddPageNumbersPage() {
     }
   }
 
+  const handleDownload = () => {
+    if (!addpagenumbersPdfBlob) return
+    saveAs(addpagenumbersPdfBlob, 'addpagenumbers.pdf')
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -153,7 +159,7 @@ export default function AddPageNumbersPage() {
 
                     <Button
                       size="lg"
-                      className="w-full text-base"
+                      className="flex-1 text-base"
                       onClick={handleAddPageNumbers}
                       disabled={isProcessing}
                     >
@@ -164,7 +170,7 @@ export default function AddPageNumbersPage() {
                         </>
                       ) : (
                         <>
-                          <Download className="mr-2 h-5 w-5" />
+                          <Plus className="mr-2 h-5 w-5" />
                           Add Numbers & Download
                         </>
                       )}

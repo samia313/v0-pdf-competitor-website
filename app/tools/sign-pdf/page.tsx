@@ -13,6 +13,7 @@ import { PenTool, Download, Loader2, Eraser } from 'lucide-react'
 export default function SignPdfPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
+  const [signPdfBlob, setSignPdfBlob] = useState<Blob | null>(null)
   const [signature, setSignature] = useState<string | null>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isDrawing, setIsDrawing] = useState(false)
@@ -131,6 +132,11 @@ export default function SignPdfPage() {
     }
   }
 
+  const handleDownload = () => {
+    if (!signPdfBlob) return
+    saveAs(signPdfBlob, 'sign.pdf')
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -197,7 +203,7 @@ export default function SignPdfPage() {
 
                     <Button
                       size="lg"
-                      className="w-full text-base"
+                      className="flex-1 text-base"
                       onClick={handleSign}
                       disabled={isProcessing || !signature}
                     >
@@ -208,7 +214,7 @@ export default function SignPdfPage() {
                         </>
                       ) : (
                         <>
-                          <Download className="mr-2 h-5 w-5" />
+                          <PenTool className="mr-2 h-5 w-5" />
                           Sign & Download
                         </>
                       )}

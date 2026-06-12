@@ -14,6 +14,7 @@ import { RotateCw, Download, Loader2, RotateCcw } from 'lucide-react'
 export default function RotatePdfPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
+  const [rotatePdfBlob, setRotatePdfBlob] = useState<Blob | null>(null)
   const [rotation, setRotation] = useState(90)
   const [totalPages, setTotalPages] = useState(0)
 
@@ -59,6 +60,11 @@ export default function RotatePdfPage() {
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  const handleDownload = () => {
+    if (!rotatePdfBlob) return
+    saveAs(rotatePdfBlob, 'rotate.pdf')
   }
 
   return (
@@ -135,7 +141,7 @@ export default function RotatePdfPage() {
 
                     <Button
                       size="lg"
-                      className="w-full text-base"
+                      className="flex-1 text-base"
                       onClick={handleRotate}
                       disabled={isProcessing}
                     >
@@ -146,7 +152,7 @@ export default function RotatePdfPage() {
                         </>
                       ) : (
                         <>
-                          <Download className="mr-2 h-5 w-5" />
+                          <RotateCw className="mr-2 h-5 w-5" />
                           Rotate & Download
                         </>
                       )}

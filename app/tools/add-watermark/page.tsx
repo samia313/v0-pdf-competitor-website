@@ -17,6 +17,7 @@ import { Droplets, Download, Loader2 } from 'lucide-react'
 export default function AddWatermarkPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
+  const [addwatermarkPdfBlob, setAddWatermarkPdfBlob] = useState<Blob | null>(null)
   const [watermarkText, setWatermarkText] = useState('CONFIDENTIAL')
   const [fontSize, setFontSize] = useState(48)
   const [opacity, setOpacity] = useState(30)
@@ -105,6 +106,11 @@ export default function AddWatermarkPage() {
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  const handleDownload = () => {
+    if (!addwatermarkPdfBlob) return
+    saveAs(addwatermarkPdfBlob, 'addwatermark.pdf')
   }
 
   return (
@@ -220,7 +226,7 @@ export default function AddWatermarkPage() {
 
                     <Button
                       size="lg"
-                      className="w-full text-base"
+                      className="flex-1 text-base"
                       onClick={handleAddWatermark}
                       disabled={isProcessing || !watermarkText.trim()}
                     >
@@ -231,7 +237,7 @@ export default function AddWatermarkPage() {
                         </>
                       ) : (
                         <>
-                          <Download className="mr-2 h-5 w-5" />
+                          <Stamp className="mr-2 h-5 w-5" />
                           Add Watermark & Download
                         </>
                       )}

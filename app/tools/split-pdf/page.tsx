@@ -17,6 +17,7 @@ import { Scissors, Download, Loader2 } from 'lucide-react'
 export default function SplitPdfPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
+  const [splitPdfBlob, setSplitPdfBlob] = useState<Blob | null>(null)
   const [splitMode, setSplitMode] = useState<'all' | 'range' | 'extract'>('all')
   const [pageRange, setPageRange] = useState('')
   const [totalPages, setTotalPages] = useState(0)
@@ -79,7 +80,7 @@ export default function SplitPdfPage() {
         
         const pdfBytes = await newPdf.save()
         const blob = new Blob([pdfBytes], { type: 'application/pdf' })
-        saveAs(blob, 'extracted_pages.pdf')
+        setSplitPdfBlob(blob)
       }
     } catch (error) {
       console.error('Error splitting PDF:', error)
@@ -87,6 +88,11 @@ export default function SplitPdfPage() {
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  const handleDownload = () => {
+    if (!splitPdfBlob) return
+    saveAs(splitPdfBlob, 'split.pdf')
   }
 
   const parsePageRange = (range: string, maxPages: number): number[] => {
@@ -198,7 +204,7 @@ export default function SplitPdfPage() {
 
                     <Button
                       size="lg"
-                      className="w-full text-base"
+                      className="flex-1 text-base"
                       onClick={handleSplit}
                       disabled={isProcessing || (splitMode !== 'all' && !pageRange)}
                     >
@@ -209,7 +215,7 @@ export default function SplitPdfPage() {
                         </>
                       ) : (
                         <>
-                          <Download className="mr-2 h-5 w-5" />
+                          <Scissors className="mr-2 h-5 w-5" />
                           {splitMode === 'all' ? 'Split & Download ZIP' : 'Extract & Download PDF'}
                         </>
                       )}

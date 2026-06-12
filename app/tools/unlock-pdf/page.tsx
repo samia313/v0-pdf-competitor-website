@@ -13,6 +13,7 @@ import { Label } from '@/components/ui/label'
 export default function UnlockPdfPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
+  const [unlockPdfBlob, setUnlockPdfBlob] = useState<Blob | null>(null)
   const [password, setPassword] = useState('')
 
   const handleFilesSelected = useCallback(async (newFiles: File[]) => {
@@ -51,6 +52,11 @@ export default function UnlockPdfPage() {
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  const handleDownload = () => {
+    if (!unlockPdfBlob) return
+    saveAs(unlockPdfBlob, 'unlock.pdf')
   }
 
   return (
@@ -104,7 +110,7 @@ export default function UnlockPdfPage() {
 
                     <Button
                       size="lg"
-                      className="w-full text-base"
+                      className="flex-1 text-base"
                       onClick={handleUnlock}
                       disabled={isProcessing}
                     >
@@ -115,7 +121,7 @@ export default function UnlockPdfPage() {
                         </>
                       ) : (
                         <>
-                          <Download className="mr-2 h-5 w-5" />
+                          <Unlock className="mr-2 h-5 w-5" />
                           Unlock & Download
                         </>
                       )}

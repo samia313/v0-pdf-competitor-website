@@ -15,6 +15,7 @@ import { Label } from '@/components/ui/label'
 export default function RemovePagesPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
+  const [removepagesPdfBlob, setRemovePagesPdfBlob] = useState<Blob | null>(null)
   const [pagesToRemove, setPagesToRemove] = useState('')
   const [totalPages, setTotalPages] = useState(0)
 
@@ -98,6 +99,11 @@ export default function RemovePagesPage() {
     }
   }
 
+  const handleDownload = () => {
+    if (!removepagesPdfBlob) return
+    saveAs(removepagesPdfBlob, 'removepages.pdf')
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -153,7 +159,7 @@ export default function RemovePagesPage() {
 
                     <Button
                       size="lg"
-                      className="w-full text-base"
+                      className="flex-1 text-base"
                       onClick={handleRemovePages}
                       disabled={isProcessing || !pagesToRemove.trim()}
                     >
@@ -164,7 +170,7 @@ export default function RemovePagesPage() {
                         </>
                       ) : (
                         <>
-                          <Download className="mr-2 h-5 w-5" />
+                          <Trash2 className="mr-2 h-5 w-5" />
                           Remove Pages & Download
                         </>
                       )}
