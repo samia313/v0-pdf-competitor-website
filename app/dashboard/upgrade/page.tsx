@@ -1,14 +1,14 @@
 'use client'
 
 import { useSearchParams, useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Loader2 } from 'lucide-react'
 import { SUBSCRIPTION_PLANS, getMonthlyPrice } from '@/lib/subscription-plans'
 
-export default function UpgradePage() {
+function UpgradePageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
@@ -68,14 +68,12 @@ export default function UpgradePage() {
           </CardHeader>
 
           <CardContent className="space-y-6">
-            {/* Price */}
             <div className="text-center py-6 border-b">
               <div className="text-5xl font-bold mb-2">${getMonthlyPrice(currentPlan.priceInCents)}</div>
               <p className="text-muted-foreground">/month, billed monthly</p>
               <p className="text-sm text-muted-foreground mt-2">Cancel anytime, no questions asked</p>
             </div>
 
-            {/* Features */}
             <div>
               <h3 className="font-semibold mb-4">Plan Features</h3>
               <ul className="space-y-3">
@@ -90,22 +88,19 @@ export default function UpgradePage() {
               </ul>
             </div>
 
-            {/* Security Info */}
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <h4 className="font-semibold text-sm mb-2">Secure Payment</h4>
               <p className="text-sm text-muted-foreground">
-                Your payment information is secure and encrypted. We use Stripe, the trusted payment processor used by millions of businesses.
+                Your payment information is secure and encrypted. We use Stripe for safe transactions.
               </p>
             </div>
 
-            {/* Error Message */}
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-4">
                 <p className="text-sm text-red-600">{error}</p>
               </div>
             )}
 
-            {/* CTA Buttons */}
             <div className="flex gap-4 pt-4">
               <Button onClick={() => router.back()} variant="outline" className="flex-1">
                 Back
@@ -116,7 +111,6 @@ export default function UpgradePage() {
               </Button>
             </div>
 
-            {/* Trust Badge */}
             <div className="text-center text-xs text-muted-foreground">
               <Badge variant="outline">🔒 Secure by Stripe</Badge>
             </div>
@@ -124,5 +118,13 @@ export default function UpgradePage() {
         </Card>
       </div>
     </div>
+  )
+}
+
+export default function UpgradePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center">Loading...</div>}>
+      <UpgradePageContent />
+    </Suspense>
   )
 }

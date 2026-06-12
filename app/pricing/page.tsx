@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import { Check, X, Zap, Building2, Crown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -8,11 +6,8 @@ import { Badge } from '@/components/ui/badge'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { SUBSCRIPTION_PLANS, getMonthlyPrice } from '@/lib/subscription-plans'
-import { getSession } from '@/lib/auth'
 
 export default async function PricingPage() {
-  const session = await getSession()
-  
   const freePlan = SUBSCRIPTION_PLANS.find(p => p.id === 'free')!
   const proPlan = SUBSCRIPTION_PLANS.find(p => p.id === 'pro')!
   const businessPlan = SUBSCRIPTION_PLANS.find(p => p.id === 'business')!
@@ -102,19 +97,11 @@ export default async function PricingPage() {
               </ul>
             </CardContent>
             <CardFooter>
-              {session?.user ? (
-                <Link href="/dashboard/upgrade?plan=pro" className="w-full">
-                  <Button className="w-full" size="lg">
-                    Upgrade to Pro
-                  </Button>
-                </Link>
-              ) : (
-                <Link href="/auth/sign-in?redirect=/pricing" className="w-full">
-                  <Button className="w-full" size="lg">
-                    Subscribe Now
-                  </Button>
-                </Link>
-              )}
+              <Link href="/dashboard/upgrade?plan=pro" className="w-full">
+                <Button className="w-full" size="lg">
+                  Upgrade to Pro
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
 
@@ -144,19 +131,11 @@ export default async function PricingPage() {
               </ul>
             </CardContent>
             <CardFooter>
-              {session?.user ? (
-                <Link href="/dashboard/upgrade?plan=business" className="w-full">
-                  <Button variant="outline" className="w-full" size="lg">
-                    Upgrade to Business
-                  </Button>
-                </Link>
-              ) : (
-                <Link href="/auth/sign-in?redirect=/pricing" className="w-full">
-                  <Button variant="outline" className="w-full" size="lg">
-                    Subscribe Now
-                  </Button>
-                </Link>
-              )}
+              <Link href="/dashboard/upgrade?plan=business" className="w-full">
+                <Button variant="outline" className="w-full" size="lg">
+                  Upgrade to Business
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
         </div>
@@ -273,7 +252,7 @@ export default async function PricingPage() {
                 Try Free Tools
               </Button>
             </Link>
-            <Link href={`/checkout?plan=${premiumPlan.id}`}>
+            <Link href="/dashboard/upgrade?plan=pro">
               <Button size="lg">
                 Get Premium Now
               </Button>
