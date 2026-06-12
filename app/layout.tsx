@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   keywords: 'PDF tools, merge PDF, split PDF, compress PDF, convert PDF, PDF to Word, Word to PDF, PDF editor, free PDF tools',
   authors: [{ name: 'pdfilio' }],
   icons: {
-    icon: '/favicon.png',
-    apple: '/apple-touch-icon.png',
+    icon: '/favicon.svg',
+    apple: '/apple-icon.png',
   },
   openGraph: {
     title: 'pdfilio - Free Online PDF Tools',
