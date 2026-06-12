@@ -238,9 +238,19 @@ export default function AddWatermarkPage() {
                       ) : (
                         <>
                           <Stamp className="mr-2 h-5 w-5" />
-                          Add Watermark & Download
+                          Add Watermark
                         </>
                       )}
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="flex-1 text-base"
+                      onClick={handleDownload}
+                      disabled={!addWatermarkPdfBlob}
+                    >
+                      <Download className="mr-2 h-5 w-5" />
+                      Download
                     </Button>
                   </div>
                 )}

@@ -153,9 +153,19 @@ export default function RotatePdfPage() {
                       ) : (
                         <>
                           <RotateCw className="mr-2 h-5 w-5" />
-                          Rotate & Download
+                          Rotate
                         </>
                       )}
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="flex-1 text-base"
+                      onClick={handleDownload}
+                      disabled={!rotatePdfBlob}
+                    >
+                      <Download className="mr-2 h-5 w-5" />
+                      Download
                     </Button>
                   </div>
                 )}

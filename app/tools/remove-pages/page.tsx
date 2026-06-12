@@ -171,9 +171,19 @@ export default function RemovePagesPage() {
                       ) : (
                         <>
                           <Trash2 className="mr-2 h-5 w-5" />
-                          Remove Pages & Download
+                          Remove Pages
                         </>
                       )}
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="flex-1 text-base"
+                      onClick={handleDownload}
+                      disabled={!removePagesPdfBlob}
+                    >
+                      <Download className="mr-2 h-5 w-5" />
+                      Download
                     </Button>
                   </div>
                 )}

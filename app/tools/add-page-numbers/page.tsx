@@ -171,9 +171,19 @@ export default function AddPageNumbersPage() {
                       ) : (
                         <>
                           <Plus className="mr-2 h-5 w-5" />
-                          Add Numbers & Download
+                          Add Numbers
                         </>
                       )}
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="flex-1 text-base"
+                      onClick={handleDownload}
+                      disabled={!addPageNumbersPdfBlob}
+                    >
+                      <Download className="mr-2 h-5 w-5" />
+                      Download
                     </Button>
                   </div>
                 )}
