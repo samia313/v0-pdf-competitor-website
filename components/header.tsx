@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { FileText, Menu, ChevronDown, User, LogOut } from 'lucide-react'
+import { FileText, Menu, ChevronDown, User, LogOut, Crown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import {
   DropdownMenu,
@@ -28,6 +29,7 @@ interface UserSession {
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [session, setSession] = useState<UserSession | null>(null)
+  const [subscription, setSubscription] = useState<any>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -41,6 +43,23 @@ export function Header() {
     }
     checkSession()
   }, [])
+
+  useEffect(() => {
+    async function fetchSubscription() {
+      if (session?.user?.id) {
+        try {
+          const response = await fetch('/api/subscription')
+          if (response.ok) {
+            const data = await response.json()
+            setSubscription(data)
+          }
+        } catch (error) {
+          console.error('Failed to fetch subscription:', error)
+        }
+      }
+    }
+    fetchSubscription()
+  }, [session?.user?.id])
 
   const handleSignOut = async () => {
     await authClient.signOut()
@@ -188,10 +207,24 @@ export function Header() {
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuContent align="end" className="w-56">
                   <div className="px-2 py-1.5">
                     <p className="text-sm font-medium">{session.user.name}</p>
                     <p className="text-xs text-muted-foreground truncate">{session.user.email}</p>
+                    {subscription?.planId && (
+                      <div className="mt-2">
+                        <Badge variant={subscription.planId === 'free' ? 'secondary' : 'default'} className="gap-1">
+                          {subscription.planId === 'pro' || subscription.planId === 'business' ? (
+                            <>
+                              <Crown className="w-3 h-3" />
+                              {subscription.planId.charAt(0).toUpperCase() + subscription.planId.slice(1)}
+                            </>
+                          ) : (
+                            'Free Plan'
+                          )}
+                        </Badge>
+                      </div>
+                    )}
                   </div>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
@@ -200,6 +233,14 @@ export function Header() {
                       Dashboard
                     </Link>
                   </DropdownMenuItem>
+                  {subscription?.planId === 'free' && (
+                    <DropdownMenuItem asChild>
+                      <Link href="/pricing" className="cursor-pointer text-sm text-primary">
+                        <Crown className="mr-2 h-4 w-4" />
+                        Upgrade to Pro
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive text-sm">
                     <LogOut className="mr-2 h-4 w-4" />
