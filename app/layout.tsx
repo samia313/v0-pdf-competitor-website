@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // PDFilio - Force rebuild cache
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
