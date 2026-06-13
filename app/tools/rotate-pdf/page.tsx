@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react'
 import { PDFDocument, degrees } from 'pdf-lib'
 import { saveAs } from 'file-saver'
+import JSZip from 'jszip'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { FileUploader } from '@/components/file-uploader'
@@ -14,7 +15,7 @@ import { RotateCw, Download, Loader2, RotateCcw } from 'lucide-react'
 export default function RotatePdfPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
-  const [rotatePdfBlob, setRotatePdfBlob] = useState<Blob | null>(null)
+  const [rotatedBlob, setRotatedBlob] = useState<Blob | null>(null)
   const [rotation, setRotation] = useState(90)
   const [totalPages, setTotalPages] = useState(0)
 
@@ -52,10 +53,17 @@ export default function RotatePdfPage() {
       })
 
       const pdfBytes = await pdf.save()
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' })
-      saveAs(blob, `rotated_${files[0].name}`)
+      
+      // Create ZIP file containing the rotated PDF
+      const zip = new JSZip()
+      zip.file('rotated.pdf', pdfBytes)
+      const zipBlob = await zip.generateAsync({ type: 'blob' })
+      
+      // Store the ZIP blob for download, don't download automatically
+      setRotatedBlob(zipBlob)
+      console.log('[v0] PDF rotated successfully - stored in ZIP for download')
     } catch (error) {
-      console.error('Error rotating PDF:', error)
+      console.error('[v0] Error rotating PDF:', error)
       alert('Error rotating PDF. Please make sure the file is a valid PDF.')
     } finally {
       setIsProcessing(false)
@@ -63,8 +71,9 @@ export default function RotatePdfPage() {
   }
 
   const handleDownload = () => {
-    if (!rotatePdfBlob) return
-    saveAs(rotatePdfBlob, 'rotate.pdf')
+    if (!rotatedBlob) return
+    saveAs(rotatedBlob, 'rotated-pdf.zip')
+    console.log('[v0] ZIP file downloaded')
   }
 
   return (
@@ -139,34 +148,49 @@ export default function RotatePdfPage() {
                       </div>
                     </div>
 
-                    <Button
-                      size="lg"
-                      className="flex-1 text-base"
-                      onClick={handleRotate}
-                      disabled={isProcessing}
-                    >
-                      {isProcessing ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Rotating...
-                        </>
-                      ) : (
-                        <>
-                          <RotateCw className="mr-2 h-5 w-5" />
-                          Rotate
-                        </>
-                      )}
-                    </Button>
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="flex-1 text-base"
-                      onClick={handleDownload}
-                      disabled={!rotatePdfBlob}
-                    >
-                      <Download className="mr-2 h-5 w-5" />
-                      Download
-                    </Button>
+                    {/* Rotate Button Section */}
+                    <div className="mt-6 bg-gradient-to-r from-amber-900/40 to-amber-800/20 border border-amber-700/50 rounded-2xl p-6 md:p-8">
+                      <div className="text-center mb-4">
+                        <h3 className="text-lg font-semibold text-foreground mb-2">Ready to Rotate?</h3>
+                        <p className="text-sm text-muted-foreground mb-6">Click the button below to start rotating your PDF</p>
+                      </div>
+                      <Button
+                        size="lg"
+                        className="w-full text-base bg-amber-600 hover:bg-amber-700 text-white"
+                        onClick={handleRotate}
+                        disabled={isProcessing}
+                      >
+                        {isProcessing ? (
+                          <>
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            Rotating...
+                          </>
+                        ) : (
+                          <>
+                            <RotateCw className="mr-2 h-5 w-5" />
+                            Start Rotate Process
+                          </>
+                        )}
+                      </Button>
+                    </div>
+
+                    {/* Download Section - Only shows after processing */}
+                    {!isProcessing && rotatedBlob && (
+                      <div className="mt-6 bg-gradient-to-r from-green-900/40 to-green-800/20 border border-green-700/50 rounded-2xl p-6 md:p-8">
+                        <div className="text-center mb-4">
+                          <h3 className="text-lg font-semibold text-green-400 mb-2">✓ Rotation Complete!</h3>
+                          <p className="text-sm text-muted-foreground mb-6">Your rotated PDF is ready to download as ZIP</p>
+                        </div>
+                        <Button
+                          size="lg"
+                          className="w-full text-base bg-green-600 hover:bg-green-700 text-white"
+                          onClick={handleDownload}
+                        >
+                          <Download className="mr-2 h-5 w-5" />
+                          Download Rotated PDF (ZIP)
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
