@@ -71,23 +71,23 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto flex h-14 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <FileText className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-600">
+            <FileText className="h-4 w-4 text-white" />
           </div>
-          <span className="text-xl font-bold text-foreground">
-            pdf<span className="text-primary">ilio</span>
+          <span className="text-lg font-bold text-foreground">
+            pdf<span className="text-red-600">ilio</span>
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-0.5 flex-1 ml-8">
+        <nav className="hidden lg:flex items-center gap-1 flex-1 ml-12">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="gap-1 text-sm text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
+              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
                 Organize PDF
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-64">
@@ -111,9 +111,9 @@ export function Header() {
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="gap-1 text-sm text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
+              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
                 Optimize
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-64">
@@ -137,9 +137,9 @@ export function Header() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="gap-1 text-sm text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
+              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
                 Convert to PDF
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-64">
@@ -163,9 +163,9 @@ export function Header() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="gap-1 text-sm text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
+              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
                 Convert from PDF
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-64">
@@ -188,10 +188,10 @@ export function Header() {
           </DropdownMenu>
 
           <Link href="/blog">
-            <Button className="text-sm text-white bg-red-600 hover:bg-red-700">Blog</Button>
+            <Button className="text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700">Blog</Button>
           </Link>
           <Link href="/pricing">
-            <Button className="text-sm text-white bg-red-600 hover:bg-red-700">Pricing</Button>
+            <Button className="text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700">Pricing</Button>
           </Link>
         </nav>
 
@@ -201,9 +201,9 @@ export function Header() {
             <>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="rounded-full">
-                    <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center">
-                      <User className="h-4 w-4" />
+                  <Button variant="ghost" size="icon" className="rounded-full h-8 w-8">
+                    <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center">
+                      <User className="h-3 w-3" />
                     </div>
                   </Button>
                 </DropdownMenuTrigger>
@@ -254,10 +254,10 @@ export function Header() {
             <>
               <ThemeToggle />
               <Link href="/auth/sign-in">
-                <Button variant="ghost" size="sm">Sign In</Button>
+                <Button variant="ghost" size="sm" className="text-xs h-8 px-2">Sign In</Button>
               </Link>
               <Link href="/pricing">
-                <Button size="sm">Get Premium</Button>
+                <Button size="sm" className="text-xs h-8 px-3">Get Premium</Button>
               </Link>
             </>
           )}
