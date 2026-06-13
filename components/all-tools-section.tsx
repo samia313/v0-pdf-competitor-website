@@ -70,6 +70,21 @@ export function AllToolsSection() {
           </div>
         </div>
       </section>
+
+      {/* Trust Section */}
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+        <div className="max-w-4xl mx-auto text-center space-y-4">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wide">
+            Trusted by Professionals Worldwide
+          </p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+            Your Complete PDF Solution
+          </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            PDFilio is the comprehensive platform for all your PDF needs. Process documents with confidence using our advanced tools, secure infrastructure, and commitment to your privacy. Trusted by professionals and businesses globally for reliable, efficient document management.
+          </p>
+        </div>
+      </section>
     </>
   )
 }
