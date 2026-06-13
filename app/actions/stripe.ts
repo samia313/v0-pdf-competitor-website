@@ -6,7 +6,7 @@ import { PRODUCTS } from '@/lib/products'
 export async function startCheckoutSession(productId: string) {
   const product = PRODUCTS.find((p) => p.id === productId)
   if (!product) {
-    throw new Error(`Product with id "${productId}" not found`)
+    throw new Error(`Product "${productId}" not found`)
   }
 
   if (product.priceInCents === 0) {
@@ -14,10 +14,13 @@ export async function startCheckoutSession(productId: string) {
   }
 
   const isSubscription = product.period === 'month' || product.period === 'year'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://pdfilio.com'
 
   const session = await stripe.checkout.sessions.create({
-    ui_mode: 'embedded',
-    redirect_on_completion: 'never',
+    ui_mode: 'hosted',
+    redirect_on_completion: 'always',
+    success_url: `${appUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${appUrl}/pricing`,
     line_items: [
       {
         price_data: {
@@ -29,7 +32,7 @@ export async function startCheckoutSession(productId: string) {
           unit_amount: product.priceInCents,
           ...(isSubscription && {
             recurring: {
-              interval: product.period,
+              interval: product.period as 'month' | 'year',
               interval_count: 1,
             },
           }),
@@ -40,13 +43,10 @@ export async function startCheckoutSession(productId: string) {
     mode: isSubscription ? 'subscription' : 'payment',
   })
 
-  return session.client_secret
+  if (!session.url) {
+    throw new Error('Failed to create checkout session')
+  }
+
+  return session.url
 }
 
-export async function getCheckoutSession(sessionId: string) {
-  const session = await stripe.checkout.sessions.retrieve(sessionId)
-  return {
-    status: session.status,
-    customerEmail: session.customer_details?.email,
-  }
-}

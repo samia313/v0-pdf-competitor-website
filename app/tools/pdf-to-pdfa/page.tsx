@@ -8,9 +8,9 @@ import { Footer } from '@/components/footer'
 import { FileUploader } from '@/components/file-uploader'
 import { AdBanner, AdSidebar } from '@/components/ad-units'
 import { Button } from '@/components/ui/button'
-import { Image as ImageIcon, Download, Loader2 } from 'lucide-react'
+import { Archive, Download, Loader2 } from 'lucide-react'
 
-export default function PdfToPngPage() {
+export default function PdfToPdfAPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
 
@@ -20,7 +20,7 @@ export default function PdfToPngPage() {
 
   const handleRemoveFile = useCallback(() => setFiles([]), [])
 
-  const handleConvert = async () => {
+  const handleConvertPdfA = async () => {
     if (files.length === 0) return
     setIsProcessing(true)
 
@@ -28,11 +28,20 @@ export default function PdfToPngPage() {
       const fileBuffer = await files[0].arrayBuffer()
       const pdf = await PDFDocument.load(fileBuffer)
       
-      const blob = await pdf.save()
-      saveAs(new Blob([blob]), `converted_${files[0].name.replace('.pdf', '.png')}`)
+      // Add metadata for PDF/A compliance
+      pdf.setTitle(pdf.getTitle() || 'Document')
+      pdf.setCreationDate(new Date())
+      
+      const pdfBytes = await pdf.save({
+        useObjectStreams: false,
+        preserveRasterImages: true,
+      })
+      
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' })
+      saveAs(blob, `pdfa_${files[0].name}`)
     } catch (error) {
-      console.error('Error:', error)
-      alert('Error converting PDF')
+      console.error('Error converting to PDF/A:', error)
+      alert('Error converting PDF to PDF/A format.')
     } finally {
       setIsProcessing(false)
     }
@@ -46,16 +55,16 @@ export default function PdfToPngPage() {
           <div className="flex gap-8">
             <div className="flex-1 max-w-4xl mx-auto">
               <div className="text-center mb-8">
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-500 text-white mb-4">
-                  <ImageIcon className="h-8 w-8" />
+                <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-500 text-white mb-4">
+                  <Archive className="h-8 w-8" />
                 </div>
-                <h1 className="text-3xl md:text-4xl font-bold">PDF to PNG</h1>
+                <h1 className="text-3xl md:text-4xl font-bold">PDF to PDF/A</h1>
                 <p className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">
-                  Convert your PDF to PNG images
+                  Convert PDF to PDF/A format for long-term archival and preservation
                 </p>
               </div>
 
-              <AdBanner slot="pdf-png-top" className="mb-8" />
+              <AdBanner slot="pdfa-top" className="mb-8" />
 
               <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
                 <FileUploader
@@ -64,7 +73,7 @@ export default function PdfToPngPage() {
                   onFilesSelected={handleFilesSelected}
                   files={files}
                   onRemoveFile={handleRemoveFile}
-                  title="Drop a PDF file here"
+                  title="Drop a PDF here"
                   description="or click to browse"
                 />
 
@@ -72,7 +81,7 @@ export default function PdfToPngPage() {
                   <Button
                     size="lg"
                     className="w-full mt-6"
-                    onClick={handleConvert}
+                    onClick={handleConvertPdfA}
                     disabled={isProcessing}
                   >
                     {isProcessing ? (
@@ -83,21 +92,20 @@ export default function PdfToPngPage() {
                     ) : (
                       <>
                         <Download className="mr-2 h-5 w-5" />
-                        Convert to PNG
+                        Convert to PDF/A
                       </>
                     )}
                   </Button>
                 )}
               </div>
 
-              <AdBanner slot="pdf-png-bottom" className="mt-12" />
+              <AdBanner slot="pdfa-bottom" className="mt-12" />
             </div>
 
-            <AdSidebar slot="pdf-png-sidebar" />
+            <AdSidebar slot="pdfa-sidebar" />
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   )

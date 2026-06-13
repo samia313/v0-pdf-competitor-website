@@ -177,6 +177,24 @@ export const pdfTools = [
     color: 'bg-violet-500',
     href: '/tools/add-page-numbers',
   },
+  {
+    id: 'redaction-pdf',
+    name: 'Redact PDF',
+    description: 'Redact text and graphics to permanently remove sensitive information',
+    icon: 'redact',
+    category: 'edit',
+    color: 'bg-fuchsia-500',
+    href: '/tools/redaction-pdf',
+  },
+  {
+    id: 'crop-pdf',
+    name: 'Crop PDF',
+    description: 'Remove margins and crop PDF pages to exact size',
+    icon: 'crop',
+    category: 'edit',
+    color: 'bg-rose-600',
+    href: '/tools/crop-pdf',
+  },
 
   // Security
   {
@@ -206,6 +224,24 @@ export const pdfTools = [
     color: 'bg-slate-800',
     href: '/tools/sign-pdf',
   },
+  {
+    id: 'repair-pdf',
+    name: 'Repair PDF',
+    description: 'Fix corrupted or damaged PDF files',
+    icon: 'repair',
+    category: 'security',
+    color: 'bg-green-600',
+    href: '/tools/repair-pdf',
+  },
+  {
+    id: 'pdf-forms',
+    name: 'PDF Forms',
+    description: 'Detect and fill PDF forms automatically',
+    icon: 'form',
+    category: 'security',
+    color: 'bg-amber-600',
+    href: '/tools/pdf-forms',
+  },
 
   // AI Tools
   {
@@ -234,6 +270,42 @@ export const pdfTools = [
     category: 'ai',
     color: 'bg-teal-500',
     href: '/tools/translate-pdf',
+  },
+  {
+    id: 'compare-pdf',
+    name: 'Compare PDF',
+    description: 'Compare two PDF files and spot differences',
+    icon: 'compare',
+    category: 'ai',
+    color: 'bg-cyan-500',
+    href: '/tools/compare-pdf',
+  },
+  {
+    id: 'scan-to-pdf',
+    name: 'Scan to PDF',
+    description: 'Convert document scans and images into PDF',
+    icon: 'camera',
+    category: 'ai',
+    color: 'bg-lime-500',
+    href: '/tools/scan-to-pdf',
+  },
+  {
+    id: 'pdf-to-pdfa',
+    name: 'PDF to PDF/A',
+    description: 'Convert PDF to PDF/A for long-term archival',
+    icon: 'archive',
+    category: 'ai',
+    color: 'bg-violet-600',
+    href: '/tools/pdf-to-pdfa',
+  },
+  {
+    id: 'pdf-to-png',
+    name: 'PDF to PNG',
+    description: 'Convert PDF pages to PNG images',
+    icon: 'image',
+    category: 'ai',
+    color: 'bg-fuchsia-600',
+    href: '/tools/pdf-to-png',
   },
 ]
 

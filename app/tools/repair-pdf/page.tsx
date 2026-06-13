@@ -8,9 +8,9 @@ import { Footer } from '@/components/footer'
 import { FileUploader } from '@/components/file-uploader'
 import { AdBanner, AdSidebar } from '@/components/ad-units'
 import { Button } from '@/components/ui/button'
-import { Image as ImageIcon, Download, Loader2 } from 'lucide-react'
+import { Wrench, Download, Loader2 } from 'lucide-react'
 
-export default function PdfToPngPage() {
+export default function RepairPdfPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
 
@@ -20,19 +20,24 @@ export default function PdfToPngPage() {
 
   const handleRemoveFile = useCallback(() => setFiles([]), [])
 
-  const handleConvert = async () => {
+  const handleRepair = async () => {
     if (files.length === 0) return
     setIsProcessing(true)
 
     try {
       const fileBuffer = await files[0].arrayBuffer()
-      const pdf = await PDFDocument.load(fileBuffer)
+      const pdf = await PDFDocument.load(fileBuffer, { ignoreEncryption: true })
       
-      const blob = await pdf.save()
-      saveAs(new Blob([blob]), `converted_${files[0].name.replace('.pdf', '.png')}`)
+      const repairedPdf = await PDFDocument.create()
+      const pages = await repairedPdf.copyPages(pdf, pdf.getPageIndices())
+      pages.forEach((page) => repairedPdf.addPage(page))
+      
+      const pdfBytes = await repairedPdf.save()
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' })
+      saveAs(blob, `repaired_${files[0].name}`)
     } catch (error) {
-      console.error('Error:', error)
-      alert('Error converting PDF')
+      console.error('Error repairing PDF:', error)
+      alert('Error repairing PDF. The file may be too damaged.')
     } finally {
       setIsProcessing(false)
     }
@@ -46,16 +51,16 @@ export default function PdfToPngPage() {
           <div className="flex gap-8">
             <div className="flex-1 max-w-4xl mx-auto">
               <div className="text-center mb-8">
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-500 text-white mb-4">
-                  <ImageIcon className="h-8 w-8" />
+                <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-green-500 text-white mb-4">
+                  <Wrench className="h-8 w-8" />
                 </div>
-                <h1 className="text-3xl md:text-4xl font-bold">PDF to PNG</h1>
+                <h1 className="text-3xl md:text-4xl font-bold">Repair PDF</h1>
                 <p className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">
-                  Convert your PDF to PNG images
+                  Fix corrupted or damaged PDF files and recover your data
                 </p>
               </div>
 
-              <AdBanner slot="pdf-png-top" className="mb-8" />
+              <AdBanner slot="repair-top" className="mb-8" />
 
               <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
                 <FileUploader
@@ -64,7 +69,7 @@ export default function PdfToPngPage() {
                   onFilesSelected={handleFilesSelected}
                   files={files}
                   onRemoveFile={handleRemoveFile}
-                  title="Drop a PDF file here"
+                  title="Drop a corrupted PDF here"
                   description="or click to browse"
                 />
 
@@ -72,32 +77,31 @@ export default function PdfToPngPage() {
                   <Button
                     size="lg"
                     className="w-full mt-6"
-                    onClick={handleConvert}
+                    onClick={handleRepair}
                     disabled={isProcessing}
                   >
                     {isProcessing ? (
                       <>
                         <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                        Converting...
+                        Repairing...
                       </>
                     ) : (
                       <>
                         <Download className="mr-2 h-5 w-5" />
-                        Convert to PNG
+                        Repair & Download
                       </>
                     )}
                   </Button>
                 )}
               </div>
 
-              <AdBanner slot="pdf-png-bottom" className="mt-12" />
+              <AdBanner slot="repair-bottom" className="mt-12" />
             </div>
 
-            <AdSidebar slot="pdf-png-sidebar" />
+            <AdSidebar slot="repair-sidebar" />
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   )

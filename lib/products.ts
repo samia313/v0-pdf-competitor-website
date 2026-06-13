@@ -38,7 +38,7 @@ export const PRODUCTS: Product[] = [
     id: 'premium-monthly',
     name: 'Premium',
     description: 'Unlimited access for professionals',
-    priceInCents: 900, // $9.00/month
+    priceInCents: 999, // $9.99/month
     period: 'month',
     popular: true,
     features: [
@@ -62,7 +62,7 @@ export const PRODUCTS: Product[] = [
     id: 'premium-yearly',
     name: 'Premium',
     description: 'Best value - Save 33%',
-    priceInCents: 7200, // $72.00/year ($6/month)
+    priceInCents: 7992, // $79.92/year ($6.66/month)
     period: 'year',
     features: [
       'Unlimited tasks',
@@ -86,7 +86,7 @@ export const PRODUCTS: Product[] = [
     id: 'business-monthly',
     name: 'Business',
     description: 'For teams and businesses',
-    priceInCents: 2500, // $25.00/month
+    priceInCents: 2999, // $29.99/month
     period: 'month',
     features: [
       'Everything in Premium',
@@ -109,7 +109,7 @@ export const PRODUCTS: Product[] = [
     id: 'business-yearly',
     name: 'Business',
     description: 'Best value for teams - Save 33%',
-    priceInCents: 20000, // $200.00/year
+    priceInCents: 23992, // $239.92/year ($19.99/month)
     period: 'year',
     features: [
       'Everything in Premium',

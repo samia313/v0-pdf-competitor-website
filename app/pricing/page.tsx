@@ -6,11 +6,12 @@ import { Badge } from '@/components/ui/badge'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { SUBSCRIPTION_PLANS, getMonthlyPrice } from '@/lib/subscription-plans'
+import { PRODUCTS } from '@/lib/products'
 
 export default async function PricingPage() {
   const freePlan = SUBSCRIPTION_PLANS.find(p => p.id === 'free')!
-  const proPlan = SUBSCRIPTION_PLANS.find(p => p.id === 'pro')!
-  const businessPlan = SUBSCRIPTION_PLANS.find(p => p.id === 'business')!
+  const proPlan = PRODUCTS.find(p => p.id === 'premium-monthly')!
+  const businessPlan = PRODUCTS.find(p => p.id === 'business-monthly')!
 
   return (
     <div className="min-h-screen bg-background">
@@ -97,7 +98,7 @@ export default async function PricingPage() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Link href="/dashboard/upgrade?plan=pro" className="w-full">
+              <Link href={`/dashboard/upgrade?plan=premium-monthly`} className="w-full">
                 <Button className="w-full" size="lg">
                   Upgrade to Pro
                 </Button>
@@ -131,7 +132,7 @@ export default async function PricingPage() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Link href="/dashboard/upgrade?plan=business" className="w-full">
+              <Link href={`/dashboard/upgrade?plan=business-monthly`} className="w-full">
                 <Button variant="outline" className="w-full" size="lg">
                   Upgrade to Business
                 </Button>
@@ -252,7 +253,7 @@ export default async function PricingPage() {
                 Try Free Tools
               </Button>
             </Link>
-            <Link href="/dashboard/upgrade?plan=pro">
+            <Link href="/dashboard/upgrade?plan=premium-monthly">
               <Button size="lg">
                 Get Premium Now
               </Button>
