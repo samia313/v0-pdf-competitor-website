@@ -145,30 +145,53 @@ export default function MergePdfPage() {
                     </div>
                   </div>
                 )}
-
-                {files.length >= 2 && (
-                  <div className="mt-6">
-                    <Button
-                      size="lg"
-                      className="w-full text-base"
-                      onClick={handleMerge}
-                      disabled={isProcessing}
-                    >
-                      {isProcessing ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Merging... {progress}%
-                        </>
-                      ) : (
-                        <>
-                          <Download className="mr-2 h-5 w-5" />
-                          Merge & Download PDF
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                )}
               </div>
+
+              {/* Merge Button Section */}
+              {files.length >= 2 && (
+                <div className="mt-6 bg-gradient-to-r from-blue-900/40 to-blue-800/20 border border-blue-700/50 rounded-2xl p-6 md:p-8">
+                  <div className="text-center mb-4">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">Ready to Merge?</h3>
+                    <p className="text-sm text-muted-foreground mb-6">Click the button below to start merging your PDFs</p>
+                  </div>
+                  <Button
+                    size="lg"
+                    className="w-full text-base bg-blue-600 hover:bg-blue-700 text-white"
+                    onClick={handleMerge}
+                    disabled={isProcessing}
+                  >
+                    {isProcessing ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Merging... {progress}%
+                      </>
+                    ) : (
+                      <>
+                        <Merge className="mr-2 h-5 w-5" />
+                        Start Merge Process
+                      </>
+                    )}
+                  </Button>
+                </div>
+              )}
+
+              {/* Download Section - Only shows after processing */}
+              {isProcessing === false && files.length >= 2 && progress > 0 && (
+                <div className="mt-6 bg-gradient-to-r from-green-900/40 to-green-800/20 border border-green-700/50 rounded-2xl p-6 md:p-8">
+                  <div className="text-center mb-4">
+                    <h3 className="text-lg font-semibold text-green-400 mb-2">✓ Merge Complete!</h3>
+                    <p className="text-sm text-muted-foreground mb-6">Your merged PDF is ready to download</p>
+                  </div>
+                  <Button
+                    size="lg"
+                    className="w-full text-base bg-green-600 hover:bg-green-700 text-white"
+                    onClick={handleMerge}
+                  >
+                    <Download className="mr-2 h-5 w-5" />
+                    Download Merged PDF
+                  </Button>
+                </div>
+              )}
 
               {/* Instructions */}
               <div className="mt-12 grid gap-6 md:grid-cols-3">
