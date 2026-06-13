@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
-import { LandingHero } from '@/components/landing-hero'
-import { ToolsSection } from '@/components/tools-section'
 import { AllToolsSection } from '@/components/all-tools-section'
 
 export const metadata: Metadata = {
@@ -15,8 +13,6 @@ export default function HomePage() {
   return (
     <div className="w-full min-h-screen bg-background">
       <Header />
-      <LandingHero />
-      <ToolsSection />
       <AllToolsSection />
       <Footer />
     </div>
