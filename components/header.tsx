@@ -85,7 +85,7 @@ export function Header() {
         <nav className="hidden lg:flex items-center gap-0.5 flex-1 ml-8">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="gap-1 text-sm outline-none focus:outline-none focus-visible:outline-none hover:bg-transparent">
+              <Button className="gap-1 text-sm text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
                 Organize PDF
                 <ChevronDown className="h-4 w-4" />
               </Button>
@@ -111,7 +111,7 @@ export function Header() {
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="gap-1 text-sm outline-none focus:outline-none focus-visible:outline-none hover:bg-transparent">
+              <Button className="gap-1 text-sm text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
                 Optimize
                 <ChevronDown className="h-4 w-4" />
               </Button>
@@ -137,7 +137,7 @@ export function Header() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="gap-1 text-sm outline-none focus:outline-none focus-visible:outline-none hover:bg-transparent">
+              <Button className="gap-1 text-sm text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
                 Convert to PDF
                 <ChevronDown className="h-4 w-4" />
               </Button>
@@ -163,7 +163,7 @@ export function Header() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="gap-1 text-sm outline-none focus:outline-none focus-visible:outline-none hover:bg-transparent">
+              <Button className="gap-1 text-sm text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
                 Convert from PDF
                 <ChevronDown className="h-4 w-4" />
               </Button>
@@ -188,10 +188,10 @@ export function Header() {
           </DropdownMenu>
 
           <Link href="/blog">
-            <Button variant="ghost" className="text-sm">Blog</Button>
+            <Button className="text-sm text-white bg-red-600 hover:bg-red-700">Blog</Button>
           </Link>
           <Link href="/pricing">
-            <Button variant="ghost" className="text-sm">Pricing</Button>
+            <Button className="text-sm text-white bg-red-600 hover:bg-red-700">Pricing</Button>
           </Link>
         </nav>
 
