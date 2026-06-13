@@ -2,6 +2,7 @@ import { db } from '@/lib/db'
 import { orders } from '@/lib/db/schema'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import AdminLogout from '@/components/admin-logout'
 
 export default async function AdminOrdersPage() {
   try {
@@ -15,9 +16,12 @@ export default async function AdminOrdersPage() {
     return (
       <div className="min-h-screen bg-background">
         <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-2">Admin Dashboard - Orders</h1>
-            <p className="text-muted-foreground">Manage and verify customer payments</p>
+          <div className="flex justify-between items-start mb-8">
+            <div>
+              <h1 className="text-4xl font-bold mb-2">Admin Dashboard - Orders</h1>
+              <p className="text-muted-foreground">Manage and verify customer payments</p>
+            </div>
+            <AdminLogout />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">

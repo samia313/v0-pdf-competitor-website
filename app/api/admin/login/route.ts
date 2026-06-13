@@ -4,20 +4,24 @@ import crypto from 'crypto'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { password } = body
+    const { username, password } = body
 
-    // Default admin password - change this or use environment variable
-    const ADMIN_PASSWORD = 'admin123'
+    // Admin credentials
+    const ADMIN_USERNAME = 'naveed313'
+    const ADMIN_PASSWORD = 'Samia@313'
 
-    // Check password
-    if (password !== ADMIN_PASSWORD) {
+    // Validate credentials
+    if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
       return NextResponse.json(
-        { message: 'Invalid password' },
+        { message: 'Invalid username or password' },
         { status: 401 }
       )
     }
 
-    const response = NextResponse.json({ success: true, message: 'Login successful' })
+    const response = NextResponse.json({ 
+      success: true, 
+      message: 'Login successful' 
+    })
     
     // Set admin session cookie
     response.cookies.set('admin-session', crypto.randomBytes(32).toString('hex'), {
@@ -28,9 +32,10 @@ export async function POST(request: NextRequest) {
       path: '/admin',
     })
 
+    console.log('[v0] Admin login successful for user:', username)
     return response
   } catch (error) {
-    console.error('Admin login error:', error)
+    console.error('[v0] Admin login error:', error)
     return NextResponse.json(
       { message: 'Login failed' },
       { status: 500 }
