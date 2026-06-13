@@ -14,6 +14,7 @@ export default function MergePdfPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [mergedBlob, setMergedBlob] = useState<Blob | null>(null)
 
   const handleFilesSelected = useCallback((newFiles: File[]) => {
     setFiles((prev) => [...prev, ...newFiles])
@@ -52,14 +53,22 @@ export default function MergePdfPage() {
 
       const mergedPdfBytes = await mergedPdf.save()
       const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' })
-      saveAs(blob, 'merged.pdf')
+      
+      // Store the blob for download, don't download automatically
+      setMergedBlob(blob)
+      console.log('[v0] Files merged successfully - stored for download')
     } catch (error) {
-      console.error('Error merging PDFs:', error)
+      console.error('[v0] Error merging PDFs:', error)
       alert('Error merging PDFs. Please make sure all files are valid PDFs.')
     } finally {
       setIsProcessing(false)
-      setProgress(0)
     }
+  }
+
+  const handleDownload = () => {
+    if (!mergedBlob) return
+    saveAs(mergedBlob, 'merged.pdf')
+    console.log('[v0] PDF downloaded')
   }
 
   return (
@@ -176,7 +185,7 @@ export default function MergePdfPage() {
               )}
 
               {/* Download Section - Only shows after processing */}
-              {isProcessing === false && files.length >= 2 && progress > 0 && (
+              {isProcessing === false && mergedBlob && (
                 <div className="mt-6 bg-gradient-to-r from-green-900/40 to-green-800/20 border border-green-700/50 rounded-2xl p-6 md:p-8">
                   <div className="text-center mb-4">
                     <h3 className="text-lg font-semibold text-green-400 mb-2">✓ Merge Complete!</h3>
@@ -185,7 +194,7 @@ export default function MergePdfPage() {
                   <Button
                     size="lg"
                     className="w-full text-base bg-green-600 hover:bg-green-700 text-white"
-                    onClick={handleMerge}
+                    onClick={handleDownload}
                   >
                     <Download className="mr-2 h-5 w-5" />
                     Download Merged PDF
