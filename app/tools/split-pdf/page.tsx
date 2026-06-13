@@ -17,7 +17,7 @@ import { Scissors, Download, Loader2 } from 'lucide-react'
 export default function SplitPdfPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
-  const [splitPdfBlob, setSplitPdfBlob] = useState<Blob | null>(null)
+  const [splitResults, setSplitResults] = useState<{ blob: Blob; filename: string } | null>(null)
   const [splitMode, setSplitMode] = useState<'all' | 'range' | 'extract'>('all')
   const [pageRange, setPageRange] = useState('')
   const [totalPages, setTotalPages] = useState(0)
@@ -63,8 +63,9 @@ export default function SplitPdfPage() {
         }
 
         const zipBlob = await zip.generateAsync({ type: 'blob' })
-        saveAs(zipBlob, 'split_pages.zip')
-      } else if (splitMode === 'range' || splitMode === 'extract') {
+        setSplitResults({ blob: zipBlob, filename: 'split_pages.zip' })
+        console.log('[v0] PDF split into individual pages - stored for download')
+      } else if (splitMode === 'extract') {
         // Extract specific pages
         const ranges = parsePageRange(pageRange, pageCount)
         if (ranges.length === 0) {
@@ -80,10 +81,11 @@ export default function SplitPdfPage() {
         
         const pdfBytes = await newPdf.save()
         const blob = new Blob([pdfBytes], { type: 'application/pdf' })
-        setSplitPdfBlob(blob)
+        setSplitResults({ blob, filename: 'extracted.pdf' })
+        console.log('[v0] Pages extracted - stored for download')
       }
     } catch (error) {
-      console.error('Error splitting PDF:', error)
+      console.error('[v0] Error splitting PDF:', error)
       alert('Error splitting PDF. Please make sure the file is a valid PDF.')
     } finally {
       setIsProcessing(false)
@@ -91,8 +93,9 @@ export default function SplitPdfPage() {
   }
 
   const handleDownload = () => {
-    if (!splitPdfBlob) return
-    saveAs(splitPdfBlob, 'split.pdf')
+    if (!splitResults) return
+    saveAs(splitResults.blob, splitResults.filename)
+    console.log('[v0] PDF downloaded:', splitResults.filename)
   }
 
   const parsePageRange = (range: string, maxPages: number): number[] => {
@@ -202,24 +205,49 @@ export default function SplitPdfPage() {
                       </div>
                     )}
 
-                    <Button
-                      size="lg"
-                      className="flex-1 text-base"
-                      onClick={handleSplit}
-                      disabled={isProcessing || (splitMode !== 'all' && !pageRange)}
-                    >
-                      {isProcessing ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Processing...
-                        </>
-                      ) : (
-                        <>
-                          <Scissors className="mr-2 h-5 w-5" />
-                          {splitMode === 'all' ? 'Split & Download ZIP' : 'Extract & Download PDF'}
-                        </>
-                      )}
-                    </Button>
+                    {/* Split Button Section */}
+                    <div className="mt-6 bg-gradient-to-r from-orange-900/40 to-orange-800/20 border border-orange-700/50 rounded-2xl p-6 md:p-8">
+                      <div className="text-center mb-4">
+                        <h3 className="text-lg font-semibold text-foreground mb-2">Ready to Split?</h3>
+                        <p className="text-sm text-muted-foreground mb-6">Click the button below to start splitting your PDF</p>
+                      </div>
+                      <Button
+                        size="lg"
+                        className="w-full text-base bg-orange-600 hover:bg-orange-700 text-white"
+                        onClick={handleSplit}
+                        disabled={isProcessing || (splitMode !== 'all' && !pageRange)}
+                      >
+                        {isProcessing ? (
+                          <>
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            Processing...
+                          </>
+                        ) : (
+                          <>
+                            <Scissors className="mr-2 h-5 w-5" />
+                            Start Split Process
+                          </>
+                        )}
+                      </Button>
+                    </div>
+
+                    {/* Download Section - Only shows after processing */}
+                    {!isProcessing && splitResults && (
+                      <div className="mt-6 bg-gradient-to-r from-green-900/40 to-green-800/20 border border-green-700/50 rounded-2xl p-6 md:p-8">
+                        <div className="text-center mb-4">
+                          <h3 className="text-lg font-semibold text-green-400 mb-2">✓ Split Complete!</h3>
+                          <p className="text-sm text-muted-foreground mb-6">Your {splitMode === 'all' ? 'ZIP file' : 'PDF'} is ready to download</p>
+                        </div>
+                        <Button
+                          size="lg"
+                          className="w-full text-base bg-green-600 hover:bg-green-700 text-white"
+                          onClick={handleDownload}
+                        >
+                          <Download className="mr-2 h-5 w-5" />
+                          Download {splitMode === 'all' ? 'ZIP' : 'PDF'}
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
