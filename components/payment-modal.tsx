@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { X, Copy, Check, ChevronRight } from 'lucide-react'
+import { X, Copy, Check, ChevronRight, Loader2 } from 'lucide-react'
 import { LOCAL_PAYMENT_METHODS } from '@/lib/payment-methods'
 
 interface PaymentModalProps {
@@ -13,14 +13,78 @@ interface PaymentModalProps {
 export default function PaymentModal({ plan, onClose }: PaymentModalProps) {
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+  const [transactionId, setTransactionId] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
 
-  const pricePKR = Math.round(plan.price * 280) // USD to PKR conversion
+  const pricePKR = Math.round(plan.price * 280)
   const selectedPayment = selectedMethod ? LOCAL_PAYMENT_METHODS.find(m => m.id === selectedMethod) : null
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const handleSubmitPayment = async () => {
+    if (!transactionId.trim()) {
+      alert('Please enter transaction ID/reference number')
+      return
+    }
+
+    setLoading(true)
+    try {
+      const response = await fetch('/api/orders/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          planName: plan.name,
+          planId: plan.name.toLowerCase(),
+          amount: plan.price,
+          paymentMethod: selectedMethod,
+          paymentProof: transactionId,
+          customerEmail: 'user@example.com',
+          customerPhone: selectedPayment?.number || '',
+          customerName: 'Customer',
+        }),
+      })
+
+      const data = await response.json()
+      
+      if (response.ok && data.orderId) {
+        setSuccess(true)
+        setTimeout(() => {
+          onClose()
+          setSuccess(false)
+          setTransactionId('')
+          setSelectedMethod(null)
+        }, 3000)
+      } else {
+        alert('Error: ' + (data.error || 'Failed to submit payment'))
+      }
+    } catch (error) {
+      alert('Failed to submit payment. Please try again.')
+      console.error('[v0] Payment error:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (success) {
+    return (
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="bg-card rounded-2xl border border-border max-w-md w-full p-8 text-center">
+          <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+            <Check className="w-8 h-8 text-green-600" />
+          </div>
+          <h2 className="text-2xl font-bold mb-2">Payment Received!</h2>
+          <p className="text-muted-foreground mb-4">
+            We have received your payment request. Our team will verify it within 24 hours and activate your subscription.
+          </p>
+          <p className="text-sm text-muted-foreground">Check your email for updates.</p>
+        </div>
+      </div>
+    )
   }
 
   if (selectedPayment) {
@@ -58,7 +122,7 @@ export default function PaymentModal({ plan, onClose }: PaymentModalProps) {
 
           <div className="mb-4">
             <p className="text-sm font-semibold mb-2">Steps:</p>
-            <ol className="space-y-1 max-h-48 overflow-y-auto">
+            <ol className="space-y-1 max-h-40 overflow-y-auto">
               {selectedPayment.steps.map((step, idx) => (
                 <li key={idx} className="flex gap-2">
                   <span className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 text-primary text-xs font-semibold flex items-center justify-center">
@@ -72,15 +136,38 @@ export default function PaymentModal({ plan, onClose }: PaymentModalProps) {
 
           <div className="bg-blue-50/50 border border-blue-200/50 rounded-lg p-2 mb-4">
             <p className="text-xs text-blue-900">
-              <span className="font-semibold">Processing time:</span> {selectedPayment.processingTime}
+              <span className="font-semibold">Processing:</span> {selectedPayment.processingTime}
             </p>
           </div>
 
-          <Button className="w-full mb-2 h-10 font-semibold text-sm" onClick={onClose}>
-            Payment Sent - Confirm
+          <div className="mb-4">
+            <label className="text-sm font-semibold block mb-2">Transaction ID / Reference</label>
+            <input
+              type="text"
+              value={transactionId}
+              onChange={(e) => setTransactionId(e.target.value)}
+              placeholder="Enter transaction ID from your payment app"
+              className="w-full px-3 py-2 border border-border rounded-lg bg-secondary text-foreground text-sm"
+            />
+            <p className="text-xs text-muted-foreground mt-1">This helps us verify your payment quickly</p>
+          </div>
+
+          <Button 
+            className="w-full mb-2 h-10 font-semibold text-sm" 
+            onClick={handleSubmitPayment}
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Submitting...
+              </>
+            ) : (
+              'Payment Sent - Confirm'
+            )}
           </Button>
           <Button variant="outline" className="w-full h-10 font-semibold text-sm" onClick={() => setSelectedMethod(null)}>
-            Back to Payment Methods
+            Back
           </Button>
         </div>
       </div>
@@ -112,7 +199,6 @@ export default function PaymentModal({ plan, onClose }: PaymentModalProps) {
         <p className="text-sm font-semibold mb-2">Choose Payment Method:</p>
 
         <div className="space-y-2 mb-4">
-          {/* Stripe Card */}
           <button
             onClick={() => window.location.href = '/checkout'}
             className="w-full p-3 rounded-lg border-2 border-border hover:border-primary hover:bg-primary/5 transition-all text-left"
@@ -126,7 +212,6 @@ export default function PaymentModal({ plan, onClose }: PaymentModalProps) {
             </div>
           </button>
 
-          {/* Local Payment Methods */}
           {LOCAL_PAYMENT_METHODS.map((method) => (
             <button
               key={method.id}

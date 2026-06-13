@@ -1,59 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { db } from '@/lib/db'
+import { orders } from '@/lib/db/schema'
 import crypto from 'crypto'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { paymentMethod, productId, amount, customerEmail } = body
+    const {
+      planName,
+      planId,
+      amount,
+      paymentMethod,
+      paymentProof,
+      customerEmail,
+      customerPhone,
+      customerName,
+    } = body
 
-    if (!paymentMethod || !productId || !amount) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
+    if (!planName || !amount || !paymentMethod || !paymentProof) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    // Generate unique order ID
     const orderId = `ORD-${Date.now()}-${crypto.randomBytes(4).toString('hex').toUpperCase()}`
 
-    // Handle local payment methods
-    if (['easypaisa', 'jazzcash', 'bank_transfer'].includes(paymentMethod)) {
-      // Store order as pending payment
-      const orderData = {
-        orderId,
-        paymentMethod,
-        productId,
-        amount,
-        customerEmail,
-        status: 'pending',
-        createdAt: new Date().toISOString(),
-        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 24 hours
-      }
+    const result = await db.insert(orders).values({
+      orderId,
+      planName,
+      planId,
+      amount,
+      currency: 'USD',
+      paymentMethod,
+      paymentProof,
+      customerEmail,
+      customerPhone,
+      customerName,
+      paymentStatus: 'pending',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }).returning()
 
-      // In production, save to database
-      console.log('[v0] Creating pending order:', orderData)
+    console.log('[v0] Order created:', result)
 
-      // Send confirmation email
-      if (customerEmail) {
-        // Email service would go here
-        console.log('[v0] Would send confirmation email to:', customerEmail)
-      }
+    // TODO: Send email notification to admin
+    // TODO: Send confirmation email to customer
 
-      return NextResponse.json({
-        success: true,
-        orderId,
-        message: 'Payment request created. Please complete the transfer and we will verify it shortly.',
-        paymentDetails: {
-          method: paymentMethod,
-          amount,
-        },
-      })
-    }
-
-    return NextResponse.json(
-      { error: 'Invalid payment method' },
-      { status: 400 }
-    )
+    return NextResponse.json({
+      success: true,
+      orderId,
+      message: 'Payment request received. We will verify it within 24 hours.',
+    })
   } catch (error) {
     console.error('[v0] Order creation error:', error)
     return NextResponse.json(
