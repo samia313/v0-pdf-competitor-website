@@ -1,9 +1,35 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { pdfTools } from '@/lib/tools-data'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ToolIcon } from './tool-icon'
+
+const HEADING_TEXT = "Powerful PDF Tools — Fast, Free & Easy to Use"
+
+function TypewriterHeading() {
+  const [displayedText, setDisplayedText] = useState('')
+  const [isComplete, setIsComplete] = useState(false)
+
+  useEffect(() => {
+    if (displayedText.length < HEADING_TEXT.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(HEADING_TEXT.slice(0, displayedText.length + 1))
+      }, 30)
+      return () => clearTimeout(timeout)
+    } else {
+      setIsComplete(true)
+    }
+  }, [displayedText])
+
+  return (
+    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight min-h-[1.2em]">
+      {displayedText}
+      {!isComplete && <span className="animate-pulse">|</span>}
+    </h1>
+  )
+}
 
 export function AllToolsSection() {
   return (
@@ -11,9 +37,7 @@ export function AllToolsSection() {
       {/* Hero Section */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-primary/5 to-background">
         <div className="max-w-7xl mx-auto text-center space-y-6">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-            Powerful PDF Tools — Fast, Free & Easy to Use
-          </h1>
+          <TypewriterHeading />
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Handle any PDF task in seconds — merge files, compress documents, convert formats, add security and much more. No software to install. Works on any device, completely free.
           </p>
