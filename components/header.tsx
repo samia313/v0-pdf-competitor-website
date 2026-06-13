@@ -73,11 +73,11 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-14 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-600">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
             <FileText className="h-4 w-4 text-white" />
           </div>
           <span className="text-lg font-bold text-foreground">
-            pdf<span className="text-red-600">ilio</span>
+            pdf<span className="text-primary">ilio</span>
           </span>
         </Link>
 
@@ -85,7 +85,7 @@ export function Header() {
         <nav className="hidden lg:flex items-center gap-1 flex-1 ml-12">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
+              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white outline-none focus:outline-none focus-visible:outline-none">
                 Organize PDF
                 <ChevronDown className="h-3 w-3" />
               </Button>
@@ -111,7 +111,7 @@ export function Header() {
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
+              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white outline-none focus:outline-none focus-visible:outline-none">
                 Optimize
                 <ChevronDown className="h-3 w-3" />
               </Button>
@@ -137,7 +137,7 @@ export function Header() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
+              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white outline-none focus:outline-none focus-visible:outline-none">
                 Convert to PDF
                 <ChevronDown className="h-3 w-3" />
               </Button>
@@ -163,7 +163,7 @@ export function Header() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700 outline-none focus:outline-none focus-visible:outline-none">
+              <Button className="gap-1 text-xs px-3 py-1 h-8 text-white outline-none focus:outline-none focus-visible:outline-none">
                 Convert from PDF
                 <ChevronDown className="h-3 w-3" />
               </Button>
@@ -188,10 +188,10 @@ export function Header() {
           </DropdownMenu>
 
           <Link href="/blog">
-            <Button className="text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700">Blog</Button>
+            <Button className="text-xs px-3 py-1 h-8 text-white">Blog</Button>
           </Link>
           <Link href="/pricing">
-            <Button className="text-xs px-3 py-1 h-8 text-white bg-red-600 hover:bg-red-700">Pricing</Button>
+            <Button className="text-xs px-3 py-1 h-8 text-white">Pricing</Button>
           </Link>
         </nav>
 
