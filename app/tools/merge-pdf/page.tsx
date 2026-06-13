@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react'
 import { PDFDocument } from 'pdf-lib'
 import { saveAs } from 'file-saver'
+import JSZip from 'jszip'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { FileUploader } from '@/components/file-uploader'
@@ -52,11 +53,15 @@ export default function MergePdfPage() {
       }
 
       const mergedPdfBytes = await mergedPdf.save()
-      const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' })
       
-      // Store the blob for download, don't download automatically
-      setMergedBlob(blob)
-      console.log('[v0] Files merged successfully - stored for download')
+      // Create ZIP file containing the merged PDF
+      const zip = new JSZip()
+      zip.file('merged.pdf', mergedPdfBytes)
+      const zipBlob = await zip.generateAsync({ type: 'blob' })
+      
+      // Store the ZIP blob for download, don't download automatically
+      setMergedBlob(zipBlob)
+      console.log('[v0] Files merged successfully - stored in ZIP for download')
     } catch (error) {
       console.error('[v0] Error merging PDFs:', error)
       alert('Error merging PDFs. Please make sure all files are valid PDFs.')
@@ -67,8 +72,8 @@ export default function MergePdfPage() {
 
   const handleDownload = () => {
     if (!mergedBlob) return
-    saveAs(mergedBlob, 'merged.pdf')
-    console.log('[v0] PDF downloaded')
+    saveAs(mergedBlob, 'merged-pdfs.zip')
+    console.log('[v0] ZIP file downloaded')
   }
 
   return (
@@ -189,7 +194,7 @@ export default function MergePdfPage() {
                 <div className="mt-6 bg-gradient-to-r from-green-900/40 to-green-800/20 border border-green-700/50 rounded-2xl p-6 md:p-8">
                   <div className="text-center mb-4">
                     <h3 className="text-lg font-semibold text-green-400 mb-2">✓ Merge Complete!</h3>
-                    <p className="text-sm text-muted-foreground mb-6">Your merged PDF is ready to download</p>
+                    <p className="text-sm text-muted-foreground mb-6">Your merged PDF is ready to download as ZIP</p>
                   </div>
                   <Button
                     size="lg"
@@ -197,7 +202,7 @@ export default function MergePdfPage() {
                     onClick={handleDownload}
                   >
                     <Download className="mr-2 h-5 w-5" />
-                    Download Merged PDF
+                    Download Merged PDF (ZIP)
                   </Button>
                 </div>
               )}
