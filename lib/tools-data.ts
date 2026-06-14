@@ -245,6 +245,17 @@ export const pdfTools = [
 
   // AI Tools
   {
+    id: 'ai-document-assistant',
+    name: 'AI Document Assistant',
+    description: 'Summarize, translate, extract data, and analyze PDFs with AI',
+    icon: 'sparkles',
+    category: 'ai',
+    color: 'bg-gradient-to-r from-purple-500 to-pink-500',
+    href: '/tools/ai-document-assistant',
+    premium: true,
+    popular: true,
+  },
+  {
     id: 'ocr-pdf',
     name: 'OCR PDF',
     description: 'Extract text from scanned PDFs using OCR',
