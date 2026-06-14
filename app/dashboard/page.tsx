@@ -84,6 +84,7 @@ export default function DashboardPage() {
     { name: 'Compress PDF', href: '/tools/compress-pdf', icon: Zap, color: 'bg-green-500' },
     { name: 'Split PDF', href: '/tools/split-pdf', icon: FileText, color: 'bg-orange-500' },
     { name: 'PDF to Word', href: '/tools/pdf-to-word', icon: FileText, color: 'bg-blue-500' },
+    { name: 'AI Document Assistant', href: '/tools/ai-document-assistant', icon: Star, color: 'bg-purple-500', premium: true },
   ]
 
   return (
