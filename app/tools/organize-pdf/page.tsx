@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef } from 'react'
 import { PDFDocument } from 'pdf-lib'
 import { saveAs } from 'file-saver'
+import JSZip from 'jszip'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { FileUploader } from '@/components/file-uploader'
@@ -117,10 +118,16 @@ export default function OrganizePdfPage() {
       }
 
       const pdfBytes = await newPdf.save()
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' })
-      saveAs(blob, 'organized.pdf')
+      
+      // Create ZIP file containing the organized PDF
+      const zip = new JSZip()
+      zip.file('organized.pdf', pdfBytes)
+      const zipBlob = await zip.generateAsync({ type: 'blob' })
+      
+      saveAs(zipBlob, 'organized-pdf.zip')
+      console.log('[v0] PDF organized and saved as ZIP')
     } catch (error) {
-      console.error('Error processing PDF:', error)
+      console.error('[v0] Error processing PDF:', error)
       alert('Error processing PDF. Please try again.')
     } finally {
       setIsProcessing(false)
@@ -242,7 +249,7 @@ export default function OrganizePdfPage() {
                         ) : (
                           <>
                             <Download className="mr-2 h-5 w-5" />
-                            Download Organized PDF ({pages.filter((p) => p.selected).length} pages)
+                            Download Organized PDF (ZIP - {pages.filter((p) => p.selected).length} pages)
                           </>
                         )}
                       </Button>
