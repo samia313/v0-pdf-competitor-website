@@ -22,6 +22,7 @@ export default function OrganizePdfPage() {
   const [pages, setPages] = useState<PageInfo[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [organizedBlob, setOrganizedBlob] = useState<Blob | null>(null)
   const dragItem = useRef<number | null>(null)
   const dragOverItem = useRef<number | null>(null)
 
@@ -56,6 +57,7 @@ export default function OrganizePdfPage() {
   const handleRemoveFile = useCallback(() => {
     setFiles([])
     setPages([])
+    setOrganizedBlob(null)
   }, [])
 
   const handleRotatePage = (index: number) => {
@@ -124,14 +126,21 @@ export default function OrganizePdfPage() {
       zip.file('organized.pdf', pdfBytes)
       const zipBlob = await zip.generateAsync({ type: 'blob' })
       
-      saveAs(zipBlob, 'organized-pdf.zip')
-      console.log('[v0] PDF organized and saved as ZIP')
+      // Store the ZIP blob for download, don't download automatically
+      setOrganizedBlob(zipBlob)
+      console.log('[v0] PDF organized successfully - stored in ZIP for download')
     } catch (error) {
       console.error('[v0] Error processing PDF:', error)
       alert('Error processing PDF. Please try again.')
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  const handleDownload = () => {
+    if (!organizedBlob) return
+    saveAs(organizedBlob, 'organized-pdf.zip')
+    console.log('[v0] ZIP file downloaded')
   }
 
   return (
@@ -235,24 +244,48 @@ export default function OrganizePdfPage() {
                     </div>
 
                     <div className="pt-4 border-t border-border">
-                      <Button
-                        size="lg"
-                        className="w-full text-base"
-                        onClick={handleProcess}
-                        disabled={isProcessing || pages.filter((p) => p.selected).length === 0}
-                      >
-                        {isProcessing ? (
-                          <>
-                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                            Processing...
-                          </>
-                        ) : (
-                          <>
+                      <div className="mt-6 bg-gradient-to-r from-purple-900/40 to-purple-800/20 border border-purple-700/50 rounded-2xl p-6 md:p-8">
+                        <div className="text-center mb-4">
+                          <h3 className="text-lg font-semibold text-foreground mb-2">Ready to Organize?</h3>
+                          <p className="text-sm text-muted-foreground mb-6">Click the button below to start organizing your PDF</p>
+                        </div>
+                        <Button
+                          size="lg"
+                          className="w-full text-base bg-purple-600 hover:bg-purple-700 text-white"
+                          onClick={handleProcess}
+                          disabled={isProcessing || pages.filter((p) => p.selected).length === 0}
+                        >
+                          {isProcessing ? (
+                            <>
+                              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                              Processing...
+                            </>
+                          ) : (
+                            <>
+                              <ArrowUpDown className="mr-2 h-5 w-5" />
+                              Start Organize Process
+                            </>
+                          )}
+                        </Button>
+                      </div>
+
+                      {/* Download Section - Only shows after processing */}
+                      {!isProcessing && organizedBlob && (
+                        <div className="mt-6 bg-gradient-to-r from-green-900/40 to-green-800/20 border border-green-700/50 rounded-2xl p-6 md:p-8">
+                          <div className="text-center mb-4">
+                            <h3 className="text-lg font-semibold text-green-400 mb-2">✓ Organization Complete!</h3>
+                            <p className="text-sm text-muted-foreground mb-6">Your organized PDF is ready to download as ZIP</p>
+                          </div>
+                          <Button
+                            size="lg"
+                            className="w-full text-base bg-green-600 hover:bg-green-700 text-white"
+                            onClick={handleDownload}
+                          >
                             <Download className="mr-2 h-5 w-5" />
                             Download Organized PDF (ZIP - {pages.filter((p) => p.selected).length} pages)
-                          </>
-                        )}
-                      </Button>
+                          </Button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
