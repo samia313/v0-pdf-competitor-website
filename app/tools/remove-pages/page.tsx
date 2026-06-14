@@ -3,19 +3,20 @@
 import { useState, useCallback } from 'react'
 import { PDFDocument } from 'pdf-lib'
 import { saveAs } from 'file-saver'
+import JSZip from 'jszip'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { FileUploader } from '@/components/file-uploader'
 import { AdBanner, AdSidebar } from '@/components/ad-units'
 import { Button } from '@/components/ui/button'
-import { Trash2, Download, Loader2, FileText } from 'lucide-react'
+import { Trash2, Download, Loader2 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 export default function RemovePagesPage() {
   const [files, setFiles] = useState<File[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
-  const [removepagesPdfBlob, setRemovePagesPdfBlob] = useState<Blob | null>(null)
+  const [removedBlob, setRemovedBlob] = useState<Blob | null>(null)
   const [pagesToRemove, setPagesToRemove] = useState('')
   const [totalPages, setTotalPages] = useState(0)
 
@@ -89,10 +90,17 @@ export default function RemovePagesPage() {
       }
 
       const pdfBytes = await pdf.save()
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' })
-      saveAs(blob, `modified_${files[0].name}`)
+      
+      // Create ZIP file containing the modified PDF
+      const zip = new JSZip()
+      zip.file('removed-pages.pdf', pdfBytes)
+      const zipBlob = await zip.generateAsync({ type: 'blob' })
+      
+      // Store the ZIP blob for download, don't download automatically
+      setRemovedBlob(zipBlob)
+      console.log('[v0] Pages removed successfully - stored in ZIP for download')
     } catch (error) {
-      console.error('Error removing pages:', error)
+      console.error('[v0] Error removing pages:', error)
       alert('Error removing pages. Please make sure the file is a valid PDF.')
     } finally {
       setIsProcessing(false)
@@ -100,8 +108,9 @@ export default function RemovePagesPage() {
   }
 
   const handleDownload = () => {
-    if (!removepagesPdfBlob) return
-    saveAs(removepagesPdfBlob, 'removepages.pdf')
+    if (!removedBlob) return
+    saveAs(removedBlob, 'removed-pages.zip')
+    console.log('[v0] ZIP file downloaded')
   }
 
   return (
@@ -157,34 +166,49 @@ export default function RemovePagesPage() {
                       </p>
                     </div>
 
-                    <Button
-                      size="lg"
-                      className="flex-1 text-base"
-                      onClick={handleRemovePages}
-                      disabled={isProcessing || !pagesToRemove.trim()}
-                    >
-                      {isProcessing ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Processing...
-                        </>
-                      ) : (
-                        <>
-                          <Trash2 className="mr-2 h-5 w-5" />
-                          Remove Pages
-                        </>
-                      )}
-                    </Button>
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="flex-1 text-base"
-                      onClick={handleDownload}
-                      disabled={!removePagesPdfBlob}
-                    >
-                      <Download className="mr-2 h-5 w-5" />
-                      Download
-                    </Button>
+                    {/* Remove Button Section */}
+                    <div className="mt-6 bg-gradient-to-r from-red-900/40 to-red-800/20 border border-red-700/50 rounded-2xl p-6 md:p-8">
+                      <div className="text-center mb-4">
+                        <h3 className="text-lg font-semibold text-foreground mb-2">Ready to Remove?</h3>
+                        <p className="text-sm text-muted-foreground mb-6">Click the button below to start removing pages</p>
+                      </div>
+                      <Button
+                        size="lg"
+                        className="w-full text-base bg-red-600 hover:bg-red-700 text-white"
+                        onClick={handleRemovePages}
+                        disabled={isProcessing || !pagesToRemove.trim()}
+                      >
+                        {isProcessing ? (
+                          <>
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            Processing...
+                          </>
+                        ) : (
+                          <>
+                            <Trash2 className="mr-2 h-5 w-5" />
+                            Start Remove Process
+                          </>
+                        )}
+                      </Button>
+                    </div>
+
+                    {/* Download Section - Only shows after processing */}
+                    {!isProcessing && removedBlob && (
+                      <div className="mt-6 bg-gradient-to-r from-green-900/40 to-green-800/20 border border-green-700/50 rounded-2xl p-6 md:p-8">
+                        <div className="text-center mb-4">
+                          <h3 className="text-lg font-semibold text-green-400 mb-2">✓ Removal Complete!</h3>
+                          <p className="text-sm text-muted-foreground mb-6">Your PDF with removed pages is ready to download as ZIP</p>
+                        </div>
+                        <Button
+                          size="lg"
+                          className="w-full text-base bg-green-600 hover:bg-green-700 text-white"
+                          onClick={handleDownload}
+                        >
+                          <Download className="mr-2 h-5 w-5" />
+                          Download Removed Pages (ZIP)
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
