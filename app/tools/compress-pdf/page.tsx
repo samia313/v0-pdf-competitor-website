@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react'
 import { PDFDocument } from 'pdf-lib'
 import { saveAs } from 'file-saver'
+import JSZip from 'jszip'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { FileUploader } from '@/components/file-uploader'
@@ -19,6 +20,7 @@ export default function CompressPdfPage() {
   const [quality, setQuality] = useState<'low' | 'medium' | 'high'>('medium')
   const [originalSize, setOriginalSize] = useState(0)
   const [compressedSize, setCompressedSize] = useState(0)
+  const [compressedBlob, setCompressedBlob] = useState<Blob | null>(null)
 
   const handleFilesSelected = useCallback(async (newFiles: File[]) => {
     if (newFiles.length > 0) {
@@ -32,6 +34,7 @@ export default function CompressPdfPage() {
     setFiles([])
     setOriginalSize(0)
     setCompressedSize(0)
+    setCompressedBlob(null)
   }, [])
 
   const handleCompress = async () => {
@@ -66,14 +69,26 @@ export default function CompressPdfPage() {
       
       setCompressedSize(pdfBytes.length)
       
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' })
-      saveAs(blob, `compressed_${files[0].name}`)
+      // Create ZIP file containing the compressed PDF
+      const zip = new JSZip()
+      zip.file('compressed.pdf', pdfBytes)
+      const zipBlob = await zip.generateAsync({ type: 'blob' })
+      
+      // Store the ZIP blob for download, don't download automatically
+      setCompressedBlob(zipBlob)
+      console.log('[v0] PDF compressed successfully - stored in ZIP for download')
     } catch (error) {
-      console.error('Error compressing PDF:', error)
+      console.error('[v0] Error compressing PDF:', error)
       alert('Error compressing PDF. Please make sure the file is a valid PDF.')
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  const handleDownload = () => {
+    if (!compressedBlob) return
+    saveAs(compressedBlob, 'compressed-pdf.zip')
+    console.log('[v0] ZIP file downloaded')
   }
 
   const formatSize = (bytes: number) => {
@@ -180,24 +195,54 @@ export default function CompressPdfPage() {
                       </RadioGroup>
                     </div>
 
-                    <Button
-                      size="lg"
-                      className="w-full text-base"
-                      onClick={handleCompress}
-                      disabled={isProcessing}
-                    >
-                      {isProcessing ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Compressing...
-                        </>
-                      ) : (
-                        <>
+                    {/* Compress Button Section */}
+                    <div className="mt-6 bg-gradient-to-r from-emerald-900/40 to-emerald-800/20 border border-emerald-700/50 rounded-2xl p-6 md:p-8">
+                      <div className="text-center mb-4">
+                        <h3 className="text-lg font-semibold text-foreground mb-2">Ready to Compress?</h3>
+                        <p className="text-sm text-muted-foreground mb-6">Click the button below to start compressing your PDF</p>
+                      </div>
+                      <Button
+                        size="lg"
+                        className="w-full text-base bg-emerald-600 hover:bg-emerald-700 text-white"
+                        onClick={handleCompress}
+                        disabled={isProcessing}
+                      >
+                        {isProcessing ? (
+                          <>
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            Compressing...
+                          </>
+                        ) : (
+                          <>
+                            <Minimize2 className="mr-2 h-5 w-5" />
+                            Start Compress Process
+                          </>
+                        )}
+                      </Button>
+                    </div>
+
+                    {/* Download Section - Only shows after processing */}
+                    {!isProcessing && compressedBlob && (
+                      <div className="mt-6 bg-gradient-to-r from-green-900/40 to-green-800/20 border border-green-700/50 rounded-2xl p-6 md:p-8">
+                        <div className="text-center mb-4">
+                          <h3 className="text-lg font-semibold text-green-400 mb-2">✓ Compression Complete!</h3>
+                          <p className="text-sm text-muted-foreground mb-6">Your compressed PDF is ready to download as ZIP</p>
+                          {compressedSize > 0 && (
+                            <p className="text-sm text-green-600 dark:text-green-400 font-semibold">
+                              Reduced by {Math.round((1 - compressedSize / originalSize) * 100)}% ({formatSize(originalSize)} → {formatSize(compressedSize)})
+                            </p>
+                          )}
+                        </div>
+                        <Button
+                          size="lg"
+                          className="w-full text-base bg-green-600 hover:bg-green-700 text-white"
+                          onClick={handleDownload}
+                        >
                           <Download className="mr-2 h-5 w-5" />
-                          Compress & Download
-                        </>
-                      )}
-                    </Button>
+                          Download Compressed PDF (ZIP)
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
