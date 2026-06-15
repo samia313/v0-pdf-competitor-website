@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { AllToolsSection } from '@/components/all-tools-section'
+import { PremiumFeaturedSection } from '@/components/premium-featured-section'
 
 export const metadata: Metadata = {
   title: 'PDFilio - Best PDF Tool (Better Than iLovePDF)',
@@ -13,6 +14,7 @@ export default function HomePage() {
   return (
     <div className="w-full min-h-screen bg-background">
       <Header />
+      <PremiumFeaturedSection />
       <AllToolsSection />
       <Footer />
     </div>
