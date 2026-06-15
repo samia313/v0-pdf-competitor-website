@@ -1,11 +1,12 @@
 import { Metadata } from 'next'
+import { metaTitles, metaDescriptions } from '@/lib/meta-titles'
 
 export const metadata: Metadata = {
-  title: 'Simple & Affordable PDF Tools Pricing | PDFilio Plans',
-  description: 'Check out PDFilio\'s simple and transparent pricing plans. Free for basic use, affordable Pro and Business plans with premium features.',
+  title: metaTitles.pricing,
+  description: metaDescriptions.pricing,
   openGraph: {
-    title: 'Simple & Affordable PDF Tools Pricing | PDFilio Plans',
-    description: 'Check out PDFilio\'s simple and transparent pricing plans. Free for basic use, affordable Pro and Business plans with premium features.',
+    title: metaTitles.pricing,
+    description: metaDescriptions.pricing,
   },
 }
 

@@ -12,10 +12,11 @@ import {
   Clock,
   Sparkles
 } from 'lucide-react'
+import { metaTitles, metaDescriptions } from '@/lib/meta-titles'
 
 export const metadata = {
-  title: 'About PDFilio | Best Free PDF Tools Platform',
-  description: 'Learn about PDFilio - your trusted destination for free, secure, and easy-to-use PDF tools. Our mission is to make PDF editing accessible to everyone.',
+  title: metaTitles.about,
+  description: metaDescriptions.about,
 }
 
 const stats = [

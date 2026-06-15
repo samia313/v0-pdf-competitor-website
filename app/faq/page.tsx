@@ -9,10 +9,11 @@ import {
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { MessageCircle } from 'lucide-react'
+import { metaTitles, metaDescriptions } from '@/lib/meta-titles'
 
 export const metadata = {
-  title: 'FAQ | Common Questions About PDFilio',
-  description: 'Find answers to commonly asked questions about PDFilio PDF tools, pricing, features, security, and more.',
+  title: metaTitles.faq,
+  description: metaDescriptions.faq,
 }
 
 const faqs = [
