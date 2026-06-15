@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
-import { AllToolsSection } from '@/components/all-tools-section'
+import { AIDocumentHero } from '@/components/ai-document-hero'
 import { PremiumFeaturedSection } from '@/components/premium-featured-section'
 
 // Revalidate homepage every 60 seconds for reliability
@@ -17,7 +17,7 @@ export default function HomePage() {
   return (
     <div className="w-full min-h-screen bg-background">
       <Header />
-      <AllToolsSection />
+      <AIDocumentHero />
       <PremiumFeaturedSection />
       <Footer />
     </div>
