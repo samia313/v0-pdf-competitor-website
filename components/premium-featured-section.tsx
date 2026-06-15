@@ -175,10 +175,10 @@ export function PremiumFeaturedSection() {
             </Badge>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            17 AI-Powered Document Tools
+            AI-Powered Workspace Features
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Eleven cutting-edge AI features plus six original premium tools to supercharge your document workflow
+            Intelligent document processing. From AI analysis and data extraction to content generation and workflow automation. Transform documents into insights.
           </p>
         </div>
 

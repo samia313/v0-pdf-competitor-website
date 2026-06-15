@@ -8,9 +8,9 @@ import { PremiumFeaturedSection } from '@/components/premium-featured-section'
 export const revalidate = 60
 
 export const metadata: Metadata = {
-  title: 'PDFilio - Best PDF Tool (Better Than iLovePDF)',
-  description: '27+ PDF tools. 10% cheaper than iLovePDF ($9.99/mo). Advanced redaction, AI summarizer, batch processing. Free online PDF tools.',
-  keywords: 'best PDF tool, PDF merger, PDF converter, PDF editor, alternative to iLovePDF, free PDF tools',
+  title: 'AI Document Workspace - Your Intelligent Document Platform | PDFilio',
+  description: 'Transform your workflow with AI Document Workspace. 47+ tools to process, analyze, and optimize documents. Merge, convert, edit PDFs + AI-powered features. Free online, no installation needed.',
+  keywords: 'document workspace, AI document processing, PDF tools, document AI, intelligent document management, PDF converter, document automation',
 }
 
 export default function HomePage() {

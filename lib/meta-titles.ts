@@ -1,73 +1,73 @@
 export const metaTitles = {
   // Main Pages
-  home: "Free PDF Tools Online | Merge, Convert, Edit & More | PDFilio",
-  tools: "45+ Free PDF Tools Online | Convert, Merge, Edit PDFs | PDFilio",
-  pricing: "Simple & Affordable PDF Tools Pricing | PDFilio Plans",
-  blog: "PDF Tips & Tutorials | PDFilio Blog",
-  about: "About PDFilio | Best Free PDF Tools Platform",
-  contact: "Contact PDFilio | Get Support & Feedback",
-  faq: "FAQ | Common Questions About PDFilio",
+  home: "AI Document Workspace - Intelligent Document Platform | PDFilio",
+  tools: "47+ AI Document Tools - Process, Analyze & Transform Documents | PDFilio",
+  pricing: "Simple & Transparent Pricing | AI Document Workspace | PDFilio",
+  blog: "Document Processing Tips & AI Insights | PDFilio Blog",
+  about: "About PDFilio | The Intelligent Document Workspace Platform",
+  contact: "Contact PDFilio | Get Support for Document Processing",
+  faq: "FAQ | AI Document Workspace Frequently Asked Questions",
   
   // PDF Conversion Tools
-  mergePdf: "Merge PDF Online Free | Combine PDF Files Instantly | PDFilio",
-  splitPdf: "Split PDF Online Free | Separate PDF Pages | PDFilio",
-  compressPdf: "Compress PDF Online Free | Reduce PDF Size | PDFilio",
-  rotatePdf: "Rotate PDF Online Free | Turn PDF Pages | PDFilio",
-  removePages: "Remove PDF Pages Online Free | Delete Pages | PDFilio",
-  organizePdf: "Organize PDF Online Free | Rearrange PDF Pages | PDFilio",
-  addPageNumbers: "Add Page Numbers to PDF Free | Number Pages Online | PDFilio",
-  addWatermark: "Add Watermark to PDF Free | Protect PDFs Online | PDFilio",
-  editPdf: "Edit PDF Online Free | Modify Text & Content | PDFilio",
-  signPdf: "Sign PDF Online Free | Add Digital Signatures | PDFilio",
-  protectPdf: "Protect PDF Online Free | Encrypt & Secure PDFs | PDFilio",
-  unlockPdf: "Unlock PDF Online Free | Remove PDF Password | PDFilio",
+  mergePdf: "Merge PDF Documents Online | AI-Powered Merging | PDFilio",
+  splitPdf: "Split PDF Pages Online | Intelligent Page Separation | PDFilio",
+  compressPdf: "Compress PDF Size Online | AI Optimization | PDFilio",
+  rotatePdf: "Rotate PDF Pages Online | Quick Page Adjustment | PDFilio",
+  removePages: "Remove PDF Pages Online | Intelligent Deletion | PDFilio",
+  organizePdf: "Organize PDF Documents | Rearrange Pages Instantly | PDFilio",
+  addPageNumbers: "Add Page Numbers to PDF | Auto Numbering | PDFilio",
+  addWatermark: "Add Watermark to PDF | Protect Documents | PDFilio",
+  editPdf: "Edit PDF Online | Modify Content Easily | PDFilio",
+  signPdf: "Sign PDF Documents Online | Digital Signatures | PDFilio",
+  protectPdf: "Protect PDF Documents | Encryption & Security | PDFilio",
+  unlockPdf: "Unlock PDF Online | Remove Protection | PDFilio",
   
   // Image to PDF
-  jpgToPdf: "JPG to PDF Online Free | Convert Images to PDF | PDFilio",
-  pngToPdf: "PNG to PDF Online Free | Convert PNG to PDF | PDFilio",
-  webpToPdf: "WEBP to PDF Online Free | Convert WEBP Images | PDFilio",
-  imageToPdf: "Image to PDF Online Free | Convert Multiple Images | PDFilio",
+  jpgToPdf: "JPG to PDF Converter | Image Processing | PDFilio",
+  pngToPdf: "PNG to PDF Converter | Transform Images | PDFilio",
+  webpToPdf: "WEBP to PDF Converter | Modern Format Support | PDFilio",
+  imageToPdf: "Image to PDF Converter | Batch Processing | PDFilio",
   
   // PDF to Image
-  pdfToJpg: "PDF to JPG Online Free | Convert PDF to Images | PDFilio",
-  pdfToPng: "PDF to PNG Online Free | Extract Images from PDF | PDFilio",
-  pdfToWebp: "PDF to WEBP Online Free | Convert PDF Format | PDFilio",
+  pdfToJpg: "PDF to JPG Converter | Extract Images | PDFilio",
+  pdfToPng: "PDF to PNG Converter | High-Quality Export | PDFilio",
+  pdfToWebp: "PDF to WEBP Converter | Modern Format | PDFilio",
   
   // Office Conversions
-  wordToPdf: "Word to PDF Online Free | Convert DOC/DOCX to PDF | PDFilio",
-  pdfToWord: "PDF to Word Online Free | Convert PDF to DOCX | PDFilio",
-  excelToPdf: "Excel to PDF Online Free | Convert XLS to PDF | PDFilio",
-  pdfToExcel: "PDF to Excel Online Free | Extract Data from PDF | PDFilio",
-  pptToPdf: "PowerPoint to PDF Free | Convert PPT/PPTX to PDF | PDFilio",
-  pdfToPpt: "PDF to PowerPoint Free | Convert PDF to PPTX | PDFilio",
-  htmlToPdf: "HTML to PDF Online Free | Convert Web Pages | PDFilio",
+  wordToPdf: "Word to PDF Converter | DOC/DOCX Processing | PDFilio",
+  pdfToWord: "PDF to Word Converter | DOCX Export | PDFilio",
+  excelToPdf: "Excel to PDF Converter | Spreadsheet Processing | PDFilio",
+  pdfToExcel: "PDF to Excel Converter | Data Extraction | PDFilio",
+  pptToPdf: "PowerPoint to PDF Converter | Presentation Support | PDFilio",
+  pdfToPpt: "PDF to PowerPoint | PPTX Export | PDFilio",
+  htmlToPdf: "HTML to PDF Converter | Web Content Processing | PDFilio",
   
   // Other Formats
-  pdfToTxt: "PDF to Text Online Free | Extract Text from PDF | PDFilio",
-  svgToPdf: "SVG to PDF Online Free | Convert SVG to PDF | PDFilio",
+  pdfToTxt: "PDF to Text Converter | Extract Content | PDFilio",
+  svgToPdf: "SVG to PDF Converter | Vector Support | PDFilio",
   
-  // AI Features - Original 6
-  aiSummarizer: "AI PDF Summarizer Free | Get Document Summaries Online | PDFilio",
-  translatePdf: "Translate PDF Online Free | Multi-Language Translation | PDFilio",
-  aiDocumentAssistant: "AI Document Assistant | Extract & Analyze Data | PDFilio",
+  // AI Features - Unified branding
+  aiSummarizer: "AI PDF Summarizer | Intelligent Summary Generation | PDFilio",
+  translatePdf: "AI PDF Translator | Multi-Language Support | PDFilio",
+  aiDocumentAssistant: "AI Document Assistant | Intelligent Analysis | PDFilio",
   
-  // AI Features - New 6
-  chatWithPdf: "Chat with PDF AI | Ask Questions Online Free | PDFilio",
-  pdfSummary: "PDF Summary Generator | AI Summaries Instant | PDFilio",
-  pdfTranslation: "PDF Translation AI | 10+ Languages Online Free | PDFilio",
-  ocrTextExtraction: "OCR PDF Extractor | Extract Text from Scans | PDFilio",
-  aiResumeAnalyzer: "AI Resume Analyzer | Score & Improve Resume | PDFilio",
-  aiContractReader: "AI Contract Reader | Analyze Legal Documents | PDFilio",
+  // AI Features - Chat & Analysis
+  chatWithPdf: "Chat with Documents | AI Document Q&A | PDFilio",
+  pdfSummary: "AI Document Summary | Instant Insights | PDFilio",
+  pdfTranslation: "AI Document Translation | Global Support | PDFilio",
+  ocrTextExtraction: "OCR Document Scanning | Text Extraction | PDFilio",
+  aiResumeAnalyzer: "AI Resume Analyzer | Career Insights | PDFilio",
+  aiContractReader: "AI Contract Analysis | Legal Document Review | PDFilio",
   
-  // AI Features - New 5
-  aiInvoiceGenerator: "AI Invoice Generator | Create Professional Invoices | PDFilio",
-  aiCoverLetterGenerator: "AI Cover Letter Generator | Write Job Letters | PDFilio",
-  aiStudyNotesGenerator: "AI Study Notes Generator | Convert PDFs to Notes | PDFilio",
-  aiPdfQuizGenerator: "AI Quiz Generator | Create MCQ Tests from PDF | PDFilio",
-  pdfMetadataEditor: "PDF Metadata Editor | Edit Title & Author | PDFilio",
+  // AI Features - Creation
+  aiInvoiceGenerator: "AI Invoice Creator | Professional Documents | PDFilio",
+  aiCoverLetterGen: "AI Cover Letter Writer | Career Tools | PDFilio",
+  aiStudyNotesGenerator: "AI Study Notes Generator | Learning Tools | PDFilio",
+  aiPdfQuizGen: "AI Quiz Generator | Assessment Tools | PDFilio",
+  pdfMetadataEditor: "PDF Metadata Editor | Document Properties | PDFilio",
   
   // API Documentation
-  apiDocs: "PDFilio API Documentation | RESTful PDF API",
+  apiDocs: "PDFilio API Documentation | Document Processing API",
 }
 
 // Function to get title by route
@@ -79,71 +79,71 @@ export function getMetaTitle(route: string): string {
 // Function to get description by route
 export const metaDescriptions = {
   // Main Pages
-  home: "Free PDF tools online to merge, convert, edit, split, and process PDFs. No registration needed. Fast, secure, and easy to use.",
-  tools: "Browse 45+ free PDF tools. Merge, convert, edit, compress, split PDFs and more. All tools online, no download required.",
-  pricing: "Simple and transparent PDFilio pricing plans. Free basic tools, affordable Pro plan, and custom Business solutions for teams.",
-  blog: "Learn PDF tips, tutorials, and best practices. Expert guides on document management, productivity, and PDF optimization.",
-  about: "About PDFilio - Your trusted platform for free, secure PDF tools. Our mission is making PDF editing accessible to everyone.",
-  contact: "Contact PDFilio support team. Send feedback, report issues, or get help with our PDF tools. We respond quickly.",
-  faq: "Frequently asked questions about PDFilio. Find answers about pricing, features, security, file limits, and more.",
+  home: "Transform your workflow with AI Document Workspace. Process, analyze, and optimize documents with 47+ tools. Merge, convert, edit PDFs + AI-powered features. Secure, free, no installation needed.",
+  tools: "Explore 47+ intelligent document tools. From conversion and editing to AI analysis. Process any document format with advanced features, secure infrastructure, and complete privacy control.",
+  pricing: "Simple, transparent pricing for document processing. Free essential tools, affordable Pro plans, and custom Business solutions. Pay for what you use, cancel anytime.",
+  blog: "Expert insights on document processing, AI workflows, and productivity tips. Learn best practices for managing documents efficiently with PDFilio's AI Workspace.",
+  about: "PDFilio's AI Document Workspace - Making intelligent document processing accessible to everyone. Our mission is empowering users with secure, powerful, and easy-to-use tools.",
+  contact: "Contact PDFilio support. Questions about document processing, features, or integrations? Our team responds quickly to help you succeed.",
+  faq: "Frequently asked questions about PDFilio's AI Document Workspace. Learn about features, pricing, security, file handling, and more.",
   
   // PDF Conversion Tools
-  mergepdf: "Merge PDF files online for free with PDFilio. Combine multiple PDF documents securely without registration.",
-  splitpdf: "Split PDF online free. Extract individual pages from PDFs instantly. No software download needed.",
-  compresspdf: "Compress PDF online free. Reduce PDF file size while maintaining quality. Perfect for email or storage.",
-  rotatepdf: "Rotate PDF pages online free. Turn PDF pages 90, 180, or 270 degrees instantly. No registration required.",
-  removepages: "Remove PDF pages online free. Delete unwanted pages from your PDF documents easily.",
-  organizepdf: "Organize PDF pages online free. Rearrange, delete, or combine PDF pages in seconds.",
-  addpagenumbers: "Add page numbers to PDF online free. Number pages automatically with custom formatting options.",
-  addwatermark: "Add watermark to PDF online free. Protect your documents with text or image watermarks.",
-  editpdf: "Edit PDF online free. Modify text, add annotations, and customize PDF content without software.",
-  signpdf: "Sign PDF online free. Add digital signatures to documents securely and legally.",
-  protectpdf: "Protect PDF online free. Encrypt PDFs with passwords and restrict editing, printing, and copying.",
-  unlockpdf: "Unlock PDF online free. Remove password protection from PDF files instantly and securely.",
+  mergepdf: "Merge multiple PDF documents into one with intelligent processing. Secure, instant results. Perfect for organizing and consolidating documents.",
+  splitpdf: "Split PDF pages with precision. Extract specific pages or separate entire documents instantly. Great for document organization and distribution.",
+  compresspdf: "Reduce PDF file sizes using AI optimization. Maintain quality while making files email-friendly and storage-efficient.",
+  rotatepdf: "Rotate PDF pages to any angle. Correct orientations instantly. Perfect for scanned documents and image-based PDFs.",
+  removepages: "Remove unwanted pages from PDFs. Clean up documents by deleting specific pages instantly.",
+  organizepdf: "Rearrange PDF pages easily. Reorganize document structure by reordering pages in seconds.",
+  addpagenumbers: "Add automatic page numbering to PDFs. Choose positioning, format, and styling for professional document presentation.",
+  addwatermark: "Protect documents with text or image watermarks. Add branding or security marks instantly.",
+  editpdf: "Edit PDF text, annotations, and content directly online. Modify documents without specialized software.",
+  signpdf: "Add legally-valid digital signatures to PDF documents. Sign with confidence and compliance.",
+  protectpdf: "Encrypt PDFs with passwords. Control permissions for editing, printing, and copying. Secure sensitive documents.",
+  unlockpdf: "Remove password protection from PDFs instantly. Access protected documents with verified ownership.",
   
   // Image to PDF
-  jpgtopdf: "Convert JPG to PDF online free. Turn images into high-quality PDF documents instantly.",
-  pngtopdf: "Convert PNG to PDF online free. Create PDFs from PNG images without losing quality.",
-  webptopdf: "Convert WEBP to PDF online free. Transform WEBP images to standard PDF format.",
-  imagetopdf: "Convert images to PDF online free. Combine multiple images into a single PDF file.",
+  jpgtopdf: "Convert JPG images to high-quality PDF documents instantly. Perfect for scanning and document digitization.",
+  pngtopdf: "Transform PNG images to PDF format. Preserve transparency and quality in your conversions.",
+  webptopdf: "Convert modern WEBP image format to standard PDF. Support for cutting-edge web formats.",
+  imagetopdf: "Combine multiple images into a single PDF. Perfect for creating image galleries and digital albums.",
   
   // PDF to Image
-  pdftojpg: "Convert PDF to JPG online free. Extract pages as high-quality JPEG images instantly.",
-  pdftopng: "Convert PDF to PNG online free. Save PDF pages as transparent PNG images.",
-  pdftowebp: "Convert PDF to WEBP online free. Transform PDF pages to modern WEBP format.",
+  pdftojpg: "Extract PDF pages as high-quality JPEG images. Perfect for sharing individual pages and web publishing.",
+  pdftopng: "Convert PDF pages to PNG format with transparency support. Ideal for design and web projects.",
+  pdftowebp: "Transform PDFs to modern WEBP format for web optimization. Smaller file sizes, better quality.",
   
   // Office Conversions
-  wordtopdf: "Convert Word to PDF online free. Transform DOC and DOCX files to PDF format instantly.",
-  pdftoword: "Convert PDF to Word online free. Transform PDFs to editable DOCX files instantly.",
-  exceltopdf: "Convert Excel to PDF online free. Transform XLS and XLSX spreadsheets to PDF.",
-  pdftoexcel: "Convert PDF to Excel online free. Extract data from PDFs to editable spreadsheets.",
-  ppttopdf: "Convert PowerPoint to PDF online free. Transform PPT and PPTX presentations to PDF.",
-  pdftoppt: "Convert PDF to PowerPoint online free. Transform PDFs to editable PPTX files.",
-  htmltopdf: "Convert HTML to PDF online free. Transform web pages and HTML content to PDF.",
+  wordtopdf: "Convert Word documents (DOC/DOCX) to PDF instantly. Preserve formatting and layout perfectly.",
+  pdftoword: "Transform PDFs to editable Word documents (DOCX). Edit content and maintain structure.",
+  exceltopdf: "Convert Excel spreadsheets (XLS/XLSX) to PDF format. Perfect for reports and sharing.",
+  pdftoexcel: "Extract data from PDFs into editable Excel spreadsheets. Automate data processing workflows.",
+  ppttopdf: "Convert PowerPoint presentations (PPT/PPTX) to PDF. Great for sharing and archiving slides.",
+  pdftoppt: "Transform PDFs to editable PowerPoint presentations. Recreate slides and edit content.",
+  htmltopdf: "Convert web pages and HTML content to PDF format. Capture web content for offline use.",
   
   // Other Formats
-  pdftotxt: "Extract text from PDF online free. Convert PDF pages to plain text instantly.",
-  svgtopdf: "Convert SVG to PDF online free. Transform vector graphics to standard PDF format.",
+  pdftotxt: "Extract readable text from PDF documents instantly. Convert any PDF page to plain text.",
+  svgtopdf: "Convert vector graphics (SVG) to standard PDF format. Preserve quality and scalability.",
   
-  // AI Features - Original 6
-  aisummarizer: "AI PDF summarizer online free. Get automatic summaries of documents instantly. Save time reading.",
-  translatepdf: "Translate PDF online free. Convert PDFs to 10+ languages instantly with AI-powered translation.",
-  aidocumentassistant: "AI document assistant online. Extract structured data from PDFs automatically with AI.",
+  // AI Features
+  aisummarizer: "AI-powered document summarization. Get key points and insights instantly. Save time reading and understanding documents.",
+  translatepdf: "Translate PDFs to 10+ languages with AI. Break language barriers for global communication.",
+  aidocumentassistant: "Intelligent document analysis and data extraction. Let AI understand and organize your document data.",
   
-  // AI Features - New 6
-  chatwithpdf: "Chat with PDF AI online free. Ask questions about your PDFs and get instant AI-powered answers.",
-  pdfsummary: "PDF summary generator online free. Get AI-powered summaries of your documents instantly.",
-  pdftranslation: "PDF translation AI online free. Translate PDFs to multiple languages instantly.",
-  ocrtextextraction: "OCR text extraction online free. Extract text from scanned PDFs and images instantly.",
-  airesumeanalyzer: "AI resume analyzer online free. Get professional feedback and score on your resume instantly.",
-  aicontractreader: "AI contract reader online free. Analyze legal documents and identify key clauses instantly.",
+  // AI Features - Chat & Analysis
+  chatwithpdf: "Ask questions about your documents and get instant AI-powered answers. Interactive document understanding.",
+  pdfsummary: "Get automatic AI summaries of any document. Extract key information instantly.",
+  pdftranslation: "Translate entire PDFs to multiple languages with AI precision. Global document support.",
+  ocrtextextraction: "Extract text from scanned PDFs and images using OCR technology. Convert images to editable text.",
+  airesumeanalyzer: "AI-powered resume analysis. Get professional feedback, scoring, and improvement suggestions.",
+  aicontractreader: "Analyze legal contracts and documents with AI. Identify key clauses and important terms automatically.",
   
-  // AI Features - New 5
-  aiinvoicegenerator: "AI invoice generator online free. Create professional invoices instantly for your business.",
-  aicoverlettergen: "AI cover letter generator online free. Write personalized cover letters for job applications.",
-  aistudynotesgenerator: "AI study notes generator online free. Convert PDFs to organized study notes instantly.",
-  aipdfquizgen: "AI quiz generator online free. Create multiple choice questions from PDF content automatically.",
-  pdfmetadataeditor: "PDF metadata editor online free. Edit title, author, subject, and keywords in PDFs instantly.",
+  // AI Features - Creation
+  aiinvoicegenerator: "Create professional invoices instantly with AI. Perfect for freelancers and small businesses.",
+  aicoverlettergen: "Write personalized cover letters with AI assistance. Stand out in job applications.",
+  aistudynotesgenerator: "Convert PDF documents into organized study notes. Perfect for students and learners.",
+  aipdfquizgen: "Generate quiz questions and MCQs from PDF content automatically. Perfect for educators and training.",
+  pdfmetadataeditor: "Edit PDF properties including title, author, subject, and keywords. Organize document metadata.",
 }
 
 export function getMetaDescription(route: string): string {

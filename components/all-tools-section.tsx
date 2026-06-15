@@ -6,7 +6,7 @@ import { pdfTools } from '@/lib/tools-data'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ToolIcon } from './tool-icon'
 
-const HEADING_TEXT = "Powerful PDF Tools — Fast, Free & Easy to Use"
+const HEADING_TEXT = "Your AI-Powered Document Workspace"
 
 function TypewriterHeading() {
   const [displayedText, setDisplayedText] = useState('')
@@ -39,7 +39,7 @@ export function AllToolsSection() {
         <div className="max-w-7xl mx-auto text-center space-y-6">
           <TypewriterHeading />
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Handle any PDF task in seconds — merge files, compress documents, convert formats, add security and much more. No software to install. Works on any device, completely free.
+            Process, analyze, and transform any document with AI. Merge files, compress documents, convert formats, extract data, and unlock intelligent insights. No software installation. Works on any device, completely free.
           </p>
         </div>
       </section>
@@ -78,10 +78,10 @@ export function AllToolsSection() {
             Trusted by Professionals Worldwide
           </p>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-            Your Complete PDF Solution
+            Intelligent Document Processing for Everyone
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            PDFilio is the comprehensive platform for all your PDF needs. Process documents with confidence using our advanced tools, secure infrastructure, and commitment to your privacy. Trusted by professionals and businesses globally for reliable, efficient document management.
+            PDFilio's AI Document Workspace combines powerful processing tools with intelligent automation. Work smarter with AI-powered insights, document analysis, and seamless workflow integration. Trusted by professionals, teams, and businesses for secure, efficient document management.
           </p>
         </div>
       </section>
