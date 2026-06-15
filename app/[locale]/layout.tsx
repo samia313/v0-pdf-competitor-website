@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { HreflangTags } from '@/components/hreflang-tags'
+import { locales, isRTL } from '@/lib/i18n/config'
 
 const inter = Inter({ 
   subsets: ["latin"],

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { startCheckoutSession } from '@/app/actions/stripe'
+import { startCheckoutSession } from '@/app/[locale]/actions/stripe'
 import { Button } from '@/components/ui/button'
 import { Loader2, AlertCircle } from 'lucide-react'
 

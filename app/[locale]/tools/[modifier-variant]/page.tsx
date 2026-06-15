@@ -14,20 +14,24 @@ import {
   getCanonicalUrl 
 } from '@/lib/programmatic-seo-utils'
 import { pdfTools } from '@/lib/tools-data'
+import { locales } from '@/lib/i18n/config'
 
 interface Props {
-  params: Promise<{ 'modifier-variant': string }>
+  params: Promise<{ locale: string; 'modifier-variant': string }>
 }
 
 export async function generateStaticParams() {
   const params = []
   
-  // Generate all modifier + tool combinations
-  for (const modifier of allModifiers) {
-    for (const tool of pdfTools.slice(0, 15)) {
-      params.push({
-        'modifier-variant': `${tool.id}__${modifier.slug}`
-      })
+  // Generate all locale + modifier + tool combinations
+  for (const locale of locales) {
+    for (const modifier of allModifiers) {
+      for (const tool of pdfTools.slice(0, 15)) {
+        params.push({
+          locale,
+          'modifier-variant': `${tool.id}__${modifier.slug}`
+        })
+      }
     }
   }
   

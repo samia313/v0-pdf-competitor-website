@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { LOCAL_PAYMENT_METHODS, PAYMENT_METHODS } from '@/lib/payment-methods'
-import { startCheckoutSession } from '@/app/actions/stripe'
+import { startCheckoutSession } from '@/app/[locale]/actions/stripe'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
