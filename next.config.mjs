@@ -17,7 +17,6 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   experimental: {
     optimizePackageImports: ['lucide-react'],
-    isrMemoryCacheSize: 0,
   },
   onDemandEntries: {
     maxInactiveAge: 60 * 60 * 1000,

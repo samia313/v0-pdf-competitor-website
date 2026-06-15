@@ -4,15 +4,12 @@ import { pool } from '@/lib/db'
 export const auth = betterAuth({
   database: pool,
   baseURL:
-    // Skip invalid BETTER_AUTH_URL values (e.g., "343434")
-    (process.env.BETTER_AUTH_URL && 
-     process.env.BETTER_AUTH_URL.startsWith('http') ? 
-     process.env.BETTER_AUTH_URL : null) ??
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
       : process.env.VERCEL_URL
         ? `https://${process.env.VERCEL_URL}`
-        : process.env.V0_RUNTIME_URL),
+        : process.env.V0_RUNTIME_URL) ||
+    (process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : undefined),
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
