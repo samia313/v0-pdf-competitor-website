@@ -6,7 +6,6 @@ import { Analytics } from '@vercel/analytics/next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { HreflangTags } from '@/components/hreflang-tags'
 import { locales, isRTL } from '@/lib/i18n/config'
 
 const inter = Inter({ 
@@ -65,7 +64,6 @@ export default async function RootLayout({ children, params }: Props) {
   return (
     <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className="bg-background">
       <head>
-        <HreflangTags />
         {/* Google AdSense */}
         <meta name="google-adsense-account" content={process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID} />
         
