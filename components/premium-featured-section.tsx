@@ -4,13 +4,57 @@ import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ToolIcon } from './tool-icon'
-import { ArrowRight, Sparkles, Lock } from 'lucide-react'
+import { ArrowRight, Sparkles, FileText, Globe, Database, Scale, BookMarked, Lightbulb } from 'lucide-react'
+
+const aiFeatures = [
+  {
+    id: 'summarize',
+    name: 'Summarize PDF',
+    description: 'Get key points and concise summaries of your documents',
+    icon: FileText,
+    color: 'from-purple-500 to-blue-500',
+  },
+  {
+    id: 'translate',
+    name: 'Translate Documents',
+    description: 'Translate your PDFs to multiple languages instantly',
+    icon: Globe,
+    color: 'from-blue-500 to-cyan-500',
+  },
+  {
+    id: 'extract',
+    name: 'Extract Data',
+    description: 'Pull structured data from tables and forms automatically',
+    icon: Database,
+    color: 'from-cyan-500 to-teal-500',
+  },
+  {
+    id: 'clauses',
+    name: 'Find Key Clauses',
+    description: 'Identify important sections in legal and contract documents',
+    icon: Scale,
+    color: 'from-teal-500 to-green-500',
+  },
+  {
+    id: 'notes',
+    name: 'Create Notes',
+    description: 'Auto-generate comprehensive study notes from content',
+    icon: BookMarked,
+    color: 'from-green-500 to-emerald-500',
+  },
+  {
+    id: 'flashcards',
+    name: 'Generate Flashcards',
+    description: 'Create Q&A pairs for effective learning and retention',
+    icon: Lightbulb,
+    color: 'from-emerald-500 to-purple-500',
+  },
+]
 
 export function PremiumFeaturedSection() {
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-purple-900/10 via-background to-background border-b border-purple-500/20">
-      <div className="max-w-6xl mx-auto space-y-12">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-purple-900/10 via-background to-background border-t border-purple-500/20">
+      <div className="max-w-7xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-2">
@@ -20,72 +64,47 @@ export function PremiumFeaturedSection() {
             </Badge>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            AI Document Assistant
+            AI-Powered PDF Analysis
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Transform your PDFs with artificial intelligence. Summarize, translate, extract data, find clauses, create notes, and generate flashcards — all powered by advanced AI.
+            Six intelligent features to supercharge your document workflow
           </p>
         </div>
 
-        {/* Feature Card */}
-        <div className="grid lg:grid-cols-3 gap-6">
-          {/* Main Feature Card */}
-          <div className="lg:col-span-2">
-            <Link href="/tools/ai-document-assistant">
-              <Card className="h-full hover:shadow-xl hover:border-purple-500/50 transition-all cursor-pointer border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-pink-900/20 overflow-hidden group">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-purple-500/10 to-transparent rounded-full -mr-20 -mt-20 group-hover:scale-150 transition-transform" />
-                <CardHeader className="relative z-10">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-14 h-14 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Sparkles className="h-7 w-7 text-white" />
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {aiFeatures.map((feature) => {
+            const IconComponent = feature.icon
+            return (
+              <Link key={feature.id} href="/tools/ai-document-assistant">
+                <Card className="h-full hover:shadow-lg hover:border-purple-500/50 transition-all cursor-pointer border-purple-500/20 bg-gradient-to-br from-slate-900/40 to-slate-900/20 hover:from-purple-900/30 hover:to-purple-900/10 group">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                        <IconComponent className="h-6 w-6 text-white" />
+                      </div>
+                      {feature.id === 'summarize' && (
+                        <Badge className="bg-purple-600/80 hover:bg-purple-700 text-xs">Premium</Badge>
+                      )}
                     </div>
-                    <Badge className="bg-purple-600 hover:bg-purple-700">Premium</Badge>
-                  </div>
-                  <CardTitle className="text-2xl">AI-Powered PDF Analysis</CardTitle>
-                  <CardDescription className="text-base mt-2">
-                    Six intelligent features to supercharge your document workflow
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="relative z-10 space-y-4">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="flex items-center gap-2 text-sm">
-                      <div className="w-2 h-2 rounded-full bg-purple-400" />
-                      Summarize PDF
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <div className="w-2 h-2 rounded-full bg-purple-400" />
-                      Translate Documents
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <div className="w-2 h-2 rounded-full bg-purple-400" />
-                      Extract Data
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <div className="w-2 h-2 rounded-full bg-purple-400" />
-                      Find Key Clauses
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <div className="w-2 h-2 rounded-full bg-purple-400" />
-                      Create Notes
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <div className="w-2 h-2 rounded-full bg-purple-400" />
-                      Generate Flashcards
-                    </div>
-                  </div>
-                  <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700 gap-2">
-                    Try AI Assistant Now
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
+                    <CardTitle className="text-lg">{feature.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      {feature.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+            )
+          })}
+        </div>
 
-          {/* Benefits Cards */}
-          <div className="flex flex-col gap-6">
-            {/* Speed Card */}
-            <Card className="border-purple-500/30 bg-purple-900/20 hover:bg-purple-900/30 transition-colors">
+        {/* Benefits Section */}
+        <div className="mt-16 pt-12 border-t border-purple-500/20">
+          <div className="grid lg:grid-cols-3 gap-6">
+            {/* Instant Analysis */}
+            <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-purple-900/5 hover:bg-purple-900/30 transition-colors">
               <CardHeader>
                 <div className="w-10 h-10 rounded-lg bg-purple-500/30 flex items-center justify-center mb-3">
                   <Sparkles className="h-5 w-5 text-purple-400" />
@@ -99,11 +118,11 @@ export function PremiumFeaturedSection() {
               </CardContent>
             </Card>
 
-            {/* Secure Card */}
-            <Card className="border-purple-500/30 bg-purple-900/20 hover:bg-purple-900/30 transition-colors">
+            {/* Premium Only */}
+            <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-purple-900/5 hover:bg-purple-900/30 transition-colors">
               <CardHeader>
                 <div className="w-10 h-10 rounded-lg bg-purple-500/30 flex items-center justify-center mb-3">
-                  <Lock className="h-5 w-5 text-purple-400" />
+                  <Sparkles className="h-5 w-5 text-purple-400" />
                 </div>
                 <CardTitle className="text-base">Premium Only</CardTitle>
               </CardHeader>
@@ -114,8 +133,8 @@ export function PremiumFeaturedSection() {
               </CardContent>
             </Card>
 
-            {/* History Card */}
-            <Card className="border-purple-500/30 bg-purple-900/20 hover:bg-purple-900/30 transition-colors">
+            {/* Keep History */}
+            <Card className="border-purple-500/30 bg-gradient-to-br from-purple-900/20 to-purple-900/5 hover:bg-purple-900/30 transition-colors">
               <CardHeader>
                 <div className="w-10 h-10 rounded-lg bg-purple-500/30 flex items-center justify-center mb-3">
                   <Sparkles className="h-5 w-5 text-purple-400" />
@@ -131,8 +150,14 @@ export function PremiumFeaturedSection() {
           </div>
         </div>
 
-        {/* CTA Button */}
-        <div className="text-center pt-4">
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+          <Link href="/tools/ai-document-assistant">
+            <Button size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 gap-2">
+              Try AI Assistant Now
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
           <Link href="/pricing">
             <Button size="lg" variant="outline" className="gap-2 border-purple-500/50 hover:bg-purple-500/10">
               Upgrade to Premium
