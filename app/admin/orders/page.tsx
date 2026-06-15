@@ -1,3 +1,6 @@
+// Skip prerendering - admin pages load on-demand only
+export const dynamic = 'force-dynamic'
+
 import { db } from '@/lib/db'
 import { orders } from '@/lib/db/schema'
 import { Button } from '@/components/ui/button'
@@ -5,13 +8,22 @@ import Link from 'next/link'
 import AdminLogout from '@/components/admin-logout'
 
 export default async function AdminOrdersPage() {
+  let allOrders = []
+  let pendingOrders = []
+  let verifiedOrders = []
+  let error = null
+
   try {
-    const allOrders = await db.query.orders.findMany({
+    allOrders = await db.query.orders.findMany({
       orderBy: (orders, { desc }) => [desc(orders.createdAt)],
     })
 
-    const pendingOrders = allOrders.filter(o => o.paymentStatus === 'pending')
-    const verifiedOrders = allOrders.filter(o => o.paymentStatus === 'verified')
+    pendingOrders = allOrders.filter(o => o.paymentStatus === 'pending')
+    verifiedOrders = allOrders.filter(o => o.paymentStatus === 'verified')
+  } catch (err) {
+    console.error('[v0] Error loading orders:', err)
+    error = 'Unable to load orders. Database connection may be unavailable.'
+  }
 
     return (
       <div className="min-h-screen bg-black">
@@ -24,6 +36,13 @@ export default async function AdminOrdersPage() {
             </div>
             <AdminLogout />
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="rounded-lg bg-red-950/50 border border-red-800/50 p-4 mb-8">
+              <p className="text-red-200">{error}</p>
+            </div>
+          )}
 
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -168,15 +187,4 @@ export default async function AdminOrdersPage() {
         </div>
       </div>
     )
-  } catch (error) {
-    console.error('[v0] Error loading orders:', error)
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">Error Loading Orders</h1>
-          <p className="text-muted-foreground">Please check the database connection</p>
-        </div>
-      </div>
-    )
-  }
 }
