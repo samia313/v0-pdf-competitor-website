@@ -1,3 +1,7 @@
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin('./lib/i18n/request.ts')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -13,6 +17,11 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   experimental: {
     optimizePackageImports: ['lucide-react'],
+    isrMemoryCacheSize: 0,
+  },
+  onDemandEntries: {
+    maxInactiveAge: 60 * 60 * 1000,
+    pagesBufferLength: 5,
   },
   async rewrites() {
     return {
@@ -33,4 +42,4 @@ const nextConfig = {
   },
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)
