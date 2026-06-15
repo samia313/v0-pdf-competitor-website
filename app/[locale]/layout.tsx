@@ -1,4 +1,5 @@
-export const dynamic = 'force-dynamic'
+// Cache locale layouts for 1 hour, revalidate on demand
+export const revalidate = 3600
 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'

@@ -4,6 +4,9 @@ import { Footer } from '@/components/footer'
 import { AllToolsSection } from '@/components/all-tools-section'
 import { PremiumFeaturedSection } from '@/components/premium-featured-section'
 
+// Revalidate homepage every 60 seconds for reliability
+export const revalidate = 60
+
 export const metadata: Metadata = {
   title: 'PDFilio - Best PDF Tool (Better Than iLovePDF)',
   description: '27+ PDF tools. 10% cheaper than iLovePDF ($9.99/mo). Advanced redaction, AI summarizer, batch processing. Free online PDF tools.',

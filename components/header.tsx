@@ -39,7 +39,8 @@ export function Header() {
       try {
         const { data } = await authClient.getSession()
         setSession(data as UserSession | null)
-      } catch {
+      } catch (error) {
+        console.error('[Header] Session check failed:', error)
         setSession(null)
       }
     }
@@ -50,13 +51,23 @@ export function Header() {
     async function fetchSubscription() {
       if (session?.user?.id) {
         try {
-          const response = await fetch('/api/subscription')
+          const controller = new AbortController()
+          const timeoutId = setTimeout(() => controller.abort(), 3000) // 3 second timeout
+          
+          const response = await fetch('/api/subscription', { 
+            signal: controller.signal,
+            cache: 'no-store'
+          })
+          clearTimeout(timeoutId)
+          
           if (response.ok) {
             const data = await response.json()
             setSubscription(data)
           }
         } catch (error) {
-          console.error('Failed to fetch subscription:', error)
+          console.error('[Header] Subscription fetch failed:', error)
+          // Don't throw - just leave subscription as null
+          setSubscription(null)
         }
       }
     }
