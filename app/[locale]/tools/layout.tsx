@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { Metadata } from 'next'
 import { metaTitles, metaDescriptions } from '@/lib/meta-titles'
 import { generateAllSchemas } from '@/lib/schema-generator'
