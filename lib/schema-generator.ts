@@ -99,3 +99,46 @@ export function generateAllSchemas(tool: ToolSchema) {
     generateHowToSchema(tool)
   ]
 }
+
+export interface SiloData {
+  siloId: string
+  siloName: string
+  siloDescription: string
+  url: string
+  tools: Array<{ name: string; url: string }>
+}
+
+export function generateCollectionSchema(silo: SiloData) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Collection',
+    name: `${silo.siloName} Collection`,
+    description: silo.siloDescription,
+    url: silo.url,
+    hasPart: silo.tools.map((tool, index) => ({
+      '@type': 'SoftwareApplication',
+      position: index + 1,
+      name: tool.name,
+      url: tool.url,
+      applicationCategory: 'Productivity',
+      operatingSystem: 'Web',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD'
+      }
+    }))
+  }
+}
+
+export function generateOrganizationSchema(silo: SiloData) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: `PDFilio ${silo.siloName}`,
+    description: silo.siloDescription,
+    url: silo.url,
+    areaServed: 'Worldwide',
+    knowsAbout: silo.tools.map(tool => tool.name)
+  }
+}
