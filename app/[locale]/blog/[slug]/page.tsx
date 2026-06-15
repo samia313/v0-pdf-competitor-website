@@ -9,8 +9,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import Image from 'next/image'
-
-export const dynamic = 'force-dynamic'
+import { getAllLocales } from '@/lib/i18n/locale-utils'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -40,9 +39,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }))
+  const locales = getAllLocales()
+  return blogPosts.flatMap((post) =>
+    locales.map((locale) => ({
+      locale,
+      slug: post.slug,
+    }))
+  )
 }
 
 export default async function BlogPostPage({ params }: Props) {
