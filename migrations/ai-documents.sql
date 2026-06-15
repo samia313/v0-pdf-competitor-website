@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS ai_analyses (
   id SERIAL PRIMARY KEY,
   documentId INTEGER NOT NULL REFERENCES ai_documents(id) ON DELETE CASCADE,
   userId TEXT NOT NULL,
-  featureType TEXT NOT NULL CHECK (featureType IN ('summarize', 'translate', 'extract', 'clauses', 'notes', 'flashcards')),
+  featureType TEXT NOT NULL CHECK (featureType IN ('summarize', 'translate', 'extract', 'clauses', 'notes', 'flashcards', 'chat', 'resume', 'contract')),
   targetLanguage TEXT,
   result TEXT NOT NULL,
   tokensUsed INTEGER,
