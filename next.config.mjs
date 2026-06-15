@@ -14,6 +14,23 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react'],
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        // API subdomain routing: api.pdfilio.com/* -> /api/v1/*
+        {
+          source: '/:path*',
+          destination: '/api/v1/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'api\\.pdfilio\\.com',
+            },
+          ],
+        },
+      ],
+    }
+  },
 }
 
 export default nextConfig
