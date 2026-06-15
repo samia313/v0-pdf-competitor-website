@@ -17,6 +17,7 @@ import { categories, pdfTools } from '@/lib/tools-data'
 import { ToolIcon } from './tool-icon'
 import { authClient } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
+import { LanguageSwitcher } from './language-switcher'
 import { ThemeToggle } from './theme-toggle'
 
 interface UserSession {
@@ -248,10 +249,12 @@ export function Header() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+            <LanguageSwitcher />
               <ThemeToggle />
             </>
           ) : (
             <>
+            <LanguageSwitcher />
               <ThemeToggle />
               <Link href="/auth/sign-in">
                 <Button variant="ghost" size="sm" className="text-xs h-8 px-2">Sign In</Button>

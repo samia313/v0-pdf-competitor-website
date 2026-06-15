@@ -1,0 +1,42 @@
+{
+  "header": {
+    "home": "Home",
+    "tools": "Tools",
+    "blog": "Blog",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "hero": {
+    "title": "Free PDF Tools Online",
+    "subtitle": "Convert, edit, and manage your PDFs with ease",
+    "cta": "Get Started for Free"
+  },
+  "tools": {
+    "mergePdf": "Merge PDF",
+    "splitPdf": "Split PDF",
+    "compressPdf": "Compress PDF",
+    "convertPdf": "Convert PDF",
+    "editPdf": "Edit PDF",
+    "rotatePdf": "Rotate PDF",
+    "addWatermark": "Add Watermark",
+    "protectPdf": "Protect PDF"
+  },
+  "footer": {
+    "about": "About PDFilio",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact Us",
+    "copyright": "All rights reserved"
+  },
+  "common": {
+    "upload": "Upload File",
+    "download": "Download",
+    "process": "Process",
+    "processing": "Processing...",
+    "cancel": "Cancel",
+    "tryAgain": "Try Again",
+    "selectFile": "Select File",
+    "dragDrop": "Drag and drop your file here",
+    "noFile": "No file selected"
+  }
+}

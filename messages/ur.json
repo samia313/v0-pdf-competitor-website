@@ -1,0 +1,42 @@
+{
+  "header": {
+    "home": "ہوم",
+    "tools": "ٹولز",
+    "blog": "بلاگ",
+    "contact": "رابطہ",
+    "language": "زبان"
+  },
+  "hero": {
+    "title": "مفت PDF ٹولز آن لائن",
+    "subtitle": "اپنے PDFs کو آسانی سے تبدیل، ترمیم اور منظم کریں",
+    "cta": "مفت شروع کریں"
+  },
+  "tools": {
+    "mergePdf": "PDF کو ملائیں",
+    "splitPdf": "PDF کو تقسیم کریں",
+    "compressPdf": "PDF کو سکیڑیں",
+    "convertPdf": "PDF کو تبدیل کریں",
+    "editPdf": "PDF کو ترمیم کریں",
+    "rotatePdf": "PDF کو گھمائیں",
+    "addWatermark": "ওয়াٹرمارک شامل کریں",
+    "protectPdf": "PDF کو محفوظ کریں"
+  },
+  "footer": {
+    "about": "PDFilio کے بارے میں",
+    "privacy": "رازداری کی پالیسی",
+    "terms": "شرائط",
+    "contact": "ہم سے رابطہ کریں",
+    "copyright": "تمام حقوق محفوظ ہیں"
+  },
+  "common": {
+    "upload": "فائل اپ لوڈ کریں",
+    "download": "ڈاؤن لوڈ کریں",
+    "process": "عمل کریں",
+    "processing": "عمل جاری ہے...",
+    "cancel": "منسوخ کریں",
+    "tryAgain": "دوبارہ کوشش کریں",
+    "selectFile": "فائل منتخب کریں",
+    "dragDrop": "اپنی فائل یہاں کھینچیں",
+    "noFile": "کوئی فائل منتخب نہیں"
+  }
+}

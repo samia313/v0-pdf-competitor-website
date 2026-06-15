@@ -1,27 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server'
+import createMiddleware from 'next-intl/middleware'
+import { routing } from '@/lib/i18n/routing'
+
+const intlMiddleware = createMiddleware(routing)
 
 export function middleware(request: NextRequest) {
-  // Skip auth check for login page and login API
+  // Apply i18n middleware first
+  const intlResponse = intlMiddleware(request)
+
+  // Check if it's an admin route that needs auth
+  const pathname = request.nextUrl.pathname
+  
   if (
-    request.nextUrl.pathname === '/admin/login' ||
-    request.nextUrl.pathname === '/api/admin/login'
+    pathname.includes('/admin/login') ||
+    pathname.includes('/api/admin/login')
   ) {
-    return NextResponse.next()
+    return intlResponse
   }
 
-  // Check for admin routes
-  if (request.nextUrl.pathname.startsWith('/admin')) {
+  if (pathname.includes('/admin')) {
     const adminSession = request.cookies.get('admin-session')?.value
 
-    // If no session cookie, redirect to login
     if (!adminSession) {
       return NextResponse.redirect(new URL('/admin/login', request.url))
     }
   }
 
-  return NextResponse.next()
+  return intlResponse
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/((?!_next|.*\\..*).*)']
 }
+

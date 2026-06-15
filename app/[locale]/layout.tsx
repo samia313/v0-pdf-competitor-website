@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import './globals.css'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { HreflangTags } from '@/components/hreflang-tags'
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -37,14 +40,29 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
+}
+
+interface Props {
   children: React.ReactNode
-}>) {
+  params: Promise<{ locale: string }>
+}
+
+export default async function RootLayout({ children, params }: Props) {
+  const { locale } = await params
+  
+  if (!locales.includes(locale as any)) {
+    notFound()
+  }
+
+  const messages = await getMessages()
+  const isRtl = isRTL(locale as any)
+
   return (
-    <html lang="en" className="bg-background">
+    <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className="bg-background">
       <head>
+        <HreflangTags />
         {/* Google AdSense */}
         <meta name="google-adsense-account" content={process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID} />
         
@@ -71,8 +89,10 @@ export default function RootLayout({
         )}
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          {children}
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+        </NextIntlClientProvider>
       </body>
     </html>
   )

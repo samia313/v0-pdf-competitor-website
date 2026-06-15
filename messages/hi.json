@@ -1,0 +1,42 @@
+{
+  "header": {
+    "home": "होम",
+    "tools": "टूलस",
+    "blog": "ब्लॉग",
+    "contact": "संपर्क",
+    "language": "भाषा"
+  },
+  "hero": {
+    "title": "मुफ्त PDF टूलस ऑनलाइन",
+    "subtitle": "अपने PDFs को आसानी से बदलें, संपादित करें और प्रबंधित करें",
+    "cta": "मुफ्त शुरू करें"
+  },
+  "tools": {
+    "mergePdf": "PDF मर्ज करें",
+    "splitPdf": "PDF विभाजित करें",
+    "compressPdf": "PDF संपीड़ित करें",
+    "convertPdf": "PDF कनवर्ट करें",
+    "editPdf": "PDF संपादित करें",
+    "rotatePdf": "PDF घुमाएं",
+    "addWatermark": "वॉटरमार्क जोड़ें",
+    "protectPdf": "PDF सुरक्षित करें"
+  },
+  "footer": {
+    "about": "PDFilio के बारे में",
+    "privacy": "गोपनीयता नीति",
+    "terms": "सेवा की शर्तें",
+    "contact": "हमसे संपर्क करें",
+    "copyright": "सर्वाधिकार सुरक्षित"
+  },
+  "common": {
+    "upload": "फाइल अपलोड करें",
+    "download": "डाउनलोड करें",
+    "process": "प्रक्रिया",
+    "processing": "प्रक्रिया जारी है...",
+    "cancel": "रद्द करें",
+    "tryAgain": "फिर से कोशिश करें",
+    "selectFile": "फाइल चुनें",
+    "dragDrop": "अपनी फाइल यहां खींचें",
+    "noFile": "कोई फाइल चुनी नहीं गई"
+  }
+}
