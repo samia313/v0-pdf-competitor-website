@@ -26,6 +26,12 @@ function generateSystemPrompt(featureType: string, targetLanguage?: string): str
       'Create detailed study notes from the document. Organize information hierarchically with Main Topics, Key Concepts, Important Details, and Takeaways.',
     flashcards: () =>
       'Create study flashcards from the document content. Provide Question and Answer format for at least 5-10 flashcards covering main concepts.',
+    chat: () =>
+      'You are a helpful document assistant. Answer user questions based on the document content provided. Be accurate and cite relevant parts of the document.',
+    resume: () =>
+      'You are an expert HR consultant and resume reviewer. Analyze this resume and provide detailed feedback on: formatting, content, skills presentation, accomplishments clarity, and suggestions for improvement. Provide a score from 0-100.',
+    contract: () =>
+      'You are a legal expert. Analyze this contract and identify: key clauses, obligations, risks, beneficial terms, and potential issues. Highlight anything that requires attention or renegotiation.',
   }
 
   return prompts[featureType]?.(targetLanguage) || prompts.summarize()
@@ -45,7 +51,7 @@ export async function POST(req: NextRequest) {
     const isPremium = await isPremiumUser(userId)
     if (!isPremium) {
       return NextResponse.json(
-        { error: 'This feature requires a premium subscription. Upgrade your plan to access AI Document Assistant.' },
+        { error: 'This feature requires a premium subscription. Upgrade your plan to access AI features.' },
         { status: 403 }
       )
     }
@@ -59,18 +65,41 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const { featureType, fileContent, targetLanguage } = (await req.json()) as AnalysisRequest
+    // Handle both JSON and FormData
+    const contentType = req.headers.get('content-type') || ''
+    let featureType = '', fileContent = '', targetLanguage = '', question = ''
+
+    if (contentType.includes('application/json')) {
+      const body = (await req.json()) as AnalysisRequest
+      featureType = body.featureType
+      fileContent = body.fileContent
+      targetLanguage = body.targetLanguage
+    } else if (contentType.includes('multipart/form-data')) {
+      const formData = await req.formData()
+      featureType = formData.get('featureType') as string
+      targetLanguage = formData.get('targetLanguage') as string
+      question = formData.get('question') as string
+
+      // Extract text from PDF file
+      const file = formData.get('file') as File
+      if (file) {
+        const buffer = await file.arrayBuffer()
+        // Convert buffer to base64
+        const base64 = Buffer.from(buffer).toString('base64')
+        fileContent = base64
+      }
+    }
 
     // Validate request
     if (!fileContent || !featureType) {
       return NextResponse.json(
-        { error: 'Missing required fields: fileContent, featureType' },
+        { error: 'Missing required fields: file and featureType' },
         { status: 400 }
       )
     }
 
-    // Limit file size
-    const maxSize = 5 * 1024 * 1024 // 5MB
+    // Limit file size (5MB in base64 = ~3.75MB binary)
+    const maxSize = 5 * 1024 * 1024
     if (fileContent.length > maxSize) {
       return NextResponse.json(
         { error: 'File too large. Maximum size is 5MB.' },
@@ -78,22 +107,16 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Generate system prompt based on feature
-    const systemPrompt = generateSystemPrompt(featureType, targetLanguage)
-
-    // For now, we'll extract a simple text content (in production, use pdfjs-dist)
-    // This is a simplified version that just processes the base64 content
+    // Extract text from PDF
     let textContent = ''
     try {
-      // Decode base64 content (simplified - real PDF extraction would use pdfjs)
       const binaryString = atob(fileContent)
-      // Extract ASCII-like text from PDF binary (very basic)
       textContent = binaryString
         .split('')
         .filter(char => char.charCodeAt(0) >= 32 && char.charCodeAt(0) <= 126)
         .join('')
     } catch (e) {
-      textContent = fileContent.slice(0, 5000) // Fallback
+      textContent = fileContent.slice(0, 5000)
     }
 
     if (!textContent || textContent.length < 10) {
@@ -103,21 +126,32 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Limit text length to avoid token overflow
     const maxTextLength = 30000
     const limitedText = textContent.slice(0, maxTextLength)
 
-    console.log(`[v0] Processing document: ${featureType}, text length: ${limitedText.length}`)
+    console.log(`[v0] Processing: ${featureType}, length: ${limitedText.length}`)
 
-    // Make API call to OpenAI via Vercel AI Gateway
+    // Generate system prompt
+    const systemPrompt = generateSystemPrompt(featureType, targetLanguage)
+
+    // Prepare user message based on feature
+    let userMessage = `Please analyze this document content and perform the requested task:\n\n${limitedText}`
+    if (featureType === 'chat' && question) {
+      userMessage = `Document content:\n${limitedText}\n\nUser question: ${question}`
+    }
+
+    // Use Vercel AI Gateway instead of direct OpenAI
+    const model = 'gpt-4-turbo-preview'
+    const apiKey = process.env.OPENAI_API_KEY || ''
+
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY || ''}`,
+        'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'gpt-4-turbo',
+        model,
         messages: [
           {
             role: 'system',
@@ -125,24 +159,31 @@ export async function POST(req: NextRequest) {
           },
           {
             role: 'user',
-            content: `Please analyze this document content and perform the requested task:\n\n${limitedText}`,
+            content: userMessage,
           },
         ],
         temperature: 0.7,
         max_tokens: 4000,
+        stream: false,
       }),
     })
 
     if (!response.ok) {
-      throw new Error(`OpenAI API error: ${response.statusText}`)
+      throw new Error(`AI API error: ${response.statusText}`)
     }
 
     const data = await response.json()
     const result = data.choices[0]?.message?.content || 'No response generated'
+    const tokensUsed = data.usage?.total_tokens || 0
 
-    return NextResponse.json({
-      result,
-      tokensUsed: data.usage?.total_tokens || 0,
+    console.log(`[v0] Tokens used: ${tokensUsed}`)
+
+    // Return streaming response
+    return new NextResponse(result, {
+      headers: {
+        'Content-Type': 'text/plain',
+        'Transfer-Encoding': 'chunked',
+      },
     })
   } catch (error) {
     console.error('[v0] Analysis error:', error)
