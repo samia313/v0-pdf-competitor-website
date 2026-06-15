@@ -11,8 +11,8 @@ import Link from 'next/link'
 import { MessageCircle } from 'lucide-react'
 
 export const metadata = {
-  title: 'FAQ - Frequently Asked Questions | pdfilio',
-  description: 'Find answers to commonly asked questions about pdfilio PDF tools, pricing, and features.',
+  title: 'FAQ | Common Questions About PDFilio',
+  description: 'Find answers to commonly asked questions about PDFilio PDF tools, pricing, features, security, and more.',
 }
 
 const faqs = [

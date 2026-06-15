@@ -11,9 +11,9 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 
 export const metadata = {
-  title: 'PDF Blog - Tips, Tutorials & Guides | pdfilio',
-  description: 'Learn everything about PDF tools, document management, and productivity tips. Free tutorials, guides, and expert advice.',
-  keywords: 'pdf blog, pdf tutorials, pdf tips, document management, pdf guides',
+  title: 'PDF Tips & Tutorials | PDFilio Blog',
+  description: 'Learn everything about PDF tools, document management, and productivity tips. Free tutorials, guides, and expert advice from PDFilio experts.',
+  keywords: 'pdf blog, pdf tutorials, pdf tips, document management, pdf guides, pdf learning',
 }
 
 export default function BlogPage() {

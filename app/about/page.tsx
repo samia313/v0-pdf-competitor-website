@@ -14,8 +14,8 @@ import {
 } from 'lucide-react'
 
 export const metadata = {
-  title: 'About Us - pdfilio | Free Online PDF Tools',
-  description: 'Learn about pdfilio - your trusted destination for free, secure, and easy-to-use PDF tools. Our mission is to make PDF editing accessible to everyone.',
+  title: 'About PDFilio | Best Free PDF Tools Platform',
+  description: 'Learn about PDFilio - your trusted destination for free, secure, and easy-to-use PDF tools. Our mission is to make PDF editing accessible to everyone.',
 }
 
 const stats = [

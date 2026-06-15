@@ -9,23 +9,24 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'PDFilio',
-  description: 'Free online PDF tools to merge, split, compress, convert PDF files. Edit PDF documents easily with our powerful and secure PDF editor.',
-  keywords: 'PDF tools, merge PDF, split PDF, compress PDF, convert PDF, PDF to Word, Word to PDF, PDF editor, free PDF tools',
-  authors: [{ name: 'pdfilio' }],
+  title: 'Free PDF Tools Online | Merge, Convert, Edit & More | PDFilio',
+  description: 'Free online PDF tools for merging, converting, editing, and more. No registration required. Fast, secure, and easy to use.',
+  keywords: 'PDF tools, merge PDF, split PDF, compress PDF, convert PDF, PDF to Word, Word to PDF, PDF editor, free PDF tools, AI PDF',
+  authors: [{ name: 'PDFilio' }],
   icons: {
     icon: '/favicon.svg',
     apple: '/apple-icon.png',
   },
   openGraph: {
-    title: 'PDFilio - Free Online PDF Tools',
-    description: 'Free online PDF tools to merge, split, compress, convert PDF files.',
+    title: 'Free PDF Tools Online | Merge, Convert, Edit & More | PDFilio',
+    description: 'Free online PDF tools for merging, converting, editing, and more. No registration required. Fast, secure, and easy to use.',
     type: 'website',
+    url: 'https://www.pdfilio.com',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PDFilio - Free Online PDF Tools',
-    description: 'Free online PDF tools to merge, split, compress, convert PDF files.',
+    title: 'Free PDF Tools Online | Merge, Convert, Edit & More | PDFilio',
+    description: 'Free online PDF tools for merging, converting, editing, and more. No registration required. Fast, secure, and easy to use.',
   },
   robots: {
     index: true,
