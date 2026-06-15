@@ -4,7 +4,10 @@ import { pool } from '@/lib/db'
 export const auth = betterAuth({
   database: pool,
   baseURL:
-    process.env.BETTER_AUTH_URL ??
+    // Skip invalid BETTER_AUTH_URL values (e.g., "343434")
+    (process.env.BETTER_AUTH_URL && 
+     process.env.BETTER_AUTH_URL.startsWith('http') ? 
+     process.env.BETTER_AUTH_URL : null) ??
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
       : process.env.VERCEL_URL
