@@ -32,6 +32,16 @@ function generateSystemPrompt(featureType: string, targetLanguage?: string): str
       'You are an expert HR consultant and resume reviewer. Analyze this resume and provide detailed feedback on: formatting, content, skills presentation, accomplishments clarity, and suggestions for improvement. Provide a score from 0-100.',
     contract: () =>
       'You are a legal expert. Analyze this contract and identify: key clauses, obligations, risks, beneficial terms, and potential issues. Highlight anything that requires attention or renegotiation.',
+    invoice: () =>
+      'You are a professional invoice generator. Create a formatted invoice based on the provided details. Include itemized breakdown, totals, and professional formatting.',
+    coverletter: () =>
+      'You are a professional cover letter writer. Generate a compelling, personalized cover letter based on the provided job title, company, and skills. Make it persuasive and professional.',
+    studynotes: () =>
+      'You are an expert study notes generator. Convert the provided document into comprehensive, well-organized study notes with clear sections, key concepts, and important details for effective learning.',
+    quiz: () =>
+      'You are an expert quiz creator. Generate a comprehensive multiple-choice quiz with 5-10 questions based on the document content. For each question, provide the question, four options (A, B, C, D), and the correct answer.',
+    metadata: () =>
+      'You are a metadata processor. Extract or confirm metadata from the document. If metadata is provided, confirm the changes.',
   }
 
   return prompts[featureType]?.(targetLanguage) || prompts.summarize()

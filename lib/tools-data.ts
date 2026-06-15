@@ -380,6 +380,58 @@ export const pdfTools = [
     href: '/tools/ai-contract-reader',
     premium: true,
   },
+
+  // New Premium AI Features
+  {
+    id: 'ai-invoice-generator',
+    name: 'AI Invoice Generator',
+    description: 'Create professional invoices in seconds with AI assistance',
+    icon: 'sparkles',
+    category: 'ai',
+    color: 'bg-gradient-to-r from-amber-500 to-orange-500',
+    href: '/tools/ai-invoice-generator',
+    premium: true,
+  },
+  {
+    id: 'ai-cover-letter-generator',
+    name: 'AI Cover Letter Generator',
+    description: 'Generate personalized cover letters for job applications',
+    icon: 'sparkles',
+    category: 'ai',
+    color: 'bg-gradient-to-r from-blue-500 to-purple-500',
+    href: '/tools/ai-cover-letter-generator',
+    premium: true,
+  },
+  {
+    id: 'ai-study-notes-generator',
+    name: 'AI Study Notes Generator',
+    description: 'Convert PDF documents into comprehensive study notes',
+    icon: 'sparkles',
+    category: 'ai',
+    color: 'bg-gradient-to-r from-orange-500 to-yellow-500',
+    href: '/tools/ai-study-notes-generator',
+    premium: true,
+  },
+  {
+    id: 'ai-pdf-quiz-generator',
+    name: 'AI PDF Quiz Generator',
+    description: 'Generate multiple choice quizzes from PDF content automatically',
+    icon: 'sparkles',
+    category: 'ai',
+    color: 'bg-gradient-to-r from-red-500 to-pink-500',
+    href: '/tools/ai-pdf-quiz-generator',
+    premium: true,
+  },
+  {
+    id: 'pdf-metadata-editor',
+    name: 'PDF Metadata Editor',
+    description: 'Edit PDF metadata including title, author, subject, and keywords',
+    icon: 'sparkles',
+    category: 'ai',
+    color: 'bg-gradient-to-r from-slate-500 to-gray-500',
+    href: '/tools/pdf-metadata-editor',
+    premium: true,
+  },
 ]
 
 export const categories = [

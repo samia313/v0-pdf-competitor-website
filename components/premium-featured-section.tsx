@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ArrowRight, Sparkles, FileText, Globe, Database, Scale, BookMarked, Lightbulb, MessageSquare, BookOpen, Scan, FileCheck, Shield } from 'lucide-react'
+import { ArrowRight, Sparkles, FileText, Globe, Database, Scale, BookMarked, Lightbulb, MessageSquare, BookOpen, Scan, FileCheck, Shield, Receipt, DollarSign, Brain, Settings } from 'lucide-react'
 
 const aiFeatures = [
   // New Premium Features (6)
@@ -61,6 +61,52 @@ const aiFeatures = [
     icon: Shield,
     color: 'from-emerald-500 to-purple-500',
     href: '/tools/ai-contract-reader',
+    isNew: true,
+  },
+  // 5 Newest Premium Features
+  {
+    id: 'invoice',
+    name: 'AI Invoice Generator',
+    description: 'Create professional invoices instantly',
+    icon: Receipt,
+    color: 'from-amber-500 to-orange-500',
+    href: '/tools/ai-invoice-generator',
+    isNew: true,
+  },
+  {
+    id: 'coverletter',
+    name: 'AI Cover Letter Generator',
+    description: 'Generate personalized cover letters',
+    icon: FileText,
+    color: 'from-blue-500 to-purple-500',
+    href: '/tools/ai-cover-letter-generator',
+    isNew: true,
+  },
+  {
+    id: 'studynotes',
+    name: 'AI Study Notes Generator',
+    description: 'Convert PDFs into study notes',
+    icon: BookOpen,
+    color: 'from-orange-500 to-yellow-500',
+    href: '/tools/ai-study-notes-generator',
+    isNew: true,
+  },
+  {
+    id: 'quiz',
+    name: 'AI PDF Quiz Generator',
+    description: 'Create MCQs from PDFs automatically',
+    icon: Brain,
+    color: 'from-red-500 to-pink-500',
+    href: '/tools/ai-pdf-quiz-generator',
+    isNew: true,
+  },
+  {
+    id: 'metadata',
+    name: 'PDF Metadata Editor',
+    description: 'Edit PDF title, author, and keywords',
+    icon: Settings,
+    color: 'from-slate-500 to-gray-500',
+    href: '/tools/pdf-metadata-editor',
     isNew: true,
   },
   // Original AI Features (6)
@@ -129,10 +175,10 @@ export function PremiumFeaturedSection() {
             </Badge>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            12 AI-Powered Document Tools
+            17 AI-Powered Document Tools
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Six intelligent features plus six new premium tools to supercharge your document workflow
+            Eleven cutting-edge AI features plus six original premium tools to supercharge your document workflow
           </p>
         </div>
 
@@ -145,7 +191,7 @@ export function PremiumFeaturedSection() {
             <h3 className="text-xl font-bold text-purple-400">Latest Premium Features</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {aiFeatures.slice(0, 6).map((feature) => {
+            {aiFeatures.slice(0, 11).map((feature) => {
               const IconComponent = feature.icon
               return (
                 <Link key={feature.id} href={feature.href || '#'}>
@@ -177,7 +223,7 @@ export function PremiumFeaturedSection() {
             <h3 className="text-xl font-bold text-muted-foreground">Original AI Features</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {aiFeatures.slice(6).map((feature) => {
+            {aiFeatures.slice(11).map((feature) => {
               const IconComponent = feature.icon
               return (
                 <Link key={feature.id} href={feature.href || '#'}>
