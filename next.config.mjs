@@ -1,3 +1,7 @@
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin('./lib/i18n/request.ts')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -14,6 +18,27 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react'],
   },
+  onDemandEntries: {
+    maxInactiveAge: 60 * 60 * 1000,
+    pagesBufferLength: 5,
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        // API subdomain routing: api.pdfilio.com/* -> /api/v1/*
+        {
+          source: '/:path*',
+          destination: '/api/v1/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'api\\.pdfilio\\.com',
+            },
+          ],
+        },
+      ],
+    }
+  },
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)

@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { FileText, Menu, ChevronDown, User, LogOut } from 'lucide-react'
+import { FileText, Menu, User, LogOut, Crown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import {
   DropdownMenu,
@@ -12,10 +13,10 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
-import { categories, pdfTools } from '@/lib/tools-data'
-import { ToolIcon } from './tool-icon'
 import { authClient } from '@/lib/auth-client'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
+import { LanguageSwitcher } from './language-switcher'
+import { ThemeToggle } from './theme-toggle'
 
 interface UserSession {
   user: {
@@ -28,240 +29,206 @@ interface UserSession {
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [session, setSession] = useState<UserSession | null>(null)
+  const [subscription, setSubscription] = useState<any>(null)
   const router = useRouter()
+  const pathname = usePathname()
+  
+  // Check if we're on homepage
+  const isHomepage = pathname === '/' || pathname.match(/^\/\w{2}$/)
 
   useEffect(() => {
     async function checkSession() {
       try {
         const { data } = await authClient.getSession()
         setSession(data as UserSession | null)
-      } catch {
+      } catch (error) {
+        console.error('[Header] Session check failed:', error)
         setSession(null)
       }
     }
     checkSession()
   }, [])
 
-  const handleSignOut = async () => {
-    await authClient.signOut()
-    setSession(null)
-    router.push('/')
-    router.refresh()
+  useEffect(() => {
+    async function fetchSubscription() {
+      if (session?.user?.id) {
+        try {
+          const controller = new AbortController()
+          const timeoutId = setTimeout(() => controller.abort(), 3000)
+          
+          const response = await fetch('/api/subscription', { 
+            signal: controller.signal,
+            cache: 'no-store'
+          })
+          
+          clearTimeout(timeoutId)
+          if (response.ok) {
+            const data = await response.json()
+            setSubscription(data)
+          }
+        } catch (error) {
+          console.error('[Header] Subscription fetch failed:', error)
+        }
+      }
+    }
+    fetchSubscription()
+  }, [session])
+
+  const handleLogout = async () => {
+    try {
+      await authClient.signOut()
+      setSession(null)
+      router.push('/')
+    } catch (error) {
+      console.error('[Header] Logout failed:', error)
+    }
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        
+        {/* Left - Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <FileText className="h-5 w-5 text-primary-foreground" />
+          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
+            <FileText className="h-5 w-5 text-white" />
           </div>
-          <span className="text-xl font-bold text-foreground">
-            Clix<span className="text-primary">PDF</span>
-          </span>
+          <span className="font-bold hidden sm:inline">PDFilio</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1">
-          {categories.slice(0, 4).map((category) => (
-            <DropdownMenu key={category.id}>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="gap-1">
-                  {category.name}
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-64">
-                {pdfTools
-                  .filter((tool) => tool.category === category.id)
-                  .map((tool) => (
-                    <DropdownMenuItem key={tool.id} asChild>
-                      <Link href={tool.href} className="flex items-center gap-3 cursor-pointer">
-                        <div className={`h-8 w-8 rounded-md ${tool.color} flex items-center justify-center`}>
-                          <ToolIcon icon={tool.icon} className="h-4 w-4 text-white" />
-                        </div>
-                        <div>
-                          <div className="font-medium">{tool.name}</div>
-                          <div className="text-xs text-muted-foreground">{tool.description}</div>
-                        </div>
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ))}
-          <Link href="/tools">
-            <Button variant="ghost">All Tools</Button>
-          </Link>
-          <Link href="/blog">
-            <Button variant="ghost">Blog</Button>
-          </Link>
-          <Link href="/about">
-            <Button variant="ghost">About</Button>
-          </Link>
-          <Link href="/contact">
-            <Button variant="ghost">Contact</Button>
-          </Link>
-          <Link href="/pricing">
-            <Button variant="ghost">Pricing</Button>
-          </Link>
-          <Link href="/faq">
-            <Button variant="ghost">FAQ</Button>
-          </Link>
+        {/* Center - Navigation (Hidden on homepage, shown on tool pages) */}
+        {!isHomepage && (
+          <nav className="hidden lg:flex items-center gap-1">
+            <Link href="/blog">
+              <Button variant="ghost" className="text-sm">Blog</Button>
+            </Link>
+            <Link href="/pricing">
+              <Button variant="ghost" className="text-sm">Pricing</Button>
+            </Link>
+          </nav>
+        )}
+
+        {/* Center - CTA (Shown on homepage) */}
+        {isHomepage && (
+          <div className="hidden md:flex items-center gap-2">
+            <Link href="#tools">
+              <Button variant="ghost" className="text-sm">Explore Tools</Button>
+            </Link>
+            <Link href="/pricing">
+              <Button variant="ghost" className="text-sm">Pricing</Button>
+            </Link>
+          </div>
+        )}
+
+        {/* Right side - Auth & Settings */}
+        <div className="flex items-center gap-2 ml-auto">
+          <LanguageSwitcher />
+          <ThemeToggle />
           
           {session?.user ? (
-            <>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="gap-2">
-                    <div className="bg-primary text-primary-foreground rounded-full h-7 w-7 flex items-center justify-center text-sm font-bold">
-                      {session.user.name?.charAt(0) || 'U'}
-                    </div>
-                    <span className="hidden lg:inline">{session.user.name?.split(' ')[0]}</span>
-                    <ChevronDown className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <div className="px-2 py-1.5">
-                    <p className="text-sm font-medium">{session.user.name}</p>
-                    <p className="text-xs text-muted-foreground">{session.user.email}</p>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full h-8 w-8">
+                  <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center">
+                    <User className="h-3 w-3" />
                   </div>
-                  <DropdownMenuSeparator />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <div className="px-2 py-1.5">
+                  <p className="text-sm font-medium">{session.user.name}</p>
+                  <p className="text-xs text-muted-foreground truncate">{session.user.email}</p>
+                  {subscription?.planId && (
+                    <div className="mt-2">
+                      <Badge variant={subscription.planId === 'free' ? 'secondary' : 'default'} className="gap-1">
+                        {subscription.planId === 'pro' || subscription.planId === 'business' ? (
+                          <>
+                            <Crown className="w-3 h-3" />
+                            {subscription.planId.charAt(0).toUpperCase() + subscription.planId.slice(1)}
+                          </>
+                        ) : (
+                          'Free Plan'
+                        )}
+                      </Badge>
+                    </div>
+                  )}
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard" className="cursor-pointer text-sm">
+                    <User className="mr-2 h-4 w-4" />
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                {subscription?.planId === 'free' && (
                   <DropdownMenuItem asChild>
-                    <Link href="/dashboard" className="cursor-pointer">
-                      <User className="mr-2 h-4 w-4" />
-                      Dashboard
+                    <Link href="/pricing" className="cursor-pointer text-sm">
+                      <Crown className="mr-2 h-4 w-4" />
+                      Upgrade Plan
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Sign Out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Link href="/pricing">
-                <Button size="sm" className="ml-2">Get Premium</Button>
-              </Link>
-            </>
+                )}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-sm text-red-600">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <>
-              <Link href="/sign-in">
-                <Button variant="ghost" size="sm">Sign In</Button>
+              <Link href="/auth/signin" className="hidden sm:inline">
+                <Button variant="ghost" size="sm" className="text-sm">Sign In</Button>
               </Link>
-              <Link href="/pricing">
-                <Button size="sm" className="ml-2">Get Premium</Button>
+              <Link href="/pricing" className="hidden sm:inline">
+                <Button size="sm" className="text-sm">Get Premium</Button>
               </Link>
             </>
           )}
-        </nav>
 
-        {/* Mobile Navigation */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-80 overflow-y-auto">
-            <div className="flex flex-col gap-4 mt-6">
-              <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2 mb-4">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-                  <FileText className="h-5 w-5 text-primary-foreground" />
-                </div>
-              <span className="text-xl font-bold">
-                Clix<span className="text-primary">PDF</span>
-              </span>
-              </Link>
-
-              {/* User Section for Mobile */}
-              {session?.user ? (
-                <div className="pb-4 border-b">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="bg-primary text-primary-foreground rounded-full h-10 w-10 flex items-center justify-center font-bold">
-                      {session.user.name?.charAt(0) || 'U'}
-                    </div>
-                    <div>
-                      <p className="font-medium">{session.user.name}</p>
-                      <p className="text-sm text-muted-foreground">{session.user.email}</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <Link href="/dashboard" onClick={() => setIsOpen(false)} className="flex-1">
-                      <Button variant="outline" className="w-full">Dashboard</Button>
+          {/* Mobile menu */}
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild className="lg:hidden">
+              <Button variant="ghost" size="icon">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-80">
+              <nav className="flex flex-col gap-4 mt-8">
+                {!isHomepage && (
+                  <>
+                    <Link href="/blog" onClick={() => setIsOpen(false)}>
+                      <Button variant="ghost" className="w-full justify-start text-base">Blog</Button>
                     </Link>
-                    <Button variant="outline" onClick={handleSignOut}>
-                      <LogOut className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                <div className="pb-4 border-b flex gap-2">
-                  <Link href="/sign-in" onClick={() => setIsOpen(false)} className="flex-1">
-                    <Button variant="outline" className="w-full">Sign In</Button>
-                  </Link>
-                  <Link href="/sign-up" onClick={() => setIsOpen(false)} className="flex-1">
-                    <Button className="w-full">Sign Up</Button>
-                  </Link>
-                </div>
-              )}
-
-              {/* Quick Links */}
-              <div className="space-y-1 pb-4 border-b">
-                <Link href="/tools" onClick={() => setIsOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start">All Tools</Button>
-                </Link>
-                <Link href="/blog" onClick={() => setIsOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start">Blog</Button>
-                </Link>
-                <Link href="/about" onClick={() => setIsOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start">About Us</Button>
-                </Link>
-                <Link href="/contact" onClick={() => setIsOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start">Contact Us</Button>
-                </Link>
-                <Link href="/pricing" onClick={() => setIsOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start">Pricing</Button>
-                </Link>
-                <Link href="/faq" onClick={() => setIsOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start">FAQ</Button>
-                </Link>
-                <Link href="/about" onClick={() => setIsOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start">About</Button>
-                </Link>
-                <Link href="/contact" onClick={() => setIsOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start">Contact</Button>
-                </Link>
-              </div>
-              
-              {categories.map((category) => (
-                <div key={category.id} className="space-y-2">
-                  <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">
-                    {category.name}
-                  </h3>
-                  <div className="space-y-1">
-                    {pdfTools
-                      .filter((tool) => tool.category === category.id)
-                      .map((tool) => (
-                        <Link
-                          key={tool.id}
-                          href={tool.href}
-                          onClick={() => setIsOpen(false)}
-                          className="flex items-center gap-3 rounded-lg p-2 hover:bg-secondary transition-colors"
-                        >
-                          <div className={`h-8 w-8 rounded-md ${tool.color} flex items-center justify-center`}>
-                            <ToolIcon icon={tool.icon} className="h-4 w-4 text-white" />
-                          </div>
-                          <span className="text-sm font-medium">{tool.name}</span>
-                        </Link>
-                      ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </SheetContent>
-        </Sheet>
+                    <Link href="/pricing" onClick={() => setIsOpen(false)}>
+                      <Button variant="ghost" className="w-full justify-start text-base">Pricing</Button>
+                    </Link>
+                  </>
+                )}
+                {isHomepage && (
+                  <>
+                    <Link href="#tools" onClick={() => setIsOpen(false)}>
+                      <Button variant="ghost" className="w-full justify-start text-base">Explore Tools</Button>
+                    </Link>
+                    <Link href="/pricing" onClick={() => setIsOpen(false)}>
+                      <Button variant="ghost" className="w-full justify-start text-base">Pricing</Button>
+                    </Link>
+                  </>
+                )}
+                {!session?.user && (
+                  <>
+                    <Link href="/auth/signin" onClick={() => setIsOpen(false)}>
+                      <Button variant="outline" className="w-full">Sign In</Button>
+                    </Link>
+                    <Link href="/pricing" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full">Get Premium</Button>
+                    </Link>
+                  </>
+                )}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   )

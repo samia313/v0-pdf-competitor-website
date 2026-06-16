@@ -1,65 +1,47 @@
 import { MetadataRoute } from 'next'
-import { blogPosts, blogCategories } from '@/lib/blog-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://orbixdocs.com'
+  const baseUrl = 'https://www.pdfilio.com'
+  const locales = ['en', 'ur', 'hi', 'es', 'fr', 'de', 'ar', 'pt', 'zh', 'ja', 'ru', 'it', 'nl', 'ko', 'tr', 'vi']
   
-  // Static pages
   const staticPages = [
-    '',
-    '/tools',
-    '/pricing',
-    '/about',
-    '/contact',
-    '/faq',
-    '/privacy',
-    '/terms',
-    '/blog',
-    '/sign-in',
-    '/sign-up',
+    { path: '/', priority: 1.0, changeFrequency: 'daily' as const },
+    { path: '/tools', priority: 0.9, changeFrequency: 'daily' as const },
+    { path: '/pricing', priority: 0.9, changeFrequency: 'monthly' as const },
+    { path: '/about', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/contact', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/blog', priority: 0.8, changeFrequency: 'weekly' as const },
+    { path: '/privacy', priority: 0.6, changeFrequency: 'yearly' as const },
+    { path: '/terms', priority: 0.6, changeFrequency: 'yearly' as const },
   ]
 
-  // Tool pages
-  const toolPages = [
-    '/tools/merge-pdf',
-    '/tools/split-pdf',
-    '/tools/compress-pdf',
-    '/tools/rotate-pdf',
-    '/tools/remove-pages',
-    '/tools/organize-pdf',
-    '/tools/add-page-numbers',
-    '/tools/add-watermark',
-    '/tools/edit-pdf',
-    '/tools/sign-pdf',
-    '/tools/protect-pdf',
-    '/tools/unlock-pdf',
-    '/tools/jpg-to-pdf',
-    '/tools/pdf-to-jpg',
-    '/tools/pdf-to-png',
-    '/tools/word-to-pdf',
-    '/tools/pdf-to-word',
-    '/tools/excel-to-pdf',
-    '/tools/pdf-to-excel',
-    '/tools/ppt-to-pdf',
-    '/tools/pdf-to-ppt',
-    '/tools/html-to-pdf',
-    '/tools/ocr-pdf',
-    '/tools/ai-summarizer',
-    '/tools/translate-pdf',
-  ]
+  const sitemap: MetadataRoute.Sitemap = []
 
-  // Blog category pages
-  const blogCategoryPages = blogCategories.map(cat => `/blog/category/${cat.id}`)
+  // Add multilingual URLs for all static pages
+  locales.forEach((locale) => {
+    staticPages.forEach((page) => {
+      const url = locale === 'en' 
+        ? `${baseUrl}${page.path}`
+        : `${baseUrl}/${locale}${page.path}`
 
-  // Blog post pages
-  const blogPostPages = blogPosts.map(post => `/blog/${post.slug}`)
+      sitemap.push({
+        url,
+        lastModified: new Date(),
+        changeFrequency: page.changeFrequency,
+        priority: page.priority,
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((lang) => [
+              lang,
+              lang === 'en'
+                ? `${baseUrl}${page.path}`
+                : `${baseUrl}/${lang}${page.path}`,
+            ])
+          ),
+        },
+      })
+    })
+  })
 
-  const allPages = [...staticPages, ...toolPages, ...blogCategoryPages, ...blogPostPages]
-
-  return allPages.map((page) => ({
-    url: `${baseUrl}${page}`,
-    lastModified: new Date(),
-    changeFrequency: page === '' ? 'daily' : page.startsWith('/blog/') ? 'weekly' : 'weekly',
-    priority: page === '' ? 1 : page.startsWith('/tools/') ? 0.9 : page.startsWith('/blog/') ? 0.8 : 0.7,
-  }))
+  return sitemap
 }

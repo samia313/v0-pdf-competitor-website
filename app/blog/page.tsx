@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { blogPosts, blogCategories, getFeaturedPosts } from '@/lib/blog-data'
@@ -8,12 +10,12 @@ import { Input } from '@/components/ui/input'
 import { Calendar, Clock, User, ArrowRight, Search, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
+import { metaTitles, metaDescriptions } from '@/lib/meta-titles'
 
 export const metadata = {
-  title: 'PDF Blog - Tips, Tutorials & Guides | ClixPDF',
-  description: 'Learn everything about PDF tools, document management, and productivity tips. Free tutorials, guides, and expert advice.',
-  keywords: 'pdf blog, pdf tutorials, pdf tips, document management, pdf guides',
+  title: metaTitles.blog,
+  description: metaDescriptions.blog,
+  keywords: 'pdf blog, pdf tutorials, pdf tips, document management, pdf guides, pdf learning',
 }
 
 export default function BlogPage() {

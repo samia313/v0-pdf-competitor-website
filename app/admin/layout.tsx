@@ -1,4 +1,5 @@
-'use client'
+// Admin pages are dynamic and require authentication
+export const dynamic = 'force-dynamic'
 
 export default function AdminLayout({
   children,
