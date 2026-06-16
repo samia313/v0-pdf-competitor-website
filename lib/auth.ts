@@ -1,6 +1,14 @@
 import { betterAuth } from 'better-auth'
 import { pool } from '@/lib/db'
 
+// Remove the invalid BETTER_AUTH_URL env var that's set to '343434'
+if (typeof process !== 'undefined' && typeof process.env !== 'undefined') {
+  const authUrl = process.env.BETTER_AUTH_URL
+  if (authUrl && (authUrl.includes('343434') || authUrl === "'343434'" || !authUrl.startsWith('http'))) {
+    delete process.env.BETTER_AUTH_URL
+  }
+}
+
 // Generate a stable fallback secret for builds (not secure, but prevents build failures)
 const FALLBACK_SECRET = process.env.BETTER_AUTH_SECRET?.trim() || 'build-time-fallback-secret-please-set-env-var'
 
@@ -41,7 +49,7 @@ export const auth = betterAuth({
     ...(process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? [`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`]
       : []),
-    ...(process.env.BETTER_AUTH_URL ? [process.env.BETTER_AUTH_URL] : []),
+    ...(process.env.BETTER_AUTH_URL && !process.env.BETTER_AUTH_URL.includes('343434') ? [process.env.BETTER_AUTH_URL] : []),
   ],
   session: {
     expiresIn: 60 * 60 * 24 * 7, // 7 days
