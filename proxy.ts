@@ -4,7 +4,7 @@ import { routing } from '@/lib/i18n/routing'
 
 const intlMiddleware = createMiddleware(routing)
 
-export function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   // Apply i18n middleware first
   const intlResponse = intlMiddleware(request)
 
@@ -32,4 +32,3 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: ['/((?!_next|.*\\..*).*)']
 }
-
