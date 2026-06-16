@@ -1,16 +1,8 @@
 import { betterAuth } from 'better-auth'
 import { pool } from '@/lib/db'
 
-// Remove the invalid BETTER_AUTH_URL env var that's set to '343434'
-if (typeof process !== 'undefined' && typeof process.env !== 'undefined') {
-  const authUrl = process.env.BETTER_AUTH_URL
-  if (authUrl && (authUrl.includes('343434') || authUrl === "'343434'" || !authUrl.startsWith('http'))) {
-    delete process.env.BETTER_AUTH_URL
-  }
-}
-
-// Generate a stable fallback secret for builds (not secure, but prevents build failures)
-const FALLBACK_SECRET = process.env.BETTER_AUTH_SECRET?.trim() || 'build-time-fallback-secret-please-set-env-var'
+// Generate a stable fallback secret for builds
+const FALLBACK_SECRET = process.env.BETTER_AUTH_SECRET?.trim() || 'default-secret-change-in-production'
 
 // Determine the correct base URL - skip invalid values like "343434"
 const getBaseURL = () => {
@@ -44,12 +36,12 @@ export const auth = betterAuth({
   },
   trustedOrigins: [
     'http://localhost:3000',
+    'https://pdfilio.com',
     ...(process.env.V0_RUNTIME_URL ? [process.env.V0_RUNTIME_URL] : []),
     ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : []),
     ...(process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? [`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`]
       : []),
-    ...(process.env.BETTER_AUTH_URL && !process.env.BETTER_AUTH_URL.includes('343434') ? [process.env.BETTER_AUTH_URL] : []),
   ],
   session: {
     expiresIn: 60 * 60 * 24 * 7, // 7 days

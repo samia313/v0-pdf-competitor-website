@@ -2,24 +2,29 @@
 
 import { createAuthClient } from 'better-auth/react'
 
-// Remove the invalid BETTER_AUTH_URL env var that's set to '343434'
-// This prevents it from being passed to createAuthClient
-if (typeof process !== 'undefined' && typeof process.env !== 'undefined') {
-  const authUrl = process.env.BETTER_AUTH_URL
-  if (authUrl && (authUrl.includes('343434') || authUrl === "'343434'" || !authUrl.startsWith('http'))) {
-    delete process.env.BETTER_AUTH_URL
-  }
-}
-
-// Get the proper base URL for auth client
+// Get the proper base URL for auth client - NEVER use invalid 343434 values
 const getAuthBaseURL = () => {
-  // Use the current window location if available (in browser)
-  if (typeof window !== 'undefined') {
-    return window.location.origin
+  // Use the current window location if available (in browser) - always preferred
+  if (typeof window !== 'undefined' && window.location) {
+    const origin = window.location.origin
+    // Make sure it's a valid URL
+    if (origin && origin.startsWith('http')) {
+      return origin
+    }
   }
   
-  // Fallback for SSR
-  return process.env.NEXT_PUBLIC_APP_URL || 'https://pdfilio.com'
+  // Check for valid env var (not 343434 or other invalid values)
+  const envUrl = process.env.NEXT_PUBLIC_APP_URL
+  if (envUrl && 
+      !envUrl.includes('343434') && 
+      !envUrl.includes('"') && 
+      !envUrl.includes("'") &&
+      envUrl.startsWith('http')) {
+    return envUrl
+  }
+  
+  // Fallback to production domain
+  return 'https://pdfilio.com'
 }
 
 export const authClient = createAuthClient({
