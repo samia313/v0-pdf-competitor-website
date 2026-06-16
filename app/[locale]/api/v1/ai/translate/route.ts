@@ -8,6 +8,12 @@ export async function POST(req: NextRequest) {
   if (corsResponse) return corsResponse
 
   try {
+    // Check required environment variables
+    if (!process.env.OPENAI_API_KEY) {
+      const response = errorResponse('AI service not configured', 503)
+      return addCorsHeaders(response)
+    }
+
     const clientIp = getClientIp(req)
     const rateLimit = checkRateLimit(clientIp, 10, 60000)
     
