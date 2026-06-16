@@ -4,7 +4,7 @@ import { pool } from '@/lib/db'
 // Generate a stable fallback secret for builds
 const FALLBACK_SECRET = process.env.BETTER_AUTH_SECRET?.trim() || 'default-secret-change-in-production'
 
-// Determine the correct base URL - skip invalid values like "343434"
+
 const getBaseURL = () => {
   // Try Vercel production URL first
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
@@ -49,12 +49,12 @@ export const auth = betterAuth({
   },
   ...(process.env.NODE_ENV === 'development' || process.env.V0_RUNTIME_URL
     ? {
-        advanced: {
-          defaultCookieAttributes: {
-            sameSite: 'none' as const,
-            secure: true,
-          },
+      advanced: {
+        defaultCookieAttributes: {
+          sameSite: 'none' as const,
+          secure: true,
         },
-      }
+      },
+    }
     : {}),
 })
