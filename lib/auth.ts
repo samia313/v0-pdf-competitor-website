@@ -1,15 +1,19 @@
 import { betterAuth } from 'better-auth'
 import { pool } from '@/lib/db'
 
+// Generate a stable fallback secret for builds (not secure, but prevents build failures)
+const FALLBACK_SECRET = process.env.BETTER_AUTH_SECRET || 'build-time-fallback-secret-please-set-env-var'
+
 export const auth = betterAuth({
   database: pool,
+  secret: FALLBACK_SECRET,
   baseURL:
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
       : process.env.VERCEL_URL
         ? `https://${process.env.VERCEL_URL}`
         : process.env.V0_RUNTIME_URL) ||
-    (process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : undefined),
+    (process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://pdfilio.com'),
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
