@@ -13,10 +13,10 @@ const getAuthBaseURL = () => {
     }
   }
   
-  // Check for valid env var (not 343434 or other invalid values)
+ 
   const envUrl = process.env.NEXT_PUBLIC_APP_URL
   if (envUrl && 
-      !envUrl.includes('343434') && 
+      
       !envUrl.includes('"') && 
       !envUrl.includes("'") &&
       envUrl.startsWith('http')) {
