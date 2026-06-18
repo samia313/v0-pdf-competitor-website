@@ -17,8 +17,8 @@ export default function HomePage() {
   return (
     <div className="w-full min-h-screen bg-background">
       <Header />
-      <AIDocumentHero />
       <PremiumFeaturedSection />
+      <AIDocumentHero />
       <Footer />
     </div>
   )
