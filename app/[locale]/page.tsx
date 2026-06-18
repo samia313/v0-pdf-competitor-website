@@ -4,9 +4,6 @@ import { Footer } from '@/components/footer'
 import { AIDocumentHero } from '@/components/ai-document-hero'
 import { PremiumFeaturedSection } from '@/components/premium-featured-section'
 
-// Revalidate homepage every 60 seconds for reliability
-export const revalidate = 60
-
 export const metadata: Metadata = {
   title: 'AI Document Workspace - Your Intelligent Document Platform | PDFilio',
   description: 'Transform your workflow with AI Document Workspace. 47+ tools to process, analyze, and optimize documents. Merge, convert, edit PDFs + AI-powered features. Free online, no installation needed.',
