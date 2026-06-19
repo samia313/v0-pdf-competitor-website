@@ -1,0 +1,6 @@
+REBUILD TRIGGER
+===============
+Date: $(date)
+Reason: Force Vercel to rebuild with AI-Powered Document Workspace
+Components: AIDocumentHero, PremiumFeaturedSection
+Expected Output: "AI-Powered Document Workspace" heading
