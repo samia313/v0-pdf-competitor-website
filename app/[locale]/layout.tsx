@@ -9,34 +9,37 @@ import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { locales, isRTL } from '@/lib/i18n/config'
 
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-inter'
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
 })
 
+const BASE_URL = 'https://www.pdfilio.com'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: 'Free PDF Tools Online | Merge, Convert, Edit & More | PDFilio',
-  description: 'Free online PDF tools for merging, converting, editing, and more. No registration required. Fast, secure, and easy to use.',
-  keywords: 'PDF tools, merge PDF, split PDF, compress PDF, convert PDF, PDF to Word, Word to PDF, PDF editor, free PDF tools, AI PDF',
+  description: 'Free online PDF tools for merging, converting, editing, and more. Fast, secure, and easy to use.',
   authors: [{ name: 'PDFilio' }],
   icons: {
     icon: '/favicon.svg',
     apple: '/apple-icon.png',
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: 'Free PDF Tools Online | Merge, Convert, Edit & More | PDFilio',
-    description: 'Free online PDF tools for merging, converting, editing, and more. No registration required. Fast, secure, and easy to use.',
+    description: 'Free online PDF tools for merging, converting, editing, and more. Fast, secure, and easy to use.',
     type: 'website',
-    url: 'https://www.pdfilio.com',
+    siteName: 'PDFilio',
+    url: BASE_URL,
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Free PDF Tools Online | Merge, Convert, Edit & More | PDFilio',
-    description: 'Free online PDF tools for merging, converting, editing, and more. No registration required. Fast, secure, and easy to use.',
-  },
-  robots: {
-    index: true,
-    follow: true,
+    description: 'Free online PDF tools for merging, converting, editing, and more. Fast, secure, and easy to use.',
   },
   ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
     verification: {
@@ -56,7 +59,7 @@ interface Props {
 
 export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params
-  
+
   if (!locales.includes(locale as any)) {
     notFound()
   }
@@ -67,9 +70,14 @@ export default async function RootLayout({ children, params }: Props) {
   return (
     <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className="bg-background">
       <head>
-        {/* Google AdSense */}
-        <meta name="google-adsense-account" content={process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID} />
-        
+        {/* Google AdSense account verification. The ad script itself should only be enabled after AdSense approval. */}
+        {process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID && (
+          <meta
+            name="google-adsense-account"
+            content={process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}
+          />
+        )}
+
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
