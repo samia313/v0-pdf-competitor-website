@@ -2,121 +2,115 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 
 export const metadata = {
-  title: 'Privacy Policy - pdfilio',
-  description: 'Learn how pdfilio protects your privacy and handles your data.',
+  title: 'Privacy Policy | PDFilio',
+  description: 'Learn how PDFilio collects, uses, protects, and deletes information when you use our PDF and document services.',
 }
 
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-
       <main className="flex-1 py-12">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-8">
-            Privacy Policy
-          </h1>
-          
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-8">Privacy Policy</h1>
           <div className="prose prose-neutral dark:prose-invert max-w-none">
-            <p className="lead text-muted-foreground text-lg">
-              Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-            </p>
+            <p className="lead text-muted-foreground text-lg">Last updated: August 31, 2026</p>
 
-            <h2>Your Privacy is Our Priority</h2>
+            <h2>Your Privacy</h2>
             <p>
-              At pdfilio, we are committed to protecting your privacy. This Privacy Policy explains
-              how we collect, use, and safeguard your information when you use our website and services.
+              PDFilio respects your privacy. This policy explains what information may be collected when you use our website and services, how it is used, and the choices available to you.
             </p>
 
             <h2>Information We Collect</h2>
-            <h3>Files You Upload</h3>
+            <h3>Account and Contact Information</h3>
             <p>
-              When you use our PDF tools, your files are processed directly in your browser.
-              We do not upload, store, or have access to your files on our servers unless
-              specifically required for certain operations.
+              If you create an account, purchase a plan, or contact us, we may collect information such as your name, email address, account details, and information needed to provide the requested service.
             </p>
 
-            <h3>Automatically Collected Information</h3>
-            <ul>
-              <li>Browser type and version</li>
-              <li>Operating system</li>
-              <li>Referring website</li>
-              <li>Pages visited and time spent</li>
-              <li>IP address (anonymized)</li>
-            </ul>
+            <h3>Files and Documents</h3>
+            <p>
+              File handling depends on the tool you use. Some tools can process files locally in your browser, while other features require secure server-side processing. When a file is sent to our servers, it is used to provide the requested operation and is handled according to the applicable service workflow. Do not upload documents containing information you are not authorized to process.
+            </p>
 
-            <h2>How We Use Your Information</h2>
+            <h3>Usage Information</h3>
+            <p>
+              We may collect technical and usage information such as browser type, device type, referring page, pages viewed, approximate usage information, and IP address or similar technical identifiers where necessary for security, analytics, fraud prevention, and service operation.
+            </p>
+
+            <h2>How We Use Information</h2>
             <ul>
-              <li>To provide and improve our PDF tools</li>
-              <li>To analyze website traffic and usage patterns</li>
-              <li>To display relevant advertisements</li>
-              <li>To ensure the security of our services</li>
+              <li>To provide, maintain, and improve PDFilio services.</li>
+              <li>To process requests and provide customer support.</li>
+              <li>To operate accounts, subscriptions, billing, and security features.</li>
+              <li>To understand website usage and improve performance.</li>
+              <li>To detect abuse, fraud, security threats, and technical problems.</li>
+              <li>To display advertising where advertising is enabled.</li>
             </ul>
 
             <h2>Advertising</h2>
             <p>
-              We use Google AdSense to display advertisements on our website. Google may use
-              cookies to serve ads based on your prior visits to our website or other websites.
-              You can opt out of personalized advertising by visiting{' '}
-              <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">
-                Google Ads Settings
-              </a>.
+              PDFilio may use third-party advertising services, including Google AdSense, to display advertisements. These services may use cookies or similar technologies to measure advertising performance and, where permitted by applicable law and user choices, personalize ads. Advertising settings may vary by region and browser.
             </p>
-
-            <h2>Cookies</h2>
             <p>
-              We use cookies to enhance your experience on our website. These include:
-            </p>
-            <ul>
-              <li><strong>Essential cookies:</strong> Required for the website to function</li>
-              <li><strong>Analytics cookies:</strong> Help us understand how visitors use our site</li>
-              <li><strong>Advertising cookies:</strong> Used to deliver relevant ads</li>
-            </ul>
-
-            <h2>Data Security</h2>
-            <p>
-              We implement industry-standard security measures to protect your information.
-              All data transfers are encrypted using SSL/TLS technology.
+              You can manage Google advertising personalization through Google&apos;s advertising settings. You can also manage or disable cookies through your browser settings, although some website functionality may be affected.
             </p>
 
-            <h2>Your Rights</h2>
-            <p>You have the right to:</p>
+            <h2>Cookies and Similar Technologies</h2>
+            <p>We may use:</p>
             <ul>
-              <li>Access your personal data</li>
-              <li>Request deletion of your data</li>
-              <li>Opt out of personalized advertising</li>
-              <li>Disable cookies in your browser settings</li>
+              <li><strong>Essential technologies:</strong> required for authentication, security, and core functionality.</li>
+              <li><strong>Analytics technologies:</strong> used to understand traffic and service usage where enabled.</li>
+              <li><strong>Advertising technologies:</strong> used by advertising partners where advertising is enabled and permitted.</li>
             </ul>
 
             <h2>Third-Party Services</h2>
-            <p>We use the following third-party services:</p>
+            <p>
+              Depending on the features you use, PDFilio may rely on third-party providers for hosting, analytics, authentication, payments, email, advertising, AI processing, or other infrastructure. These providers may process information only as needed to provide their services and under their own applicable privacy terms.
+            </p>
+
+            <h2>Data Security</h2>
+            <p>
+              We use reasonable technical and organizational safeguards designed to protect information against unauthorized access, alteration, disclosure, or destruction. No internet service can guarantee absolute security.
+            </p>
+
+            <h2>Data Retention and File Deletion</h2>
+            <p>
+              Retention depends on the specific service and processing workflow. Where files are processed on our servers, they are intended to be removed according to the applicable tool or service retention policy. We do not claim that every PDFilio tool uses the same processing method or retention period; the relevant tool documentation takes precedence.
+            </p>
+
+            <h2>Your Choices and Rights</h2>
+            <p>Depending on your location and applicable law, you may have rights to:</p>
             <ul>
-              <li>Google Analytics for website analytics</li>
-              <li>Google AdSense for advertising</li>
-              <li>Vercel for hosting</li>
+              <li>Request access to personal information we hold about you.</li>
+              <li>Request correction or deletion of eligible personal information.</li>
+              <li>Object to or restrict certain processing.</li>
+              <li>Withdraw consent where processing is based on consent.</li>
+              <li>Manage certain cookie and advertising preferences.</li>
             </ul>
+            <p>To make a privacy request, contact us through our contact page.</p>
 
             <h2>Children&apos;s Privacy</h2>
             <p>
-              Our services are not intended for children under 13. We do not knowingly collect
-              personal information from children.
+              PDFilio is not directed to children under 13, and we do not knowingly collect personal information from children under 13.
+            </p>
+
+            <h2>International Users</h2>
+            <p>
+              PDFilio may be accessed from different countries, and information may be processed in countries where our service providers operate. Where required, we use appropriate safeguards for applicable international data transfers.
             </p>
 
             <h2>Changes to This Policy</h2>
             <p>
-              We may update this Privacy Policy from time to time. We will notify you of any
-              changes by posting the new policy on this page.
+              We may update this policy when our services, technology, or legal requirements change. The latest version will be published on this page with an updated date.
             </p>
 
             <h2>Contact Us</h2>
             <p>
-              If you have any questions about this Privacy Policy, please contact us through
-              our contact page.
+              For privacy questions or requests, please contact PDFilio through our contact page.
             </p>
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   )
