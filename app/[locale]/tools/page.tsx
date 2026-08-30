@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { ToolCard } from '@/components/tool-card'
@@ -5,9 +6,20 @@ import { AdBanner } from '@/components/ad-units'
 import { pdfTools, categories } from '@/lib/tools-data'
 import { ToolIcon } from '@/components/tool-icon'
 
-export const metadata = {
-  title: 'All PDF Tools - pdfilio',
-  description: 'Browse all our free PDF tools. Merge, split, compress, convert and edit PDF files online.',
+const BASE_URL = 'https://www.pdfilio.com'
+
+export const metadata: Metadata = {
+  title: 'PDF Tools Online | Merge, Split, Compress & Convert | PDFilio',
+  description: 'Browse PDFilio’s online PDF tools for merging, splitting, compressing, converting, and editing PDF files.',
+  alternates: {
+    canonical: `${BASE_URL}/tools`,
+  },
+  openGraph: {
+    title: 'PDF Tools Online | Merge, Split, Compress & Convert | PDFilio',
+    description: 'Browse PDFilio’s online PDF tools for merging, splitting, compressing, converting, and editing PDF files.',
+    url: `${BASE_URL}/tools`,
+    type: 'website',
+  },
 }
 
 export default function ToolsPage() {
@@ -22,11 +34,10 @@ export default function ToolsPage() {
               All PDF Tools
             </h1>
             <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
-              Everything you need to work with PDFs in one place. All tools are free and easy to use.
+              Everything you need to work with PDFs in one place. Explore tools for merging, splitting, compressing, converting, and editing PDF files.
             </p>
           </div>
 
-          {/* Ad Banner */}
           <AdBanner slot="tools-top" className="max-w-4xl mx-auto mb-12" />
 
           {categories.map((category) => {
@@ -59,7 +70,6 @@ export default function ToolsPage() {
             )
           })}
 
-          {/* Bottom Ad */}
           <AdBanner slot="tools-bottom" className="max-w-4xl mx-auto mt-12" />
         </div>
       </main>
