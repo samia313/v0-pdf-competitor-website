@@ -5,9 +5,9 @@ import { AIDocumentHero } from '@/components/ai-document-hero'
 import { PremiumFeaturedSection } from '@/components/premium-featured-section'
 
 export const metadata: Metadata = {
-  title: 'AI Document Workspace - Your Intelligent Document Platform | PDFilio',
-  description: 'Transform your workflow with AI Document Workspace. 47+ tools to process, analyze, and optimize documents. Merge, convert, edit PDFs + AI-powered features. Free online, no installation needed.',
-  keywords: 'document workspace, AI document processing, PDF tools, document AI, intelligent document management, PDF converter, document automation',
+  title: 'Free Online PDF Tools & AI Document Tools | PDFilio',
+  description: 'Use PDFilio for free online PDF tools and AI document features. Merge, split, compress, convert, edit, OCR and analyze documents online with no installation required.',
+  keywords: 'PDF tools, merge PDF, split PDF, compress PDF, convert PDF, PDF to Word, Word to PDF, PDF editor, free PDF tools, AI PDF tools, OCR PDF',
 }
 
 export default function HomePage() {
@@ -20,6 +20,3 @@ export default function HomePage() {
     </div>
   )
 }
-
-// Force cache bust - Deploy AI-Powered Document Workspace
-
