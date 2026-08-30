@@ -1,152 +1,142 @@
 export const metaTitles = {
   // Main Pages
-  home: "AI Document Workspace - Intelligent Document Platform | PDFilio",
-  tools: "47+ AI Document Tools - Process, Analyze & Transform Documents | PDFilio",
-  pricing: "Simple & Transparent Pricing | AI Document Workspace | PDFilio",
-  blog: "Document Processing Tips & AI Insights | PDFilio Blog",
-  about: "About PDFilio | The Intelligent Document Workspace Platform",
-  contact: "Contact PDFilio | Get Support for Document Processing",
-  faq: "FAQ | AI Document Workspace Frequently Asked Questions",
-  
+  home: "Free PDF Tools Online & AI Document Tools | PDFilio",
+  tools: "PDF & AI Document Tools Online | PDFilio",
+  pricing: "Simple & Transparent Pricing | PDFilio",
+  blog: "PDF & Document Guides, Tips & Insights | PDFilio Blog",
+  about: "About PDFilio | Online PDF & Document Tools",
+  contact: "Contact PDFilio | Document Tool Support",
+  faq: "FAQ | PDFilio PDF & Document Tools",
+
   // PDF Conversion Tools
-  mergePdf: "Merge PDF Documents Online | AI-Powered Merging | PDFilio",
-  splitPdf: "Split PDF Pages Online | Intelligent Page Separation | PDFilio",
-  compressPdf: "Compress PDF Size Online | AI Optimization | PDFilio",
-  rotatePdf: "Rotate PDF Pages Online | Quick Page Adjustment | PDFilio",
-  removePages: "Remove PDF Pages Online | Intelligent Deletion | PDFilio",
-  organizePdf: "Organize PDF Documents | Rearrange Pages Instantly | PDFilio",
-  addPageNumbers: "Add Page Numbers to PDF | Auto Numbering | PDFilio",
-  addWatermark: "Add Watermark to PDF | Protect Documents | PDFilio",
-  editPdf: "Edit PDF Online | Modify Content Easily | PDFilio",
-  signPdf: "Sign PDF Documents Online | Digital Signatures | PDFilio",
-  protectPdf: "Protect PDF Documents | Encryption & Security | PDFilio",
-  unlockPdf: "Unlock PDF Online | Remove Protection | PDFilio",
-  
+  mergePdf: "Merge PDF Documents Online | PDFilio",
+  splitPdf: "Split PDF Pages Online | PDFilio",
+  compressPdf: "Compress PDF Online | PDFilio",
+  rotatePdf: "Rotate PDF Pages Online | PDFilio",
+  removePages: "Remove Pages from PDF Online | PDFilio",
+  organizePdf: "Organize PDF Pages Online | PDFilio",
+  addPageNumbers: "Add Page Numbers to PDF Online | PDFilio",
+  addWatermark: "Add Watermark to PDF Online | PDFilio",
+  editPdf: "Edit PDF Online | PDFilio",
+  signPdf: "Sign PDF Online | PDFilio",
+  protectPdf: "Protect PDF with Password | PDFilio",
+  unlockPdf: "Unlock PDF Online | PDFilio",
+
   // Image to PDF
-  jpgToPdf: "JPG to PDF Converter | Image Processing | PDFilio",
-  pngToPdf: "PNG to PDF Converter | Transform Images | PDFilio",
-  webpToPdf: "WEBP to PDF Converter | Modern Format Support | PDFilio",
-  imageToPdf: "Image to PDF Converter | Batch Processing | PDFilio",
-  
+  jpgToPdf: "JPG to PDF Converter Online | PDFilio",
+  pngToPdf: "PNG to PDF Converter Online | PDFilio",
+  webpToPdf: "WEBP to PDF Converter Online | PDFilio",
+  imageToPdf: "Image to PDF Converter Online | PDFilio",
+
   // PDF to Image
-  pdfToJpg: "PDF to JPG Converter | Extract Images | PDFilio",
-  pdfToPng: "PDF to PNG Converter | High-Quality Export | PDFilio",
-  pdfToWebp: "PDF to WEBP Converter | Modern Format | PDFilio",
-  
+  pdfToJpg: "PDF to JPG Converter Online | PDFilio",
+  pdfToPng: "PDF to PNG Converter Online | PDFilio",
+  pdfToWebp: "PDF to WEBP Converter Online | PDFilio",
+
   // Office Conversions
-  wordToPdf: "Word to PDF Converter | DOC/DOCX Processing | PDFilio",
-  pdfToWord: "PDF to Word Converter | DOCX Export | PDFilio",
-  excelToPdf: "Excel to PDF Converter | Spreadsheet Processing | PDFilio",
-  pdfToExcel: "PDF to Excel Converter | Data Extraction | PDFilio",
-  pptToPdf: "PowerPoint to PDF Converter | Presentation Support | PDFilio",
-  pdfToPpt: "PDF to PowerPoint | PPTX Export | PDFilio",
-  htmlToPdf: "HTML to PDF Converter | Web Content Processing | PDFilio",
-  
+  wordToPdf: "Word to PDF Converter Online | PDFilio",
+  pdfToWord: "PDF to Word Converter Online | PDFilio",
+  excelToPdf: "Excel to PDF Converter Online | PDFilio",
+  pdfToExcel: "PDF to Excel Converter Online | PDFilio",
+  pptToPdf: "PowerPoint to PDF Converter Online | PDFilio",
+  pdfToPpt: "PDF to PowerPoint Converter Online | PDFilio",
+  htmlToPdf: "HTML to PDF Converter Online | PDFilio",
+
   // Other Formats
-  pdfToTxt: "PDF to Text Converter | Extract Content | PDFilio",
-  svgToPdf: "SVG to PDF Converter | Vector Support | PDFilio",
-  
-  // AI Features - Unified branding
-  aiSummarizer: "AI PDF Summarizer | Intelligent Summary Generation | PDFilio",
-  translatePdf: "AI PDF Translator | Multi-Language Support | PDFilio",
-  aiDocumentAssistant: "AI Document Assistant | Intelligent Analysis | PDFilio",
-  
-  // AI Features - Chat & Analysis
-  chatWithPdf: "Chat with Documents | AI Document Q&A | PDFilio",
-  pdfSummary: "AI Document Summary | Instant Insights | PDFilio",
-  pdfTranslation: "AI Document Translation | Global Support | PDFilio",
-  ocrTextExtraction: "OCR Document Scanning | Text Extraction | PDFilio",
-  aiResumeAnalyzer: "AI Resume Analyzer | Career Insights | PDFilio",
-  aiContractReader: "AI Contract Analysis | Legal Document Review | PDFilio",
-  
-  // AI Features - Creation
-  aiInvoiceGenerator: "AI Invoice Creator | Professional Documents | PDFilio",
-  aiCoverLetterGen: "AI Cover Letter Writer | Career Tools | PDFilio",
-  aiStudyNotesGenerator: "AI Study Notes Generator | Learning Tools | PDFilio",
-  aiPdfQuizGen: "AI Quiz Generator | Assessment Tools | PDFilio",
-  pdfMetadataEditor: "PDF Metadata Editor | Document Properties | PDFilio",
-  
+  pdfToTxt: "PDF to Text Converter Online | PDFilio",
+  svgToPdf: "SVG to PDF Converter Online | PDFilio",
+
+  // AI Features
+  aiSummarizer: "AI PDF Summarizer | PDFilio",
+  translatePdf: "AI PDF Translator | PDFilio",
+  aiDocumentAssistant: "AI Document Assistant | PDFilio",
+  chatWithPdf: "Chat with PDF & Documents | PDFilio",
+  pdfSummary: "AI Document Summary | PDFilio",
+  pdfTranslation: "AI Document Translation | PDFilio",
+  ocrTextExtraction: "OCR Text Extraction Online | PDFilio",
+  aiResumeAnalyzer: "AI Resume Analyzer | PDFilio",
+  aiContractReader: "AI Contract Analysis | PDFilio",
+  aiInvoiceGenerator: "AI Invoice Generator | PDFilio",
+  aiCoverLetterGen: "AI Cover Letter Writer | PDFilio",
+  aiStudyNotesGenerator: "AI Study Notes Generator | PDFilio",
+  aiPdfQuizGen: "AI PDF Quiz Generator | PDFilio",
+  pdfMetadataEditor: "PDF Metadata Editor | PDFilio",
+
   // API Documentation
   apiDocs: "PDFilio API Documentation | Document Processing API",
 }
 
-// Function to get title by route
 export function getMetaTitle(route: string): string {
   const key = route.replace(/[/-]/g, '').toLowerCase() as keyof typeof metaTitles
   return metaTitles[key] || "PDFilio - Free PDF Tools Online"
 }
 
-// Function to get description by route
 export const metaDescriptions = {
   // Main Pages
-  home: "Transform your workflow with AI Document Workspace. Process, analyze, and optimize documents with 47+ tools. Merge, convert, edit PDFs + AI-powered features. Secure, free, no installation needed.",
-  tools: "Explore 47+ intelligent document tools. From conversion and editing to AI analysis. Process any document format with advanced features, secure infrastructure, and complete privacy control.",
-  pricing: "Simple, transparent pricing for document processing. Free essential tools, affordable Pro plans, and custom Business solutions. Pay for what you use, cancel anytime.",
-  blog: "Expert insights on document processing, AI workflows, and productivity tips. Learn best practices for managing documents efficiently with PDFilio's AI Workspace.",
-  about: "PDFilio's AI Document Workspace - Making intelligent document processing accessible to everyone. Our mission is empowering users with secure, powerful, and easy-to-use tools.",
-  contact: "Contact PDFilio support. Questions about document processing, features, or integrations? Our team responds quickly to help you succeed.",
-  faq: "Frequently asked questions about PDFilio's AI Document Workspace. Learn about features, pricing, security, file handling, and more.",
-  
+  home: "Use online PDF tools to merge, split, compress, convert, edit, and organize documents. PDFilio also offers AI-assisted document features with clear tool-specific processing information.",
+  tools: "Explore PDF and AI document tools for conversion, editing, organization, OCR, extraction, and document analysis. Choose the tool that fits your workflow.",
+  pricing: "View PDFilio plans for document processing, advanced features, and API access. Compare available options and choose the plan that fits your needs.",
+  blog: "Practical guides and insights about PDF tools, document workflows, file conversion, OCR, and AI-assisted document processing.",
+  about: "Learn about PDFilio, an online platform for PDF and document workflows including conversion, editing, organization, OCR, and AI-assisted features.",
+  contact: "Contact PDFilio for questions about PDF tools, document processing, features, billing, or integrations.",
+  faq: "Find answers about PDFilio tools, pricing, document processing, file handling, privacy, and common PDF workflows.",
+
   // PDF Conversion Tools
-  mergepdf: "Merge multiple PDF documents into one with intelligent processing. Secure, instant results. Perfect for organizing and consolidating documents.",
-  splitpdf: "Split PDF pages with precision. Extract specific pages or separate entire documents instantly. Great for document organization and distribution.",
-  compresspdf: "Reduce PDF file sizes using AI optimization. Maintain quality while making files email-friendly and storage-efficient.",
-  rotatepdf: "Rotate PDF pages to any angle. Correct orientations instantly. Perfect for scanned documents and image-based PDFs.",
-  removepages: "Remove unwanted pages from PDFs. Clean up documents by deleting specific pages instantly.",
-  organizepdf: "Rearrange PDF pages easily. Reorganize document structure by reordering pages in seconds.",
-  addpagenumbers: "Add automatic page numbering to PDFs. Choose positioning, format, and styling for professional document presentation.",
-  addwatermark: "Protect documents with text or image watermarks. Add branding or security marks instantly.",
-  editpdf: "Edit PDF text, annotations, and content directly online. Modify documents without specialized software.",
-  signpdf: "Add legally-valid digital signatures to PDF documents. Sign with confidence and compliance.",
-  protectpdf: "Encrypt PDFs with passwords. Control permissions for editing, printing, and copying. Secure sensitive documents.",
-  unlockpdf: "Remove password protection from PDFs instantly. Access protected documents with verified ownership.",
-  
+  mergepdf: "Combine multiple PDF files into one document online. Upload your files, arrange them as needed, and create a single PDF.",
+  splitpdf: "Split a PDF into separate files or extract selected pages online. Choose the pages you need and create new PDF files.",
+  compresspdf: "Reduce PDF file size online while aiming to preserve useful document quality. Prepare PDFs for sharing, storage, or upload.",
+  rotatepdf: "Rotate PDF pages online to correct document orientation. Process selected pages and create an updated PDF.",
+  removepages: "Remove unwanted pages from a PDF online. Select the pages to delete and create a cleaned document.",
+  organizepdf: "Rearrange and organize PDF pages online. Change page order to create a better-structured document.",
+  addpagenumbers: "Add page numbers to PDF documents online. Configure the placement and numbering format for your document.",
+  addwatermark: "Add a text or image watermark to a PDF online for branding, identification, or document handling workflows.",
+  editpdf: "Edit supported PDF content online, including document elements and annotations where available.",
+  signpdf: "Add signatures to supported PDF documents online. Review the tool's workflow and options before signing.",
+  protectpdf: "Protect a PDF with a password and available document permissions. Use the tool to help control access to your file.",
+  unlockpdf: "Unlock supported PDF files when you have permission to access them. Processing depends on the document and its protection settings.",
+
   // Image to PDF
-  jpgtopdf: "Convert JPG images to high-quality PDF documents instantly. Perfect for scanning and document digitization.",
-  pngtopdf: "Transform PNG images to PDF format. Preserve transparency and quality in your conversions.",
-  webptopdf: "Convert modern WEBP image format to standard PDF. Support for cutting-edge web formats.",
-  imagetopdf: "Combine multiple images into a single PDF. Perfect for creating image galleries and digital albums.",
-  
+  jpgtopdf: "Convert JPG images to PDF online. Create PDF documents from one or more supported image files.",
+  pngtopdf: "Convert PNG images to PDF online while preserving supported image content and quality.",
+  webptopdf: "Convert WEBP images to PDF online for document sharing and archiving workflows.",
+  imagetopdf: "Convert supported images into a PDF document online. Combine multiple images into a single file where supported.",
+
   // PDF to Image
-  pdftojpg: "Extract PDF pages as high-quality JPEG images. Perfect for sharing individual pages and web publishing.",
-  pdftopng: "Convert PDF pages to PNG format with transparency support. Ideal for design and web projects.",
-  pdftowebp: "Transform PDFs to modern WEBP format for web optimization. Smaller file sizes, better quality.",
-  
+  pdftojpg: "Convert PDF pages to JPG images online for sharing, previews, and supported image workflows.",
+  pdftopng: "Convert PDF pages to PNG images online for supported design, preview, and document workflows.",
+  pdftowebp: "Convert PDF pages to WEBP images online for supported web and image workflows.",
+
   // Office Conversions
-  wordtopdf: "Convert Word documents (DOC/DOCX) to PDF instantly. Preserve formatting and layout perfectly.",
-  pdftoword: "Transform PDFs to editable Word documents (DOCX). Edit content and maintain structure.",
-  exceltopdf: "Convert Excel spreadsheets (XLS/XLSX) to PDF format. Perfect for reports and sharing.",
-  pdftoexcel: "Extract data from PDFs into editable Excel spreadsheets. Automate data processing workflows.",
-  ppttopdf: "Convert PowerPoint presentations (PPT/PPTX) to PDF. Great for sharing and archiving slides.",
-  pdftoppt: "Transform PDFs to editable PowerPoint presentations. Recreate slides and edit content.",
-  htmltopdf: "Convert web pages and HTML content to PDF format. Capture web content for offline use.",
-  
+  wordtopdf: "Convert supported Word documents to PDF online while preserving available document structure and formatting.",
+  pdftoword: "Convert supported PDF documents to editable Word files online. Results can vary depending on the source PDF structure.",
+  exceltopdf: "Convert supported Excel spreadsheets to PDF online for sharing, presentation, and document workflows.",
+  pdftoexcel: "Convert supported PDF tables and content into Excel format online. Results depend on the source document structure.",
+  ppttopdf: "Convert supported PowerPoint presentations to PDF online for sharing and document workflows.",
+  pdftoppt: "Convert supported PDF content to PowerPoint format online. Results depend on the source PDF structure.",
+  htmltopdf: "Convert supported HTML content to PDF online for saving and sharing web-based documents.",
+
   // Other Formats
-  pdftotxt: "Extract readable text from PDF documents instantly. Convert any PDF page to plain text.",
-  svgtopdf: "Convert vector graphics (SVG) to standard PDF format. Preserve quality and scalability.",
-  
+  pdftotxt: "Extract text from supported PDF documents and convert it to plain text online.",
+  svgtopdf: "Convert supported SVG graphics to PDF online while preserving available vector content.",
+
   // AI Features
-  aisummarizer: "AI-powered document summarization. Get key points and insights instantly. Save time reading and understanding documents.",
-  translatepdf: "Translate PDFs to 10+ languages with AI. Break language barriers for global communication.",
-  aidocumentassistant: "Intelligent document analysis and data extraction. Let AI understand and organize your document data.",
-  
-  // AI Features - Chat & Analysis
-  chatwithpdf: "Ask questions about your documents and get instant AI-powered answers. Interactive document understanding.",
-  pdfsummary: "Get automatic AI summaries of any document. Extract key information instantly.",
-  pdftranslation: "Translate entire PDFs to multiple languages with AI precision. Global document support.",
-  ocrtextextraction: "Extract text from scanned PDFs and images using OCR technology. Convert images to editable text.",
-  airesumeanalyzer: "AI-powered resume analysis. Get professional feedback, scoring, and improvement suggestions.",
-  aicontractreader: "Analyze legal contracts and documents with AI. Identify key clauses and important terms automatically.",
-  
-  // AI Features - Creation
-  aiinvoicegenerator: "Create professional invoices instantly with AI. Perfect for freelancers and small businesses.",
-  aicoverlettergen: "Write personalized cover letters with AI assistance. Stand out in job applications.",
-  aistudynotesgenerator: "Convert PDF documents into organized study notes. Perfect for students and learners.",
-  aipdfquizgen: "Generate quiz questions and MCQs from PDF content automatically. Perfect for educators and training.",
-  pdfmetadataeditor: "Edit PDF properties including title, author, subject, and keywords. Organize document metadata.",
+  aisummarizer: "Use AI-assisted summarization to identify key information from supported documents.",
+  translatepdf: "Translate supported PDF content with AI assistance into available languages. Review results for important documents.",
+  aidocumentassistant: "Use AI-assisted document analysis for supported files, including summarization, extraction, notes, and other document tasks.",
+  chatwithpdf: "Ask questions about supported documents and receive AI-assisted answers based on the available document content.",
+  pdfsummary: "Generate an AI-assisted summary of supported documents and review the resulting key information.",
+  pdftranslation: "Translate supported document content with AI assistance into available languages.",
+  ocrtextextraction: "Extract text from supported scanned documents and images using OCR technology.",
+  airesumeanalyzer: "Analyze a supported resume with AI assistance and receive feedback on its content and structure.",
+  aicontractreader: "Review supported contracts with AI assistance to identify clauses, terms, and areas for closer review. This is not legal advice.",
+  aiinvoicegenerator: "Create invoice drafts with AI assistance for supported business workflows. Review all generated details before use.",
+  aicoverlettergen: "Create a personalized cover-letter draft with AI assistance and review it before submitting an application.",
+  aistudynotesgenerator: "Turn supported document content into organized study notes with AI assistance.",
+  aipdfquizgen: "Generate quiz questions from supported PDF content with AI assistance for study and training workflows.",
+  pdfmetadataeditor: "View and edit supported PDF metadata such as title, author, subject, and keywords.",
 }
 
 export function getMetaDescription(route: string): string {
   const key = route.replace(/[/-]/g, '').toLowerCase() as keyof typeof metaDescriptions
-  return metaDescriptions[key] || "Free PDF tools online. Merge, convert, edit, and process PDFs without software."
+  return metaDescriptions[key] || "Free PDF tools online for merging, converting, editing, compressing, and organizing supported documents."
 }
