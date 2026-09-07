@@ -5,21 +5,24 @@ import { ToolCard } from '@/components/tool-card'
 import { AdBanner } from '@/components/ad-units'
 import { pdfTools, categories } from '@/lib/tools-data'
 import { ToolIcon } from '@/components/tool-icon'
+import { locales } from '@/lib/i18n/config'
 
 const BASE_URL = 'https://www.pdfilio.com'
 
-export const metadata: Metadata = {
-  title: 'PDF Tools Online | Merge, Split, Compress & Convert | PDFilio',
-  description: 'Browse PDFilio’s online PDF tools for merging, splitting, compressing, converting, and editing PDF files.',
-  alternates: {
-    canonical: `${BASE_URL}/tools`,
-  },
-  openGraph: {
-    title: 'PDF Tools Online | Merge, Split, Compress & Convert | PDFilio',
-    description: 'Browse PDFilio’s online PDF tools for merging, splitting, compressing, converting, and editing PDF files.',
-    url: `${BASE_URL}/tools`,
-    type: 'website',
-  },
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const url = `${BASE_URL}${locale === 'en' ? '' : `/${locale}`}/tools`
+  const title = locale === 'en' ? 'PDF Tools Online | Merge, Split, Compress & Convert | PDFilio' : `PDF Tools Online | PDFilio`
+  const description = 'Browse PDFilio’s online PDF tools for merging, splitting, compressing, converting, and editing PDF files.'
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: Object.fromEntries(locales.map((lang) => [lang, `${BASE_URL}${lang === 'en' ? '' : `/${lang}`}/tools`])),
+    },
+    openGraph: { title, description, url, type: 'website' },
+  }
 }
 
 export default function ToolsPage() {

@@ -21,7 +21,8 @@ const PUBLIC_TOOLS = pdfTools.filter(
 )
 
 function localizedPath(locale: string, path: string) {
-  return locale === 'en' ? path : `/${locale}${path}`
+  // routing.ts uses localePrefix: 'always', so every indexable URL must include its locale.
+  return `/${locale}${path}`
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
